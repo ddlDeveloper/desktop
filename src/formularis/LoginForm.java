@@ -7,9 +7,17 @@ package formularis;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.io.DataInputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.net.Socket;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -350,7 +358,44 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldMousePressed
 
     private void entrarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarLabelMouseClicked
-        javax.swing.JOptionPane.showMessageDialog(this, "Intent d'accés amb les dades:\nUsuari: " + usuariTextField.getText() + "\nContrasenya: " + String.valueOf(passwordField.getPassword()), "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        /*javax.swing.JOptionPane.showMessageDialog(this, "Intent d'accés amb les dades:\nUsuari: " 
+        + usuariTextField.getText() + "\nContrasenya: " + String.valueOf(passwordField.getPassword()), 
+        "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);*/
+        
+        Socket cli;
+        
+        try {
+            cli = new Socket("127.0.0.1", 8000);
+            DataInputStream in = new DataInputStream(cli.getInputStream());
+            DataOutputStream out = new DataOutputStream(cli.getOutputStream());
+            
+            String resposta_server = in.readUTF();
+            
+            // send response to server with user and password
+            out.writeUTF("LOGIN, " + usuariTextField.getText().toString() + ", " + passwordField.getText().toString() + ", 0");
+            System.out.println("LOGIN, " + usuariTextField.getText().toString() + ", " + passwordField.getText().toString() + ", 0");
+            
+            int resposta_server_id = in.readInt();
+            System.out.println("Resposta servidor:  " + resposta_server);
+            
+            if (resposta_server_id != 0){
+                JOptionPane.showMessageDialog(this, "Benvigut/da " + usuariTextField.getText().toString());
+                ClientForm clientForm = new ClientForm();
+                
+                clientForm.setId(resposta_server_id);
+                clientForm.setUsuari(usuariTextField.getText().toString());
+                clientForm.setPass(passwordField.getText().toString());
+                clientForm.setVisible(true);
+                this.dispose();
+                
+            } else {
+                JOptionPane.showMessageDialog(this,"Usuari o contrasenya incorrecta");
+                
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "No es pot establir connexió amb el servidor");
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_entrarLabelMouseClicked
 
     private void registrarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarLabelMouseClicked
@@ -390,4 +435,6 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel usuariLabel;
     private javax.swing.JTextField usuariTextField;
     // End of variables declaration//GEN-END:variables
+
+    
 }

@@ -5,17 +5,56 @@
  */
 package formularis;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.net.Socket;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Dapau69
  */
 public class ClientForm extends javax.swing.JFrame {
+    
+    static int id;
+    static String usuari;
+    static String pass;
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        ClientForm.id = id;
+    }
+
+    public static String getUsuari() {
+        return usuari;
+    }
+
+    public static void setUsuari(String usuari) {
+        ClientForm.usuari = usuari;
+    }
+
+    public static String getPass() {
+        return pass;
+    }
+
+    public static void setPass(String pass) {
+        ClientForm.pass = pass;
+    }
+    
 
     /**
      * Creates new form ClientForm
      */
     public ClientForm() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("../images/logo.png")).getImage());
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -27,21 +66,66 @@ public class ClientForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabelLogOut = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(640, 480));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
+        jLabelLogOut.setText("LogOut");
+        jLabelLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelLogOutMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(826, Short.MAX_VALUE)
+                .addComponent(jLabelLogOut)
+                .addGap(33, 33, 33))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabelLogOut)
+                .addContainerGap(618, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabelLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogOutMouseClicked
+        
+        logOut();
+        System.exit(0);
+    }//GEN-LAST:event_jLabelLogOutMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        
+        logOut();
+        System.exit(0);
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
@@ -79,5 +163,28 @@ public class ClientForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelLogOut;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+ private void logOut() {
+
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 8000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+
+            // Llegir la resposta del servidor al establir la connexió
+            String resposta_svr = in.readUTF();
+            //Enviem resposta al servidor amb el usuari i la contrasenya
+            out.writeUTF("LOGIN," + getUsuari() + "," + getPass() + "," + getId());
+            //Executo la consulta de la crida per sortir
+            out.writeUTF("USER_EXIT");
+            System.out.println("Valor getId: " + getId());
+
+        } catch (IOException ex) {
+            Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
