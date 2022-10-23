@@ -17,7 +17,7 @@ import javax.swing.ImageIcon;
  *
  * @author Dapau69
  */
-public class ClientForm extends javax.swing.JFrame {
+public class AdministracioForm extends javax.swing.JFrame {
     
     static int id;
     static String usuari;
@@ -28,7 +28,7 @@ public class ClientForm extends javax.swing.JFrame {
     }
 
     public static void setId(int id) {
-        ClientForm.id = id;
+        AdministracioForm.id = id;
     }
 
     public static String getUsuari() {
@@ -36,7 +36,7 @@ public class ClientForm extends javax.swing.JFrame {
     }
 
     public static void setUsuari(String usuari) {
-        ClientForm.usuari = usuari;
+        AdministracioForm.usuari = usuari;
     }
 
     public static String getPass() {
@@ -44,14 +44,14 @@ public class ClientForm extends javax.swing.JFrame {
     }
 
     public static void setPass(String pass) {
-        ClientForm.pass = pass;
+        AdministracioForm.pass = pass;
     }
     
 
     /**
      * Creates new form ClientForm
      */
-    public ClientForm() {
+    public AdministracioForm() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../images/logo.png")).getImage());
         setLocationRelativeTo(this);
@@ -144,20 +144,21 @@ public class ClientForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdministracioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdministracioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdministracioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdministracioForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClientForm().setVisible(true);
+                new AdministracioForm().setVisible(true);
             }
         });
     }
@@ -184,7 +185,7 @@ public class ClientForm extends javax.swing.JFrame {
             System.out.println("Valor getId: " + getId());
 
         } catch (IOException ex) {
-            Logger.getLogger(ClientForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdministracioForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -380,7 +380,7 @@ public class LoginForm extends javax.swing.JFrame {
             
             if (resposta_server_id != 0){
                 JOptionPane.showMessageDialog(this, "Benvigut/da " + usuariTextField.getText().toString());
-                ClientForm clientForm = new ClientForm();
+                AdministracioForm clientForm = new AdministracioForm();
                 
                 clientForm.setId(resposta_server_id);
                 clientForm.setUsuari(usuariTextField.getText().toString());
