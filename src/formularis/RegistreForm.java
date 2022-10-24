@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Dapau69
+ * @author Lluís Barbó
  */
 public class RegistreForm extends javax.swing.JFrame {
 
@@ -50,7 +50,7 @@ public class RegistreForm extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(144, 164, 174));
 
         registreForm.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
-        registreForm.setText("REGISTRE");
+        registreForm.setText("REGISTER");
 
         tornarPanel.setBackground(new java.awt.Color(0, 134, 190));
         tornarPanel.setFont(new java.awt.Font("Rockwell Condensed", 0, 14)); // NOI18N
@@ -60,7 +60,7 @@ public class RegistreForm extends javax.swing.JFrame {
         tornarLabel.setForeground(new java.awt.Color(255, 255, 255));
         tornarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tornarLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/previous.png"))); // NOI18N
-        tornarLabel.setText("TORNAR");
+        tornarLabel.setText("BACK");
         tornarLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tornarLabelMouseClicked(evt);
@@ -96,7 +96,7 @@ public class RegistreForm extends javax.swing.JFrame {
         desarLabel.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         desarLabel.setForeground(new java.awt.Color(255, 255, 255));
         desarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        desarLabel.setText("DESAR");
+        desarLabel.setText("SAVE");
         desarLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 desarLabelMouseClicked(evt);
@@ -126,24 +126,29 @@ public class RegistreForm extends javax.swing.JFrame {
         );
 
         usuariLabel.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel.setText("USUARI");
+        usuariLabel.setText("USER");
 
         usuariTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         usuariTextField.setForeground(new java.awt.Color(204, 204, 204));
-        usuariTextField.setText("Introdueixi el seu usuari");
+        usuariTextField.setText("Enter new user");
         usuariTextField.setBorder(null);
         usuariTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 usuariTextFieldMousePressed(evt);
             }
         });
+        usuariTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuariTextFieldActionPerformed(evt);
+            }
+        });
 
         passLabel.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        passLabel.setText("CONTRASENYA");
+        passLabel.setText("PASSWORD");
 
         passwordField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passwordField.setForeground(new java.awt.Color(204, 204, 204));
-        passwordField.setText("********");
+        passwordField.setText("Enter ");
         passwordField.setBorder(null);
         passwordField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -248,7 +253,7 @@ public class RegistreForm extends javax.swing.JFrame {
     }//GEN-LAST:event_desarLabelMouseExited
 
     private void usuariTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariTextFieldMousePressed
-        if (usuariTextField.getText().equals("Introdueixi el seu usuari")) {
+        if (usuariTextField.getText().equals("Enter new user")) {
             usuariTextField.setText("");
             usuariTextField.setForeground(Color.black);
         }
@@ -264,14 +269,18 @@ public class RegistreForm extends javax.swing.JFrame {
             passwordField.setText("");
             passwordField.setForeground(Color.black);
         }
-        if (usuariTextField.getText().isEmpty()){
-            usuariTextField.setText("Introdueix el seu usuari");
+        if (usuariTextField.getText().isEmpty()) {
+            usuariTextField.setText("Enter new user");
             usuariTextField.setForeground(Color.gray);
         }
 
     }//GEN-LAST:event_passwordFieldMousePressed
 
-    
+    private void usuariTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuariTextFieldActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel desarLabel;
     private javax.swing.JPanel desarPanel;

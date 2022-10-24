@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Dapau69
+ * @author Lluís Barbó
  */
 public class Principal {
 
@@ -43,7 +43,7 @@ public class Principal {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -51,8 +51,7 @@ public class Principal {
                 new LoginForm().setVisible(true);
             }
         });
-        
+
     }
-    
-    
+
 }

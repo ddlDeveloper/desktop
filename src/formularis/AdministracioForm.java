@@ -15,10 +15,10 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Dapau69
+ * @author Lluís Barbó
  */
 public class AdministracioForm extends javax.swing.JFrame {
-    
+
     static int id;
     static String usuari;
     static String pass;
@@ -46,7 +46,6 @@ public class AdministracioForm extends javax.swing.JFrame {
     public static void setPass(String pass) {
         AdministracioForm.pass = pass;
     }
-    
 
     /**
      * Creates new form ClientForm
@@ -66,10 +65,16 @@ public class AdministracioForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_show = new javax.swing.JPanel();
+        jPanel_adm_form = new javax.swing.JPanel();
         jLabelLogOut = new javax.swing.JLabel();
+        jLabelManagement = new javax.swing.JLabel();
+        jLabelQueries = new javax.swing.JLabel();
+        jLabelHelp = new javax.swing.JLabel();
+        jLabelTools1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ADMINISTRATION");
         setSize(new java.awt.Dimension(640, 480));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -77,55 +82,141 @@ public class AdministracioForm extends javax.swing.JFrame {
             }
         });
 
+        jPanel_show.setBackground(new java.awt.Color(144, 164, 174));
+
+        jPanel_adm_form.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabelLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/logout-rounded-left-48.png"))); // NOI18N
         jLabelLogOut.setText("LogOut");
         jLabelLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelLogOutMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelLogOutMousePressed(evt);
+            }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(826, Short.MAX_VALUE)
+        jLabelManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/home-48.png"))); // NOI18N
+        jLabelManagement.setText("Management");
+        jLabelManagement.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelManagementMouseClicked(evt);
+            }
+        });
+
+        jLabelQueries.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/resume-48.png"))); // NOI18N
+        jLabelQueries.setText("Queries");
+        jLabelQueries.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelQueriesMouseClicked(evt);
+            }
+        });
+
+        jLabelHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/help-48.png"))); // NOI18N
+        jLabelHelp.setText("Help");
+        jLabelHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelHelpMouseClicked(evt);
+            }
+        });
+
+        jLabelTools1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/tools-48.png"))); // NOI18N
+        jLabelTools1.setText("Tools");
+        jLabelTools1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelTools1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_adm_formLayout = new javax.swing.GroupLayout(jPanel_adm_form);
+        jPanel_adm_form.setLayout(jPanel_adm_formLayout);
+        jPanel_adm_formLayout.setHorizontalGroup(
+            jPanel_adm_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_adm_formLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabelManagement)
+                .addGap(82, 82, 82)
+                .addComponent(jLabelQueries)
+                .addGap(103, 103, 103)
+                .addComponent(jLabelTools1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addComponent(jLabelHelp)
+                .addGap(89, 89, 89)
                 .addComponent(jLabelLogOut)
-                .addGap(33, 33, 33))
+                .addGap(22, 22, 22))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabelLogOut)
-                .addContainerGap(618, Short.MAX_VALUE))
+        jPanel_adm_formLayout.setVerticalGroup(
+            jPanel_adm_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_adm_formLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel_adm_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelQueries)
+                    .addComponent(jLabelManagement)
+                    .addComponent(jLabelTools1)
+                    .addComponent(jLabelHelp)
+                    .addComponent(jLabelLogOut))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel_showLayout = new javax.swing.GroupLayout(jPanel_show);
+        jPanel_show.setLayout(jPanel_showLayout);
+        jPanel_showLayout.setHorizontalGroup(
+            jPanel_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel_adm_form, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel_showLayout.setVerticalGroup(
+            jPanel_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_showLayout.createSequentialGroup()
+                .addComponent(jPanel_adm_form, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 570, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_show, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel_show, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogOutMouseClicked
-        
+
         logOut();
         System.exit(0);
     }//GEN-LAST:event_jLabelLogOutMouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        
+
         logOut();
         System.exit(0);
     }//GEN-LAST:event_formMouseClicked
+
+    private void jLabelManagementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelManagementMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelManagementMouseClicked
+
+    private void jLabelQueriesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelQueriesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelQueriesMouseClicked
+
+    private void jLabelHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHelpMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelHelpMouseClicked
+
+    private void jLabelTools1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTools1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelTools1MouseClicked
+
+    private void jLabelLogOutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogOutMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelLogOutMousePressed
 
     /**
      * @param args the command line arguments
@@ -164,11 +255,16 @@ public class AdministracioForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelHelp;
     private javax.swing.JLabel jLabelLogOut;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabelManagement;
+    private javax.swing.JLabel jLabelQueries;
+    private javax.swing.JLabel jLabelTools1;
+    private javax.swing.JPanel jPanel_adm_form;
+    private javax.swing.JPanel jPanel_show;
     // End of variables declaration//GEN-END:variables
 
- private void logOut() {
+    private void logOut() {
 
         Socket sc;
         try {

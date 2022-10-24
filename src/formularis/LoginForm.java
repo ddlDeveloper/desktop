@@ -21,37 +21,37 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Dapau69
+ * @author Lluís Barbó
  */
 public class LoginForm extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginForm
      */
-    int xMouse, 
+    int xMouse,
+            /**
+             * Creates new form LoginForm
+             */
+            yMouse;
 
-    /**
-     * Creates new form LoginForm
-     */
-    yMouse;
     public LoginForm() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../images/logo.png")).getImage());
         setLocationRelativeTo(this);
-        
+
         //rescalelabel.RSScaleLabel.setScaleLabel(ddlbg, "src/images/images_1_.png");
         SetImageLabel(ddlbg, "src/images/images_1_.png");
         //SetImageLabel(bg, "src/image/gris_1.png");
     }
-    
-    
-    private void SetImageLabel(JLabel labelName, String root){
+
+    private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
         labelName.setIcon(icon);
         this.repaint();
-        
+
     }
+
     // Comprovació GIT
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,20 +126,25 @@ public class LoginForm extends javax.swing.JFrame {
         bg.add(capçaleraPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 800, 40));
 
         inici_sessio.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
-        inici_sessio.setText("INICIAR SESSIÓ");
+        inici_sessio.setText("LOGIN");
         bg.add(inici_sessio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
         usuariLabel.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel.setText("USUARI");
+        usuariLabel.setText("USER");
         bg.add(usuariLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
         usuariTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         usuariTextField.setForeground(new java.awt.Color(204, 204, 204));
-        usuariTextField.setText("Introdueixi el seu usuari");
+        usuariTextField.setText("Enter your user");
         usuariTextField.setBorder(null);
         usuariTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 usuariTextFieldMousePressed(evt);
+            }
+        });
+        usuariTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuariTextFieldActionPerformed(evt);
             }
         });
         bg.add(usuariTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 340, 30));
@@ -147,7 +152,7 @@ public class LoginForm extends javax.swing.JFrame {
         bg.add(passSeparator, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 340, -1));
 
         passLabel.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        passLabel.setText("CONTRASENYA");
+        passLabel.setText("PASSWORD");
         bg.add(passLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
 
         passwordField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -168,7 +173,7 @@ public class LoginForm extends javax.swing.JFrame {
         entrarLabel.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         entrarLabel.setForeground(new java.awt.Color(255, 255, 255));
         entrarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        entrarLabel.setText("ENTRAR");
+        entrarLabel.setText("LOG IN");
         entrarLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 entrarLabelMouseClicked(evt);
@@ -206,7 +211,7 @@ public class LoginForm extends javax.swing.JFrame {
         registrarLabel.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         registrarLabel.setForeground(new java.awt.Color(255, 255, 255));
         registrarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        registrarLabel.setText("REGISTRAR");
+        registrarLabel.setText("REGISTER");
         registrarLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registrarLabelMouseClicked(evt);
@@ -273,8 +278,8 @@ public class LoginForm extends javax.swing.JFrame {
         bg.add(tancarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         olvidarLabel.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        olvidarLabel.setText("¿Has oblidat la contrasenya?");
-        bg.add(olvidarLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
+        olvidarLabel.setText("Have you forgotten your password?");
+        bg.add(olvidarLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,13 +320,13 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tancarLabelMouseClicked
 
     private void tancarLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tancarLabelMouseEntered
-        tancarPanel.setBackground(new Color(144,164,174));
+        tancarPanel.setBackground(new Color(144, 164, 174));
         tancarLabel.setForeground(Color.red);
     }//GEN-LAST:event_tancarLabelMouseEntered
 
     private void tancarLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tancarLabelMouseExited
         //tancarPanel.setBackground(Color.white);
-        tancarPanel.setBackground(new Color(144,164,174));
+        tancarPanel.setBackground(new Color(144, 164, 174));
         tancarLabel.setForeground(Color.black);
     }//GEN-LAST:event_tancarLabelMouseExited
 
@@ -333,64 +338,55 @@ public class LoginForm extends javax.swing.JFrame {
         entrarPanel.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_entrarLabelMouseExited
 
-    private void usuariTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariTextFieldMousePressed
-        if (usuariTextField.getText().equals("Introdueixi el seu usuari")) {
-            usuariTextField.setText("");
-            usuariTextField.setForeground(Color.black);
-        }
-        if (String.valueOf(passwordField.getPassword()).isEmpty()) {
-            passwordField.setText("********");
-            passwordField.setForeground(Color.gray);
-        }
-        
-    }//GEN-LAST:event_usuariTextFieldMousePressed
-
     private void passwordFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMousePressed
         if (String.valueOf(passwordField.getPassword()).equals("********")) {
             passwordField.setText("");
             passwordField.setForeground(Color.black);
         }
-        if (usuariTextField.getText().isEmpty()){
-            usuariTextField.setText("Introdueix el seu usuari");
+        if (usuariTextField.getText().isEmpty()) {
+            usuariTextField.setText("Enter your user");
             usuariTextField.setForeground(Color.gray);
         }
-        
+
     }//GEN-LAST:event_passwordFieldMousePressed
 
     private void entrarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarLabelMouseClicked
+        // Ho deixem comentat per comprovacions
         /*javax.swing.JOptionPane.showMessageDialog(this, "Intent d'accés amb les dades:\nUsuari: " 
         + usuariTextField.getText() + "\nContrasenya: " + String.valueOf(passwordField.getPassword()), 
         "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);*/
-        
+
         Socket cli;
-        
+
         try {
             cli = new Socket("127.0.0.1", 8000);
             DataInputStream in = new DataInputStream(cli.getInputStream());
             DataOutputStream out = new DataOutputStream(cli.getOutputStream());
-            
+
             String resposta_server = in.readUTF();
-            
+
             // send response to server with user and password
-            out.writeUTF("LOGIN, " + usuariTextField.getText().toString() + ", " + passwordField.getText().toString() + ", 0");
+            out.writeUTF(usuariTextField.getText());
+            out.writeUTF(passwordField.getText());
+            out.writeBoolean(true);
             System.out.println("LOGIN, " + usuariTextField.getText().toString() + ", " + passwordField.getText().toString() + ", 0");
-            
+
             int resposta_server_id = in.readInt();
             System.out.println("Resposta servidor:  " + resposta_server);
-            
-            if (resposta_server_id != 0){
+
+            if (resposta_server_id != 0) {
                 JOptionPane.showMessageDialog(this, "Benvigut/da " + usuariTextField.getText().toString());
                 AdministracioForm clientForm = new AdministracioForm();
-                
+
                 clientForm.setId(resposta_server_id);
                 clientForm.setUsuari(usuariTextField.getText().toString());
                 clientForm.setPass(passwordField.getText().toString());
                 clientForm.setVisible(true);
                 this.dispose();
-                
+
             } else {
-                JOptionPane.showMessageDialog(this,"Usuari o contrasenya incorrecta");
-                
+                JOptionPane.showMessageDialog(this, "Usuari o contrasenya incorrecta");
+
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "No es pot establir connexió amb el servidor");
@@ -413,7 +409,22 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_registrarLabelMouseExited
 
-   
+    private void usuariTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuariTextFieldActionPerformed
+
+    private void usuariTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariTextFieldMousePressed
+        if (usuariTextField.getText().equals("Introdueixi el seu usuari")) {
+            usuariTextField.setText("");
+            usuariTextField.setForeground(Color.black);
+        }
+        if (String.valueOf(passwordField.getPassword()).isEmpty()) {
+            passwordField.setText("********");
+            passwordField.setForeground(Color.gray);
+        }
+
+    }//GEN-LAST:event_usuariTextFieldMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
@@ -436,5 +447,4 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField usuariTextField;
     // End of variables declaration//GEN-END:variables
 
-    
 }

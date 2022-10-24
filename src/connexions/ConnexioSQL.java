@@ -10,10 +10,11 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Dapau69
+ * @author Lluís Barbó
  */
 public class ConnexioSQL {
 
+    //Preparat per fer connexions a la base de dades
     //Login init = new Login();
     public static Connection conectar = null;
 

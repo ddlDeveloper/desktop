@@ -8,10 +8,11 @@ import java.sql.*;
 
 /**
  *
- * @author Dapau69
+ * @author Lluís Barbó
  */
 public class MetodesSQL {
 
+    //Preparat per fer connexions a la base de dades
     public static ConnexioSQL connect = new ConnexioSQL();
 
     public static PreparedStatement sentence_ready;
@@ -23,7 +24,6 @@ public class MetodesSQL {
     public int createrUser(String user, String passwd, String nom, String cognom, String correu) {
         int result = 0;
         Connection conn = null;
-        //
 
         String sentenciaCrear = ("INSERT INTO usuaris (\"ID\",\"Usuari\",\"Contrasenya\",\"Nom\",\"Cognom\",\"Correu\") VALUES (default,?,?,?,?,?)");
 
