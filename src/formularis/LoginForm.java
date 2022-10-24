@@ -337,7 +337,7 @@ public class LoginForm extends javax.swing.JFrame {
     private void entrarLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarLabelMouseExited
         entrarPanel.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_entrarLabelMouseExited
-
+        
     private void passwordFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMousePressed
         if (String.valueOf(passwordField.getPassword()).equals("********")) {
             passwordField.setText("");
@@ -414,7 +414,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_usuariTextFieldActionPerformed
 
     private void usuariTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariTextFieldMousePressed
-        if (usuariTextField.getText().equals("Introdueixi el seu usuari")) {
+        if (usuariTextField.getText().equals("Enter your user")) {
             usuariTextField.setText("");
             usuariTextField.setForeground(Color.black);
         }

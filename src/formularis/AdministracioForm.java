@@ -188,8 +188,10 @@ public class AdministracioForm extends javax.swing.JFrame {
 
     private void jLabelLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogOutMouseClicked
 
+        LoginForm form = new LoginForm();
+        form.setVisible(true);
         logOut();
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jLabelLogOutMouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
