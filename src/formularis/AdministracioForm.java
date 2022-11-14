@@ -22,6 +22,8 @@ public class AdministracioForm extends javax.swing.JFrame {
     static int id;
     static String usuari;
     static String pass;
+    static DataInputStream in;
+    static DataOutputStream out;
 
     public static int getId() {
         return id;
@@ -50,7 +52,9 @@ public class AdministracioForm extends javax.swing.JFrame {
     /**
      * Creates new form ClientForm
      */
-    public AdministracioForm() {
+    public AdministracioForm(DataInputStream in, DataOutputStream out) {
+        this.in = in;
+        this.out = out;
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../images/logo.png")).getImage());
         setLocationRelativeTo(this);
@@ -190,13 +194,36 @@ public class AdministracioForm extends javax.swing.JFrame {
 
         LoginForm form = new LoginForm();
         form.setVisible(true);
-        logOut();
+        logOut(in, out);
+        try {
+            out.writeBoolean(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdministracioForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jLabelLogOutMouseClicked
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
 
-        logOut();
+        /*
+        LoginForm form = new LoginForm();
+        form.setVisible(true);
+        logOut(in, out);
+        try {
+            out.writeBoolean(true);
+        } catch (IOException ex) {
+            Logger.getLogger(AdministracioForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+        
+        */
+        logOut(in, out);
+        try {
+            out.writeBoolean(true);
+        } catch (Exception ex) {
+            Logger.getLogger(AdministracioForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         System.exit(0);
     }//GEN-LAST:event_formMouseClicked
 
@@ -251,7 +278,7 @@ public class AdministracioForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdministracioForm().setVisible(true);
+                new AdministracioForm(in, out).setVisible(true);
             }
         });
     }
@@ -266,8 +293,23 @@ public class AdministracioForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_show;
     // End of variables declaration//GEN-END:variables
 
-    private void logOut() {
+    private void logOut(DataInputStream in, DataOutputStream out) {
+        
+        try {
 
+            // Llegir la resposta del servidor al establir la connexió
+            String resposta_svr = in.readUTF();
+            //Enviem resposta al servidor amb el usuari i la contrasenya
+            out.writeUTF("LOGIN," + getUsuari() + "," + getPass() + "," + getId());
+            //Executo la consulta de la crida per sortir
+            out.writeUTF("USER_EXIT");
+            System.out.println("Valor getId: " + getId());
+
+        } catch (IOException ex) {
+            Logger.getLogger(AdministracioForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /*
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 8000);
@@ -284,6 +326,6 @@ public class AdministracioForm extends javax.swing.JFrame {
 
         } catch (IOException ex) {
             Logger.getLogger(AdministracioForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 }
