@@ -5,6 +5,8 @@
  */
 package formularis;
 
+import java.awt.BorderLayout;
+import java.awt.datatransfer.DataFlavor;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,6 +14,8 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.net.Socket;
 import javax.swing.ImageIcon;
+import javax.swing.text.AbstractDocument;
+
 
 /**
  *
@@ -58,6 +62,9 @@ public class AdministracioForm extends javax.swing.JFrame {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../images/logo.png")).getImage());
         setLocationRelativeTo(this);
+        
+        
+                
     }
 
     /**
@@ -76,6 +83,7 @@ public class AdministracioForm extends javax.swing.JFrame {
         jLabelQueries = new javax.swing.JLabel();
         jLabelHelp = new javax.swing.JLabel();
         jLabelTools1 = new javax.swing.JLabel();
+        jPanelPrin = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ADMINISTRATION");
@@ -163,17 +171,32 @@ public class AdministracioForm extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        jPanelPrin.setBackground(new java.awt.Color(144, 164, 174));
+
+        javax.swing.GroupLayout jPanelPrinLayout = new javax.swing.GroupLayout(jPanelPrin);
+        jPanelPrin.setLayout(jPanelPrinLayout);
+        jPanelPrinLayout.setHorizontalGroup(
+            jPanelPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelPrinLayout.setVerticalGroup(
+            jPanelPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 621, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel_showLayout = new javax.swing.GroupLayout(jPanel_show);
         jPanel_show.setLayout(jPanel_showLayout);
         jPanel_showLayout.setHorizontalGroup(
             jPanel_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel_adm_form, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelPrin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel_showLayout.setVerticalGroup(
             jPanel_showLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_showLayout.createSequentialGroup()
                 .addComponent(jPanel_adm_form, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 570, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelPrin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -228,19 +251,48 @@ public class AdministracioForm extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void jLabelManagementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelManagementMouseClicked
-        // TODO add your handling code here:
+        PanelManagement panelManagement = new PanelManagement();
+        panelManagement.setSize(912,650);
+        panelManagement.setLocation(0, 0);
+        
+        jPanelPrin.removeAll();
+        jPanelPrin.add(panelManagement, BorderLayout.CENTER);
+        jPanelPrin.revalidate();
+        jPanelPrin.repaint();
+        
     }//GEN-LAST:event_jLabelManagementMouseClicked
 
     private void jLabelQueriesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelQueriesMouseClicked
-        // TODO add your handling code here:
+        PanelQueries panelQueries = new PanelQueries();
+        panelQueries.setSize(912,650);
+        panelQueries.setLocation(0, 0);
+        
+        jPanelPrin.removeAll();
+        jPanelPrin.add(panelQueries, BorderLayout.CENTER);
+        jPanelPrin.revalidate();
+        jPanelPrin.repaint();
     }//GEN-LAST:event_jLabelQueriesMouseClicked
 
     private void jLabelHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelHelpMouseClicked
-        // TODO add your handling code here:
+        PanelHelp panelHelp = new PanelHelp();
+        panelHelp.setSize(900,621);
+        panelHelp.setLocation(0, 0);
+        
+        jPanelPrin.removeAll();
+        jPanelPrin.add(panelHelp, BorderLayout.CENTER);
+        jPanelPrin.revalidate();
+        jPanelPrin.repaint();
     }//GEN-LAST:event_jLabelHelpMouseClicked
 
     private void jLabelTools1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTools1MouseClicked
-        // TODO add your handling code here:
+        PanelTools panelTools = new PanelTools();
+        panelTools.setSize(912,650);
+        panelTools.setLocation(0, 0);
+        
+        jPanelPrin.removeAll();
+        jPanelPrin.add(panelTools, BorderLayout.CENTER);
+        jPanelPrin.revalidate();
+        jPanelPrin.repaint();
     }//GEN-LAST:event_jLabelTools1MouseClicked
 
     private void jLabelLogOutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogOutMousePressed
@@ -289,6 +341,7 @@ public class AdministracioForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelManagement;
     private javax.swing.JLabel jLabelQueries;
     private javax.swing.JLabel jLabelTools1;
+    private javax.swing.JPanel jPanelPrin;
     private javax.swing.JPanel jPanel_adm_form;
     private javax.swing.JPanel jPanel_show;
     // End of variables declaration//GEN-END:variables

@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package formularis.contingut;
+package formularis;
 
 /**
  *
  * @author Dapau69
  */
-public class PanelHelp extends javax.swing.JPanel {
+public class PanelQueries extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelManagement
      */
-    public PanelHelp() {
+    public PanelQueries() {
         initComponents();
     }
 
@@ -33,23 +33,20 @@ public class PanelHelp extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(912, 650));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setText("Help");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Queries");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(309, 309, 309)
-                .addComponent(jLabel1)
-                .addContainerGap(526, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(233, 233, 233)
                 .addComponent(jLabel1)
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addGap(0, 603, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
