@@ -11,7 +11,11 @@ package formularis;
 //import Logica.fcliente;
 //import Logica.fproducto;
 //import Logica.ftrabajador;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import utils.ManagedUsers;
 
@@ -26,19 +30,19 @@ public class frmuser extends javax.swing.JInternalFrame {
      */
     public frmuser() {
         initComponents();
-        mostrar("");
+        //mostrar("");
         inhabilitar();
     }
        private String accio = "save";
 
     void ocultar_columnas() {
-        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
-        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
-        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tablelist.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablelist.getColumnModel().getColumn(0).setMinWidth(0);
+        tablelist.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
     void inhabilitar() {
-        txtidpersona.setVisible(false);
+        txtiduser.setVisible(false);
         
         txtname.setEnabled(false);
         txtlastname.setEnabled(false);
@@ -55,7 +59,7 @@ public class frmuser extends javax.swing.JInternalFrame {
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
         btneliminar.setEnabled(false);
-        txtidpersona.setText("");
+        txtiduser.setText("");
         txtname.setText("");
         txtlastname.setText("");
         txtnum_document.setText("");
@@ -67,7 +71,7 @@ public class frmuser extends javax.swing.JInternalFrame {
     }
 
     void habilitar() {
-        txtidpersona.setVisible(false);
+        txtiduser.setVisible(false);
         
         txtname.setEnabled(true);
         txtlastname.setEnabled(true);
@@ -84,7 +88,7 @@ public class frmuser extends javax.swing.JInternalFrame {
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
         btneliminar.setEnabled(true);
-        txtidpersona.setText("");
+        txtiduser.setText("");
         txtname.setText("");
         txtlastname.setText("");
         txtnum_document.setText("");
@@ -97,21 +101,7 @@ public class frmuser extends javax.swing.JInternalFrame {
 
     }
 
-    void mostrar(String buscar) {
-        try {
-            DefaultTableModel modelo;/*
-            ftrabajador func = new ftrabajador();
-            modelo = func.mostrar(buscar);
-
-            tablalistado.setModel(modelo);
-            ocultar_columnas();
-            lbltotalregistros.setText("Total Registros " + Integer.toString(func.totalregistros));*/
-
-        } catch (Exception e) {
-            JOptionPane.showConfirmDialog(rootPane, e);
-        }
-    }
-
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,7 +113,7 @@ public class frmuser extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtidpersona = new javax.swing.JTextField();
+        txtiduser = new javax.swing.JTextField();
         jLabelName = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         jLabelNumDoc = new javax.swing.JLabel();
@@ -152,7 +142,7 @@ public class frmuser extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tablalistado = new javax.swing.JTable();
+        tablelist = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         txtbuscar = new javax.swing.JTextField();
         btnbuscar = new javax.swing.JButton();
@@ -279,7 +269,7 @@ public class frmuser extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtidpersona, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtiduser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(94, 94, 94))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -339,7 +329,7 @@ public class frmuser extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(txtidpersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtiduser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelName)
@@ -398,7 +388,7 @@ public class frmuser extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(144, 164, 174));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("User list"));
 
-        tablalistado.setModel(new javax.swing.table.DefaultTableModel(
+        tablelist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -409,12 +399,12 @@ public class frmuser extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tablalistado.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablelist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablalistadoMouseClicked(evt);
+                tablelistMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tablalistado);
+        jScrollPane3.setViewportView(tablelist);
 
         jLabel9.setText("Search");
 
@@ -606,47 +596,87 @@ public class frmuser extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_btnguardarActionPerformed
+ 
+    public void llistar(String buscar) {
+        
+        Socket sc;
+        
+        try {
+            
+            sc = new Socket("127.0.0.1", 8000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            out.writeBoolean(true);
+            
+            // Realitzem la crida per llegir l'usuari
+            out.writeUTF(",USER_QUERY,");
+            
+            int response_query = in.readInt();
+            
+            String[] nameColumns = {"ID", "Name", "LastName", "TypeDoc", "NumDoc", "Address", "Phone", "Email", "Acces", "User", "Password", "Sex"};
+            String[] fields;
+            Object[][] recordGrid = new Object[response_query][12];
+            
+            DefaultTableModel model = new DefaultTableModel();
+            model.setColumnIdentifiers(nameColumns);
+            
+            for (int i = 0; i < response_query; i++) {
+                String record = in.readUTF();
+                fields = record.split(",");
+                
+                for (int j = 0; j < 0; j++) {
+                    recordGrid[i][j] = fields[j];
+                }
+                                
+            model.addRow(fields);
+            
+        }
+        
+        tablelist.setModel(model);
+        
 
+        } catch (Exception e) {
+            
+        }
+    }
+    
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btncancelarActionPerformed
 
-    private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
+    private void tablelistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistMouseClicked
         // TODO add your handling code here:
-        btnguardar.setText("Editar");
+        btnguardar.setText("Edit");
         habilitar();
         btneliminar.setEnabled(true);
         accio="edit";
-
-        int fila = tablalistado.rowAtPoint(evt.getPoint());
-
-        txtidpersona.setText(tablalistado.getValueAt(fila, 0).toString());
-        txtname.setText(tablalistado.getValueAt(fila, 1).toString());
-
-        txtlastname.setText(tablalistado.getValueAt(fila, 2).toString());
-        //txtamaterno.setText(tablalistado.getValueAt(fila, 3).toString());
-        cbotipo_document.setSelectedItem(tablalistado.getValueAt(fila, 4).toString());
-        txtnum_document.setText(tablalistado.getValueAt(fila, 5).toString());
-        txtaddress.setText(tablalistado.getValueAt(fila, 6).toString());
-        txtphone.setText(tablalistado.getValueAt(fila, 7).toString());
-        txtemail.setText(tablalistado.getValueAt(fila, 8).toString());
         
-        //txtsueldo.setText(tablalistado.getValueAt(fila, 9).toString());
-        cboaccess.setSelectedItem(tablalistado.getValueAt(fila, 10).toString());
-        txtlogin.setText(tablalistado.getValueAt(fila, 11).toString());
-        txtpassword.setText(tablalistado.getValueAt(fila, 12).toString());
-        cbosex.setSelectedItem(tablalistado.getValueAt(fila, 13).toString());
-    }//GEN-LAST:event_tablalistadoMouseClicked
+        int fila = tablelist.rowAtPoint(evt.getPoint());
+
+        txtiduser.setText(tablelist.getValueAt(fila, 0).toString());
+        txtname.setText(tablelist.getValueAt(fila, 1).toString());
+        txtlastname.setText(tablelist.getValueAt(fila, 2).toString());
+        cbotipo_document.setSelectedItem(tablelist.getValueAt(fila, 3).toString());
+        txtnum_document.setText(tablelist.getValueAt(fila, 4).toString());
+        txtaddress.setText(tablelist.getValueAt(fila, 5).toString());
+        txtphone.setText(tablelist.getValueAt(fila, 6).toString());
+        txtemail.setText(tablelist.getValueAt(fila, 7).toString());
+        cboaccess.setSelectedItem(tablelist.getValueAt(fila, 8).toString());
+        txtlogin.setText(tablelist.getValueAt(fila, 9).toString());
+        txtpassword.setText(tablelist.getValueAt(fila, 10).toString());
+        cbosex.setSelectedItem(tablelist.getValueAt(fila, 11).toString());
+    }//GEN-LAST:event_tablelistMouseClicked
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
-        mostrar(txtbuscar.getText());
+        llistar(txtbuscar.getText());
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
-        if (!txtidpersona.getText().equals("")) {
+        if (!txtiduser.getText().equals("")) {
             int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the user?","Confirm",2);
 
             if (confirmacion==0) {/*
@@ -755,11 +785,11 @@ public class frmuser extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbltotalregistros;
-    private javax.swing.JTable tablalistado;
+    private javax.swing.JTable tablelist;
     private javax.swing.JTextField txtaddress;
     private javax.swing.JTextField txtbuscar;
     private javax.swing.JTextField txtemail;
-    private javax.swing.JTextField txtidpersona;
+    private javax.swing.JTextField txtiduser;
     private javax.swing.JTextField txtlastname;
     private javax.swing.JTextField txtlogin;
     private javax.swing.JTextField txtname;

@@ -10,13 +10,17 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.plaf.RootPaneUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Lluís Barbó
  */
 public class ManagedUsers {
-    
+
     private int id_con;
     private String name;
     private String lastName;
@@ -29,7 +33,7 @@ public class ManagedUsers {
     private String user;
     private String password;
     private String sex;
-    
+
     ArrayList<String> usersArray = new ArrayList<>();
 
     public int getId_con() {
@@ -135,40 +139,37 @@ public class ManagedUsers {
     public void setUsersArray(ArrayList<String> usersArray) {
         this.usersArray = usersArray;
     }
-    
+
     // Mètode afegir usuaris
     public boolean addUser() {
         //frmuser fuser = new frmuser();
         boolean result = false;
-        
+
         Socket sc;
-        
+
         try {
-            
+
             sc = new Socket("127.0.0.1", 8000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
+
             out.writeBoolean(true);
-            
+
             // Realitzem la crida per afegir l'usuari
             out.writeUTF(id_con + ",USER_ADD," + name + "," + lastName + "," + docType + "," + numDoc + "," + address + "," + phone + "," + email + "," + acces + "," + user + "," + password + "," + sex);
-            
+
             int response_add = in.readInt();
-            
+
             if (response_add == 1) {
-                
+
                 result = true;
             }
-            
-            
+
         } catch (Exception e) {
         }
-        
+
         return result;
-        
+
     }
-    
-    
-    
+
 }
