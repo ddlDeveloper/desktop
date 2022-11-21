@@ -228,7 +228,7 @@ public class RegistreForm extends javax.swing.JFrame {
 
     private void tornarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tornarLabelMouseClicked
         this.setVisible(false);
-        LoginForm t1 = new LoginForm();
+        frmlogin t1 = new frmlogin();
         t1.setVisible(true);
     }//GEN-LAST:event_tornarLabelMouseClicked
 

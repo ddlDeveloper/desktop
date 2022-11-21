@@ -23,18 +23,22 @@ import javax.swing.JOptionPane;
  *
  * @author Lluís Barbó
  */
-public class LoginForm extends javax.swing.JFrame {
+public class frmlogin extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginForm
+     * Creates new form frmlogin
      */
     int xMouse,
             /**
              * Creates new form LoginForm
              */
-            yMouse;
 
-    public LoginForm() {
+    /**
+     * Creates new form frmlogin
+     */
+    yMouse;
+
+    public frmlogin() {
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../images/logo.png")).getImage());
         setLocationRelativeTo(this);
@@ -376,21 +380,21 @@ public class LoginForm extends javax.swing.JFrame {
 
             if (resposta_server_id != 0) {
                 JOptionPane.showMessageDialog(this, "Benvigut/da " + usuariTextField.getText().toString());
-                AdministracioForm clientForm = new AdministracioForm(in, out);
+                frmInici formInici = new frmInici(in, out);
 
-                clientForm.setId(resposta_server_id);
-                clientForm.setUsuari(usuariTextField.getText().toString());
-                clientForm.setPass(passwordField.getText().toString());
-                clientForm.setVisible(true);
+                formInici.setId(resposta_server_id);
+                formInici.setUsuari(usuariTextField.getText().toString());
+                formInici.setPass(passwordField.getText().toString());
+                formInici.setVisible(true);
                 this.dispose();
 
             } else {
                 JOptionPane.showMessageDialog(this, "Usuari o contrasenya incorrecta");
-
+                
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "No es pot establir connexió amb el servidor");
-            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_entrarLabelMouseClicked
 
