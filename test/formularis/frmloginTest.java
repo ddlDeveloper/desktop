@@ -3,42 +3,53 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tea2;
+package formularis;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.net.Socket;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 
 /**
  *
  * @author Lluís Barbó
  */
-public class Test_tea2 {
-
-    private static int resposta_server_id;
-
-    public static void main(String[] args) throws InterruptedException {
-
-        System.out.println("Test TEA2 - ACCESOS al servidor: \n");
-
-        // Test login usuari administrador
-        loginAdministrador("lluis", "daniel");
-        logout("lluis", "daniel", String.valueOf(resposta_server_id));
-
-        System.out.println("");
-
-        System.out.println("Test TEA2 - ACCESOS al servidor: \n");
-
-        // Test login usuari erroni
-        loginErroni("userErroni", "passErroni");
-
-        System.out.println("");
-
+public class frmloginTest {
+    
+    public frmloginTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
     }
 
+    @Test
+    public void testSomeMethod() throws InterruptedException {
+        // TODO review the generated test code and remove the default call to fail.
+                
+    }
+    
     /**
      * Fem el Login amb l'usuari administrador passant per paràmetre les dades
      * necessaries
@@ -47,9 +58,12 @@ public class Test_tea2 {
      * @param password
      * @throws InterruptedException
      */
-    public static void loginAdministrador(String user, String password) throws InterruptedException {
+    @Test
+    public void loginAdministrador() throws InterruptedException {
 
         Socket cli;
+        String user = "lluis";
+        String password = "password";
 
         try {
 
@@ -83,7 +97,9 @@ public class Test_tea2 {
 
         }
     }
-
+    
+    //Preparat per comprovar que no ha de donar accés amb usari o passsword erroni
+    
     /**
      * Fem el Login amb usuari erroni passant per paràmetre les dades
      *
@@ -91,9 +107,14 @@ public class Test_tea2 {
      * @param password
      * @throws InterruptedException
      */
-    public static void loginErroni(String user, String password) throws InterruptedException {
+    
+    
+    @Test
+    public void loginErroni() throws InterruptedException {
 
         Socket cli;
+        String user = "userErroni";
+        String password = "passErroni";
 
         try {
 
@@ -127,37 +148,5 @@ public class Test_tea2 {
         }
     }
 
-    /**
-     * Realitzem el logout d'un user pasat per paràmetre
-     *
-     * @param user
-     * @param password
-     * @param id
-     */
-    public static void logout(String user, String password, String id) {
-
-        Socket cli;
-        System.out.println("Logout usuari: " + user);
-
-        try {
-
-            cli = new Socket("127.0.0.1", 8000);
-            DataInputStream in = new DataInputStream(cli.getInputStream());
-            DataOutputStream out = new DataOutputStream(cli.getOutputStream());
-
-            // Llegir la resposta del servidor en establir connexió
-            String resposta_svr = in.readUTF();
-
-            // Enviem resposta al servidor amb l'usuari i contrasenya
-            out.writeUTF("LOGIN," + user + "," + password + "," + id);
-
-            //Executo la consulta de la crida per sortir
-            out.writeUTF("USER_EXIT");
-            System.out.println("Logout CORRECTE");
-
-        } catch (IOException ex) {
-            Logger.getLogger(Test_tea2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+        
 }
