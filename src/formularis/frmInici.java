@@ -164,7 +164,7 @@ public class frmInici extends javax.swing.JFrame {
 
         menuReserves.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/reserve-48.png"))); // NOI18N
         menuReserves.setMnemonic('e');
-        menuReserves.setText("Reseves");
+        menuReserves.setText("Reserves");
 
         menuItemReser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemReser.setMnemonic('t');
@@ -331,6 +331,7 @@ public class frmInici extends javax.swing.JFrame {
 
     private void menuToolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuToolsActionPerformed
         // TODO add your handling code here:
+        
 
     }//GEN-LAST:event_menuToolsActionPerformed
 

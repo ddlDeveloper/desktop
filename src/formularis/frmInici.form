@@ -38,7 +38,7 @@
               <Image iconType="3" name="/images/formularis/reserve-48.png"/>
             </Property>
             <Property name="mnemonic" type="int" value="101"/>
-            <Property name="text" type="java.lang.String" value="Reseves"/>
+            <Property name="text" type="java.lang.String" value="Reserves"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemReser">

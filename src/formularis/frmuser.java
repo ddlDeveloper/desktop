@@ -29,7 +29,12 @@ public class frmuser extends javax.swing.JInternalFrame {
     DataInputStream in;
     DataOutputStream out;
     Socket cli;
+    int rol;
     int access = 0;
+
+    frmuser(DataInputStream in, DataOutputStream out, int rol) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public int getAccess() {
         return access;
@@ -626,6 +631,7 @@ public class frmuser extends javax.swing.JInternalFrame {
         */
         try {
             //out.writeInt(2);
+            //out.writeInt(0);
             out.writeInt(1);
             int comprovacio = in.readInt();
             if (comprovacio == 1) {
@@ -670,7 +676,8 @@ public class frmuser extends javax.swing.JInternalFrame {
             /*
             frmInici inici = new frmInici(in, out);
             inici.logOut(in, out);*/
-            this.dispose();
+            //this.dispose();
+            inhabilitar();
             
         } catch (IOException ex) {
             //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);

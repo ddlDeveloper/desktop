@@ -411,26 +411,20 @@ public class frmlogin extends javax.swing.JFrame {
             String resposta_server = in.readUTF();
 
             // send response to server with user and password
-            //out.writeUTF("0, " + usuariTextField.getText() + ", " + passwordField.getText() + ", " + 1);
             out.writeUTF(usuariTextField.getText());
             out.writeUTF(passwordField.getText());
             out.writeInt(0);
-            //System.out.println("LOGIN, " + usuariTextField.getText().toString() + ", " + passwordField.getText().toString() + ", 1");
-
+            
             int resposta_server_id = in.readInt();
-            //System.out.println("Resposta servidor:  " + resposta_server);
-
+            
             if (resposta_server_id == 0) {
-                //JOptionPane.showMessageDialog(this, "Benvigut/da " + usuariTextField.getText().toString());
-
+                
                 this.setVisible(false);
                 RegistreForm r1 = new RegistreForm(cli, in, out);
                 r1.setVisible(true);
 
-            } else {
-                //JOptionPane.showMessageDialog(this, "Usuari o contrasenya incorrecta");
-
-            }
+            } 
+            
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "No es pot establir connexió amb el servidor");
             Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
