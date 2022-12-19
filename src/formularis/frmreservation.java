@@ -3,21 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package formularis;
 
-//import Datos.vcliente;
-//import Datos.vtrabajador;
-//import Logica.fcliente;
-//import Logica.fproducto;
-//import Logica.ftrabajador;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-//import java.lang.System.Logger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import java.net.Socket;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -36,7 +28,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
     DataInputStream in;
     DataOutputStream out;
     Socket cli;
-    
+
     public frmreservation(DataInputStream in, DataOutputStream out) {
         initComponents();
         this.in = in;
@@ -44,7 +36,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
         //mostrar("");
         inhabilitar();
     }
-       private String accio = "save";
+    private String accio = "save";
 
     void ocultar_columnas() {
         tablelist.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -54,7 +46,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
 
     void inhabilitar() {
         txtiduser.setVisible(false);
-        
+
         txtname.setEnabled(false);
         txtlastname.setEnabled(false);
         cbotipo_document.setEnabled(false);
@@ -83,7 +75,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
 
     void habilitar() {
         txtiduser.setVisible(true);
-        
+
         txtname.setEnabled(true);
         txtlastname.setEnabled(true);
         cbotipo_document.setEnabled(true);
@@ -108,12 +100,9 @@ public class frmreservation extends javax.swing.JInternalFrame {
         txtemail.setText("");
         txtlogin.setText("");
         txtpassword.setText("");
-        
 
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -555,55 +544,53 @@ public class frmreservation extends javax.swing.JInternalFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         // TODO add your handling code here:
-        
-               
+
 
     }//GEN-LAST:event_btnguardarActionPerformed
- 
+
     public void llistar(String buscar) {
-        
+
         Socket sc;
-        
+
         try {
-            
+
             sc = new Socket("127.0.0.1", 8000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
+
             out.writeBoolean(true);
-            
+
             // Realitzem la crida per llegir l'usuari
             out.writeUTF(",USER_QUERY,");
-            
+
             int response_query = in.readInt();
-            
+
             String[] nameColumns = {"ID", "Name", "LastName", "TypeDoc", "NumDoc", "Address", "Phone", "Email", "Acces", "User", "Password", "Sex"};
             String[] fields;
             Object[][] recordGrid = new Object[response_query][12];
-            
+
             DefaultTableModel model = new DefaultTableModel();
             model.setColumnIdentifiers(nameColumns);
-            
+
             for (int i = 0; i < response_query; i++) {
                 String record = in.readUTF();
                 fields = record.split(",");
-                
+
                 for (int j = 0; j < 0; j++) {
                     recordGrid[i][j] = fields[j];
                 }
-                                
-            model.addRow(fields);
-            
-        }
-        
-        tablelist.setModel(model);
-        
+
+                model.addRow(fields);
+
+            }
+
+            tablelist.setModel(model);
 
         } catch (Exception e) {
-            
+
         }
     }
-    
+
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -614,8 +601,8 @@ public class frmreservation extends javax.swing.JInternalFrame {
         btnguardar.setText("Edit");
         habilitar();
         btneliminar.setEnabled(true);
-        accio="edit";
-        
+        accio = "edit";
+
         int fila = tablelist.rowAtPoint(evt.getPoint());
 
         txtiduser.setText(tablelist.getValueAt(fila, 0).toString());
@@ -640,9 +627,9 @@ public class frmreservation extends javax.swing.JInternalFrame {
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
         if (!txtiduser.getText().equals("")) {
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the user?","Confirm",2);
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the user?", "Confirm", 2);
 
-            if (confirmacion==0) {/*
+            if (confirmacion == 0) {/*
                 ftrabajador func = new ftrabajador();
                 vtrabajador dts= new vtrabajador();
 
@@ -700,14 +687,13 @@ public class frmreservation extends javax.swing.JInternalFrame {
             txtlastname.requestFocus();
             return;
         }
-        
+
         if (txtnum_document.getText().length() == 0) {
             JOptionPane.showConfirmDialog(rootPane, "You must enter a Doc Number for the User");
             txtnum_document.requestFocus();
             return;
         }
-        
-        
+
         if (txtlogin.getText().length() == 0) {
             JOptionPane.showConfirmDialog(rootPane, "You must enter a login for the User");
             txtlogin.requestFocus();
@@ -718,7 +704,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
             txtpassword.requestFocus();
             return;
         }
-        
+
         // Creem les variables on desem les dades de l'usuari
         String id = txtiduser.getText().toString();
         String name = txtname.getText().toString();
@@ -729,12 +715,10 @@ public class frmreservation extends javax.swing.JInternalFrame {
         String phone = txtphone.getText().toString();
         String email = txtemail.getText().toString();
         String acces = cboaccess.getSelectedItem().toString();
-        //String user = txtlogin.getText().toString();
-        //String password = txtpassword.getText().toString();
         String user = txtlogin.getText();
         String password = txtpassword.getText();
         String sex = cbosex.getSelectedItem().toString();
-        
+
         try {
             out.writeInt(2);
             int comprovacio = in.readInt();
@@ -747,78 +731,26 @@ public class frmreservation extends javax.swing.JInternalFrame {
                     String correcte = in.readUTF();
                     System.out.println(correcte);
                     int rol = in.readInt();
-                    if ( rol != 0) {
+                    if (rol != 0) {
                         System.out.println("Ha accedit l'usuari " + txtlogin.getText());
                     } else {
                         System.out.println("L'usuari " + txtlogin.getText() + " no té el rol correcte");
                     }
                 }
             }
-            /*
-            frmInici inici = new frmInici(in, out);
-            inici.logOut(in, out);
-            this.dispose();*/
-            
+
         } catch (IOException ex) {
             //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
             Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
-        /*
-        // Instanciem la classe ManagedUsers
-        ManagedUsers mUser = new ManagedUsers();
-        
-        mUser.addUser(user, password);
-        mUser.setId(id);
-        mUser.setName(name);
-        mUser.setLastName(lastName);
-        mUser.setDocType(docType);
-        mUser.setNumDoc(numDoc);
-        mUser.setAddress(address);
-        mUser.setPhone(phone);
-        mUser.setEmail(email);
-        mUser.setAcces(acces);
-        mUser.setUser(user);
-        mUser.setPassword(password);
-        mUser.setSex(sex);
-        
-        /*
-        if (mUser.addUser()) {
-            
-            JOptionPane.showMessageDialog(this, "L'usuari " + name + " " + lastName + " ha sigut donat d'alta amb el nom d'usuari " + user);
-            
-        /*
-        // Instanciem la classe ManagedUsers
-        ManagedUsers mUser = new ManagedUsers();
-        
-        mUser.addUser(user, password);
-        mUser.setId(id);
-        mUser.setName(name);
-        mUser.setLastName(lastName);
-        mUser.setDocType(docType);
-        mUser.setNumDoc(numDoc);
-        mUser.setAddress(address);
-        mUser.setPhone(phone);
-        mUser.setEmail(email);
-        mUser.setAcces(acces);
-        mUser.setUser(user);
-        mUser.setPassword(password);
-        mUser.setSex(sex);
-        
-        /*
-        if (mUser.addUser()) {
-            
-            JOptionPane.showMessageDialog(this, "L'usuari " + name + " " + lastName + " ha sigut donat d'alta amb el nom d'usuari " + user);
-            
-        }*/
-        
-        
+
+
     }//GEN-LAST:event_btnguardarMouseClicked
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;

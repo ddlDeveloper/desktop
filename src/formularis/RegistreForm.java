@@ -57,34 +57,8 @@ public class RegistreForm extends javax.swing.JFrame {
         usuariTextField = new javax.swing.JTextField();
         passLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
-        usuariLabel1 = new javax.swing.JLabel();
-        carrerTextField = new javax.swing.JTextField();
-        usuariLabel2 = new javax.swing.JLabel();
-        municipiTextField = new javax.swing.JTextField();
-        usuariLabel3 = new javax.swing.JLabel();
-        provinciaTextField = new javax.swing.JTextField();
-        usuariLabel4 = new javax.swing.JLabel();
-        nacionalitatTextField = new javax.swing.JTextField();
-        usuariLabel5 = new javax.swing.JLabel();
-        ibanTextField = new javax.swing.JTextField();
-        usuariLabel6 = new javax.swing.JLabel();
-        codiPostalTextField = new javax.swing.JTextField();
-        usuariLabel7 = new javax.swing.JLabel();
-        telefonTextField = new javax.swing.JTextField();
         usuariLabel8 = new javax.swing.JLabel();
         rolTextField = new javax.swing.JTextField();
-        usuariLabel9 = new javax.swing.JLabel();
-        tarjetaBancariaTextField = new javax.swing.JTextField();
-        usuariLabel10 = new javax.swing.JLabel();
-        dniTextField = new javax.swing.JTextField();
-        usuariLabel11 = new javax.swing.JLabel();
-        correuTextField = new javax.swing.JTextField();
-        usuariLabel12 = new javax.swing.JLabel();
-        cognomTextField = new javax.swing.JTextField();
-        nomTextField = new javax.swing.JTextField();
-        usuariLabel13 = new javax.swing.JLabel();
-        usuariLabel14 = new javax.swing.JLabel();
-        idTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,125 +171,6 @@ public class RegistreForm extends javax.swing.JFrame {
             }
         });
 
-        usuariLabel1.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel1.setText("CARRER");
-
-        carrerTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        carrerTextField.setForeground(new java.awt.Color(204, 204, 204));
-        carrerTextField.setBorder(null);
-        carrerTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                carrerTextFieldMousePressed(evt);
-            }
-        });
-        carrerTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carrerTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel2.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel2.setText("MUNICIPI");
-
-        municipiTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        municipiTextField.setForeground(new java.awt.Color(204, 204, 204));
-        municipiTextField.setBorder(null);
-        municipiTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                municipiTextFieldMousePressed(evt);
-            }
-        });
-        municipiTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                municipiTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel3.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel3.setText("PROVINCIA");
-
-        provinciaTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        provinciaTextField.setForeground(new java.awt.Color(204, 204, 204));
-        provinciaTextField.setBorder(null);
-        provinciaTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                provinciaTextFieldMousePressed(evt);
-            }
-        });
-        provinciaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                provinciaTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel4.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel4.setText("NACIO");
-
-        nacionalitatTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        nacionalitatTextField.setForeground(new java.awt.Color(204, 204, 204));
-        nacionalitatTextField.setBorder(null);
-        nacionalitatTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                nacionalitatTextFieldMousePressed(evt);
-            }
-        });
-        nacionalitatTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nacionalitatTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel5.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel5.setText("IBAN");
-
-        ibanTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        ibanTextField.setForeground(new java.awt.Color(204, 204, 204));
-        ibanTextField.setBorder(null);
-        ibanTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                ibanTextFieldMousePressed(evt);
-            }
-        });
-        ibanTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ibanTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel6.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel6.setText("CP");
-
-        codiPostalTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        codiPostalTextField.setForeground(new java.awt.Color(204, 204, 204));
-        codiPostalTextField.setBorder(null);
-        codiPostalTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                codiPostalTextFieldMousePressed(evt);
-            }
-        });
-        codiPostalTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codiPostalTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel7.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel7.setText("TELEFON");
-
-        telefonTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        telefonTextField.setForeground(new java.awt.Color(204, 204, 204));
-        telefonTextField.setBorder(null);
-        telefonTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                telefonTextFieldMousePressed(evt);
-            }
-        });
-        telefonTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefonTextFieldActionPerformed(evt);
-            }
-        });
-
         usuariLabel8.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
         usuariLabel8.setText("ROL");
 
@@ -333,108 +188,6 @@ public class RegistreForm extends javax.swing.JFrame {
             }
         });
 
-        usuariLabel9.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel9.setText("TBANC");
-
-        tarjetaBancariaTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        tarjetaBancariaTextField.setForeground(new java.awt.Color(204, 204, 204));
-        tarjetaBancariaTextField.setBorder(null);
-        tarjetaBancariaTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tarjetaBancariaTextFieldMousePressed(evt);
-            }
-        });
-        tarjetaBancariaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tarjetaBancariaTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel10.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel10.setText("DNI");
-
-        dniTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        dniTextField.setForeground(new java.awt.Color(204, 204, 204));
-        dniTextField.setBorder(null);
-        dniTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                dniTextFieldMousePressed(evt);
-            }
-        });
-        dniTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dniTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel11.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel11.setText("CORREU");
-
-        correuTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        correuTextField.setForeground(new java.awt.Color(204, 204, 204));
-        correuTextField.setBorder(null);
-        correuTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                correuTextFieldMousePressed(evt);
-            }
-        });
-        correuTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                correuTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel12.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel12.setText("COGNOM");
-
-        cognomTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        cognomTextField.setForeground(new java.awt.Color(204, 204, 204));
-        cognomTextField.setBorder(null);
-        cognomTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cognomTextFieldMousePressed(evt);
-            }
-        });
-        cognomTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cognomTextFieldActionPerformed(evt);
-            }
-        });
-
-        nomTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        nomTextField.setForeground(new java.awt.Color(204, 204, 204));
-        nomTextField.setBorder(null);
-        nomTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                nomTextFieldMousePressed(evt);
-            }
-        });
-        nomTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomTextFieldActionPerformed(evt);
-            }
-        });
-
-        usuariLabel13.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel13.setText("NOM");
-
-        usuariLabel14.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
-        usuariLabel14.setText("ID");
-
-        idTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        idTextField.setForeground(new java.awt.Color(204, 204, 204));
-        idTextField.setBorder(null);
-        idTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                idTextFieldMousePressed(evt);
-            }
-        });
-        idTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idTextFieldActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -448,159 +201,39 @@ public class RegistreForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(usuariLabel)
-                                    .addComponent(passLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(usuariTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                    .addComponent(passwordField)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(usuariLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(correuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(usuariLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(dniTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(usuariLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tarjetaBancariaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(usuariLabel14)
-                                        .addComponent(usuariLabel13))
-                                    .addComponent(usuariLabel12))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cognomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(usuariLabel1)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(carrerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(usuariLabel2)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(municipiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(usuariLabel4)
-                                    .addComponent(usuariLabel5)
-                                    .addComponent(usuariLabel6)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(usuariLabel7)
-                                            .addComponent(usuariLabel8))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rolTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(telefonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(134, 134, 134)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nacionalitatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ibanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(codiPostalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(usuariLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(provinciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(219, 219, 219)
-                        .addComponent(registreForm)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                        .addComponent(registreForm))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passLabel)
+                            .addComponent(usuariLabel8)
+                            .addComponent(usuariLabel))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usuariTextField)
+                            .addComponent(passwordField)
+                            .addComponent(rolTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(carrerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(municipiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(usuariLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(passLabel)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(registreForm)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(usuariTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usuariLabel1))
-                        .addGap(18, 18, 18)
-                        .addComponent(usuariLabel2)))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(usuariLabel13)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(usuariLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(nomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usuariLabel4))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cognomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usuariLabel12))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(usuariLabel11)
-                            .addComponent(correuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dniTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usuariLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tarjetaBancariaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usuariLabel9)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(provinciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usuariLabel3)
-                            .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nacionalitatTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(ibanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usuariLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(codiPostalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usuariLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(telefonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usuariLabel7))
-                                .addGap(14, 14, 14)
-                                .addComponent(usuariLabel8))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rolTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(registreForm)
+                .addGap(83, 83, 83)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usuariTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usuariLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passLabel))
+                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rolTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usuariLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tornarPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(desarPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -622,11 +255,10 @@ public class RegistreForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tornarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tornarLabelMouseClicked
-        
-        
+
         frmlogin t1 = new frmlogin();
         logOut(in, out);
-        
+
         try {
             s.close();
         } catch (IOException ex) {
@@ -648,17 +280,9 @@ public class RegistreForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tornarLabelMouseExited
 
     private void desarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desarLabelMouseClicked
-        //javax.swing.JOptionPane.showMessageDialog(this, "Intent d'accés amb les dades:\nUsuari: " + usuariTextField.getText() + "\nContrasenya: " + String.valueOf(passwordField.getPassword()), "LOGIN", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        //Socket cli;
+
         try {
 
-            //cli = new Socket("127.0.0.1", 8000);
-            //DataInputStream in = new DataInputStream(cli.getInputStream());
-            //DataOutputStream out = new DataOutputStream(cli.getOutputStream());
-            //String resposta_server = in.readUTF();
-            //out.writeUTF(usuariTextField.getText());
-            //out.writeUTF(passwordField.getText());
-            //out.writeBoolean(false);
             out.writeInt(1);
             int comprovacio = in.readInt();
             if (comprovacio == 1) {
@@ -668,18 +292,6 @@ public class RegistreForm extends javax.swing.JFrame {
                     //out.writeUTF(idTextField.getText());
                     out.writeUTF(usuariTextField.getText());
                     out.writeUTF(passwordField.getText());
-                    out.writeUTF(nomTextField.getText());
-                    out.writeUTF(cognomTextField.getText());
-                    out.writeUTF(correuTextField.getText());
-                    out.writeUTF(dniTextField.getText());
-                    out.writeUTF(tarjetaBancariaTextField.getText());
-                    out.writeUTF(carrerTextField.getText());
-                    out.writeUTF(municipiTextField.getText());
-                    out.writeUTF(provinciaTextField.getText());
-                    out.writeUTF(nacionalitatTextField.getText());
-                    out.writeUTF(ibanTextField.getText());
-                    out.writeUTF(telefonTextField.getText());
-                    out.writeUTF(codiPostalTextField.getText());
                     out.writeUTF(rolTextField.getText());
                     String correcte = in.readUTF();
                     System.out.println(correcte);
@@ -740,128 +352,18 @@ public class RegistreForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usuariTextFieldActionPerformed
 
-    private void carrerTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carrerTextFieldMousePressed
+    private void rolTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_carrerTextFieldMousePressed
-
-    private void carrerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrerTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_carrerTextFieldActionPerformed
-
-    private void municipiTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_municipiTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_municipiTextFieldMousePressed
-
-    private void municipiTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_municipiTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_municipiTextFieldActionPerformed
-
-    private void provinciaTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_provinciaTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_provinciaTextFieldMousePressed
-
-    private void provinciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provinciaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_provinciaTextFieldActionPerformed
-
-    private void nacionalitatTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nacionalitatTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nacionalitatTextFieldMousePressed
-
-    private void nacionalitatTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacionalitatTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nacionalitatTextFieldActionPerformed
-
-    private void ibanTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ibanTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ibanTextFieldMousePressed
-
-    private void ibanTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ibanTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ibanTextFieldActionPerformed
-
-    private void codiPostalTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_codiPostalTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_codiPostalTextFieldMousePressed
-
-    private void codiPostalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codiPostalTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_codiPostalTextFieldActionPerformed
-
-    private void telefonTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telefonTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefonTextFieldMousePressed
-
-    private void telefonTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefonTextFieldActionPerformed
+    }//GEN-LAST:event_rolTextFieldActionPerformed
 
     private void rolTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rolTextFieldMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_rolTextFieldMousePressed
 
-    private void rolTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rolTextFieldActionPerformed
+    void logOut(DataInputStream in, DataOutputStream out) {
 
-    private void tarjetaBancariaTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tarjetaBancariaTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tarjetaBancariaTextFieldMousePressed
-
-    private void tarjetaBancariaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarjetaBancariaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tarjetaBancariaTextFieldActionPerformed
-
-    private void dniTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dniTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dniTextFieldMousePressed
-
-    private void dniTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dniTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dniTextFieldActionPerformed
-
-    private void correuTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_correuTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_correuTextFieldMousePressed
-
-    private void correuTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correuTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_correuTextFieldActionPerformed
-
-    private void cognomTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cognomTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cognomTextFieldMousePressed
-
-    private void cognomTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cognomTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cognomTextFieldActionPerformed
-
-    private void nomTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nomTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomTextFieldMousePressed
-
-    private void nomTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomTextFieldActionPerformed
-
-    private void idTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idTextFieldMousePressed
-
-    private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idTextFieldActionPerformed
-
-void logOut(DataInputStream in, DataOutputStream out) {
-        
         try {
 
-            // Llegir la resposta del servidor al establir la connexió
-            //String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            
-            //out.writeUTF("LOGIN," + getUsuari() + "," + getPass() + "," + getId());
-            //Executo la consulta de la crida per sortir
             out.writeInt(0);
 
         } catch (IOException ex) {
@@ -869,45 +371,19 @@ void logOut(DataInputStream in, DataOutputStream out) {
         }
 
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField carrerTextField;
-    private javax.swing.JTextField codiPostalTextField;
-    private javax.swing.JTextField cognomTextField;
-    private javax.swing.JTextField correuTextField;
     private javax.swing.JLabel desarLabel;
     private javax.swing.JPanel desarPanel;
-    private javax.swing.JTextField dniTextField;
-    private javax.swing.JTextField ibanTextField;
-    private javax.swing.JTextField idTextField;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField municipiTextField;
-    private javax.swing.JTextField nacionalitatTextField;
-    private javax.swing.JTextField nomTextField;
     private javax.swing.JLabel passLabel;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JTextField provinciaTextField;
     private javax.swing.JLabel registreForm;
     private javax.swing.JTextField rolTextField;
-    private javax.swing.JTextField tarjetaBancariaTextField;
-    private javax.swing.JTextField telefonTextField;
     private javax.swing.JLabel tornarLabel;
     private javax.swing.JPanel tornarPanel;
     private javax.swing.JLabel usuariLabel;
-    private javax.swing.JLabel usuariLabel1;
-    private javax.swing.JLabel usuariLabel10;
-    private javax.swing.JLabel usuariLabel11;
-    private javax.swing.JLabel usuariLabel12;
-    private javax.swing.JLabel usuariLabel13;
-    private javax.swing.JLabel usuariLabel14;
-    private javax.swing.JLabel usuariLabel2;
-    private javax.swing.JLabel usuariLabel3;
-    private javax.swing.JLabel usuariLabel4;
-    private javax.swing.JLabel usuariLabel5;
-    private javax.swing.JLabel usuariLabel6;
-    private javax.swing.JLabel usuariLabel7;
     private javax.swing.JLabel usuariLabel8;
-    private javax.swing.JLabel usuariLabel9;
     private javax.swing.JTextField usuariTextField;
     // End of variables declaration//GEN-END:variables
 }

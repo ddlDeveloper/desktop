@@ -9,6 +9,11 @@ package formularis;
 //import Datos.vcliente;
 //import Logica.fcliente;
 //import Logica.fproducto;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,8 +26,14 @@ public class frmclient extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmcliente
      */
-    public frmclient() {
+    
+    static DataInputStream in;
+    static DataOutputStream out;
+    
+    public frmclient(DataInputStream in, DataOutputStream out) {
         initComponents();
+        this.in = in;
+        this.out = out;
         mostrar("");
         inhabilitar();
     }
@@ -62,6 +73,9 @@ public class frmclient extends javax.swing.JInternalFrame {
         txtNacionality.setText("");
         txtemail.setText("");
         txtprovince.setText("");
+        txtpostalcode.setText("");
+        txtphone.setText("");
+        txtiban.setText("");
     }
 
     void habilitar() {
@@ -592,6 +606,43 @@ public class frmclient extends javax.swing.JInternalFrame {
             JOptionPane.showConfirmDialog(rootPane, "You must enter a province for the client");
             txtprovince.requestFocus();
             return;
+        }
+        
+        try {
+
+            out.writeInt(3);
+            out.writeInt(1);
+            out.writeInt(1);
+            int comprovacio = in.readInt();
+            if (comprovacio == 1) {
+                out.writeBoolean(true);
+                boolean senyal = in.readBoolean();
+                if (senyal == true) {  
+                    out.writeUTF(txtNacionality.getText());
+                    out.writeUTF(txtaddress.getText());
+                    out.writeUTF(txtbuscar.getText());
+                    out.writeUTF(txtemail.getText());
+                    out.writeUTF(txtiban.getText());
+                    out.writeUTF(txtidpersona.getText());
+                    out.writeUTF(txtlastname.getText());
+                    out.writeUTF(txtmunicipality.getText());
+                    out.writeUTF(txtname.getText());
+                    out.writeUTF(txtnum_document.getText());
+                    out.writeUTF(txtphone.getText());
+                    out.writeUTF(txtpostalcode.getText());
+                    out.writeUTF(txtprovince.getText());
+                    String correcte = in.readUTF();
+                    System.out.println(correcte); 
+                    JOptionPane.showMessageDialog(this, "The Client has been entered");
+                    inhabilitar();
+                }
+            }
+
+            
+            //this.dispose();
+
+        } catch (IOException ex) {
+            Logger.getLogger(RegistreForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 /*
         vcliente dts = new vcliente();

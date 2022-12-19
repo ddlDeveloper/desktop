@@ -1,9 +1,8 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package formularis;
 
 import java.io.DataInputStream;
@@ -43,7 +42,7 @@ public class frmuser extends javax.swing.JInternalFrame {
     public void setAccess(int access) {
         this.access = access;
     }
-    
+
     public frmuser(DataInputStream in, DataOutputStream out) {
         initComponents();
         this.in = in;
@@ -51,7 +50,7 @@ public class frmuser extends javax.swing.JInternalFrame {
         //mostrar("");
         inhabilitar();
     }
-       private String accio = "save";
+    private String accio = "save";
 
     void ocultar_columnas() {
         tablelist.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -61,7 +60,7 @@ public class frmuser extends javax.swing.JInternalFrame {
 
     void inhabilitar() {
         txtiduser.setVisible(false);
-        
+
         txtname.setEnabled(false);
         txtlastname.setEnabled(false);
         cbotipo_document.setEnabled(false);
@@ -90,7 +89,7 @@ public class frmuser extends javax.swing.JInternalFrame {
 
     void habilitar() {
         txtiduser.setVisible(true);
-        
+
         txtname.setEnabled(true);
         txtlastname.setEnabled(true);
         cbotipo_document.setEnabled(true);
@@ -115,12 +114,9 @@ public class frmuser extends javax.swing.JInternalFrame {
         txtemail.setText("");
         txtlogin.setText("");
         txtpassword.setText("");
-        
 
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -569,14 +565,13 @@ public class frmuser extends javax.swing.JInternalFrame {
             txtlastname.requestFocus();
             return;
         }
-        
+
         if (txtnum_document.getText().length() == 0) {
             JOptionPane.showConfirmDialog(rootPane, "You must enter a Doc Number for the User");
             txtnum_document.requestFocus();
             return;
         }
-        
-        
+
         if (txtlogin.getText().length() == 0) {
             JOptionPane.showConfirmDialog(rootPane, "You must enter a login for the User");
             txtlogin.requestFocus();
@@ -587,7 +582,7 @@ public class frmuser extends javax.swing.JInternalFrame {
             txtpassword.requestFocus();
             return;
         }
-        
+
         // Creem les variables on desem les dades de l'usuari
         String name = txtname.getText().toString();
         String lastName = txtlastname.getText().toString();
@@ -601,38 +596,17 @@ public class frmuser extends javax.swing.JInternalFrame {
         String password = txtpassword.getText().toString();
         String sex = cbosex.getSelectedItem().toString();
         JOptionPane.showMessageDialog(this, acces);
-        
+
         if (cboaccess.equals("Administration")) {
             acces = "1";
         } else {
             acces = "2";
         }
-        /*
-        // Instanciem la classe ManagedUsers
-        ManagedUsers mUser = new ManagedUsers();
-        
-        mUser.setName(name);
-        mUser.setLastName(lastName);
-        mUser.setDocType(docType);
-        mUser.setNumDoc(numDoc);
-        mUser.setAddress(address);
-        mUser.setPhone(phone);
-        mUser.setEmail(email);
-        mUser.setAccess(access);
-        mUser.setUser(user);
-        mUser.setPassword(password);
-        mUser.setSex(sex);
 
-        if (mUser.addUser()) {
-            
-            JOptionPane.showMessageDialog(this, "L'usuari " + name + " " + lastName + " ha sigut donat d'alta amb el nom d'usuari " + user);
-            
-        }
-        */
         try {
-            //out.writeInt(2);
-            //out.writeInt(0);
+            out.writeInt(2);
             out.writeInt(1);
+            //out.writeInt(1);
             int comprovacio = in.readInt();
             if (comprovacio == 1) {
                 out.writeBoolean(true);
@@ -647,92 +621,67 @@ public class frmuser extends javax.swing.JInternalFrame {
                     out.writeUTF(address);
                     out.writeUTF(phone);
                     out.writeUTF(acces);
-                    //out.writeInt(access);
-                    //out.writeUTF(docType);
-                    
-                    
-                    
-                    //out.writeUTF(sex);
+                    out.writeUTF(sex);
                     String correcte = in.readUTF();
                     System.out.println(correcte);
-                    /*
-                    int rol = in.readInt();  
-                    String rol_ = "";
-                    if (rol == 0) {
-                        System.out.println("L'usuari " + user + " no te rol correcte.");
-                     
-                    } else {
-                        switch(rol){
-                            case 1:
-                                break;
-                            case 2:
-                                break;
-                            default:
-                                break;
-                        }
-                    }*/
+                    JOptionPane.showMessageDialog(this, "The user has been entered");
+                    inhabilitar();
+
                 }
             }
-            /*
-            frmInici inici = new frmInici(in, out);
-            inici.logOut(in, out);*/
-            //this.dispose();
-            inhabilitar();
-            
+
         } catch (IOException ex) {
             //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
             Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
-        
-               
+
 
     }//GEN-LAST:event_btnguardarActionPerformed
- 
+
     public void llistar(String buscar) {
-        
+
         Socket sc;
-        
+
         try {
-            
+
             sc = new Socket("127.0.0.1", 8000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
+
             out.writeBoolean(true);
-            
+
             // Realitzem la crida per llegir l'usuari
             out.writeUTF(",USER_QUERY,");
-            
+
             int response_query = in.readInt();
-            
+
             String[] nameColumns = {"ID", "Name", "LastName", "TypeDoc", "NumDoc", "Address", "Phone", "Email", "Acces", "User", "Password", "Sex"};
             String[] fields;
             Object[][] recordGrid = new Object[response_query][12];
-            
+
             DefaultTableModel model = new DefaultTableModel();
             model.setColumnIdentifiers(nameColumns);
-            
+
             for (int i = 0; i < response_query; i++) {
                 String record = in.readUTF();
                 fields = record.split(",");
-                
+
                 for (int j = 0; j < 0; j++) {
                     recordGrid[i][j] = fields[j];
                 }
-                                
-            model.addRow(fields);
-            
-        }
-        
-        tablelist.setModel(model);
-        
+
+                model.addRow(fields);
+
+            }
+
+            tablelist.setModel(model);
 
         } catch (Exception e) {
-            
+
         }
     }
-    
+
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -743,8 +692,8 @@ public class frmuser extends javax.swing.JInternalFrame {
         btnguardar.setText("Edit");
         habilitar();
         btneliminar.setEnabled(true);
-        accio="edit";
-        
+        accio = "edit";
+
         int fila = tablelist.rowAtPoint(evt.getPoint());
 
         txtiduser.setText(tablelist.getValueAt(fila, 0).toString());
@@ -769,9 +718,9 @@ public class frmuser extends javax.swing.JInternalFrame {
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
         if (!txtiduser.getText().equals("")) {
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the user?","Confirm",2);
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the user?", "Confirm", 2);
 
-            if (confirmacion==0) {/*
+            if (confirmacion == 0) {/*
                 ftrabajador func = new ftrabajador();
                 vtrabajador dts= new vtrabajador();
 
@@ -819,39 +768,13 @@ public class frmuser extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtiduserActionPerformed
 
     private void btnguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnguardarMouseClicked
-        
-        /*
-        // Instanciem la classe ManagedUsers
-        ManagedUsers mUser = new ManagedUsers();
-        
-        mUser.addUser(user, password);
-        mUser.setId(id);
-        mUser.setName(name);
-        mUser.setLastName(lastName);
-        mUser.setDocType(docType);
-        mUser.setNumDoc(numDoc);
-        mUser.setAddress(address);
-        mUser.setPhone(phone);
-        mUser.setEmail(email);
-        mUser.setAcces(acces);
-        mUser.setUser(user);
-        mUser.setPassword(password);
-        mUser.setSex(sex);
-        
-        /*
-        if (mUser.addUser()) {
-            
-            JOptionPane.showMessageDialog(this, "L'usuari " + name + " " + lastName + " ha sigut donat d'alta amb el nom d'usuari " + user);
-            
-        }*/
-        
-        
+
+
     }//GEN-LAST:event_btnguardarMouseClicked
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;

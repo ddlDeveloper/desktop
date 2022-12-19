@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Dapau69
+ * @author Lluís Barbó
  */
 public class frmInici extends javax.swing.JFrame {
 
@@ -90,7 +90,6 @@ public class frmInici extends javax.swing.JFrame {
             case 1:
                 //Administrator
                 JOptionPane.showMessageDialog(this, "You are logged in with the Administrator role");
-                menuBaixa.setVisible(true);
                 menuLogout.setVisible(true);
                 menuHelp.setVisible(true);
                 menuTools.setVisible(true);
@@ -101,7 +100,6 @@ public class frmInici extends javax.swing.JFrame {
             case 2:
                 //Reception
                 JOptionPane.showMessageDialog(this, "You are logged in with the Reception role");
-                menuBaixa.setVisible(false);
                 menuLogout.setVisible(true);
                 menuHelp.setVisible(true);
                 menuTools.setVisible(false);
@@ -140,7 +138,6 @@ public class frmInici extends javax.swing.JFrame {
         menuItemAbout = new javax.swing.JMenuItem();
         menuItemHelp = new javax.swing.JMenuItem();
         menuLogout = new javax.swing.JMenu();
-        menuBaixa = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,6 +151,11 @@ public class frmInici extends javax.swing.JFrame {
 
         menuItemRoom.setMnemonic('o');
         menuItemRoom.setText("Rooms");
+        menuItemRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRoomActionPerformed(evt);
+            }
+        });
         menuManagement.add(menuItemRoom);
 
         menuItemServices.setMnemonic('s');
@@ -239,21 +241,6 @@ public class frmInici extends javax.swing.JFrame {
         });
         menuBar.add(menuLogout);
 
-        menuBaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/password-key-24.png"))); // NOI18N
-        menuBaixa.setText("Baixa");
-        menuBaixa.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/images_1_.png"))); // NOI18N
-        menuBaixa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuBaixaMouseClicked(evt);
-            }
-        });
-        menuBaixa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuBaixaActionPerformed(evt);
-            }
-        });
-        menuBar.add(menuBaixa);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -283,7 +270,7 @@ public class frmInici extends javax.swing.JFrame {
     }//GEN-LAST:event_menuLogoutMouseClicked
 
     private void menuItemClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemClientsActionPerformed
-        frmclient form = new frmclient();
+        frmclient form = new frmclient(in, out);
         desktop.add(form);
         form.toFront();
         form.setVisible(true);
@@ -300,28 +287,6 @@ public class frmInici extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_jMenuItemUsersActionPerformed
 
-    private void menuBaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBaixaActionPerformed
-
-        BaixaForm form = new BaixaForm(in, out);
-        desktop.add(form);
-        form.toFront();
-        form.setVisible(true);
-    }//GEN-LAST:event_menuBaixaActionPerformed
-
-    private void menuBaixaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBaixaMouseClicked
-        // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            out.writeInt(1);
-        } catch (IOException ex) {
-            Logger.getLogger(frmInici.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        BaixaForm form = new BaixaForm(in, out);
-        form.setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_menuBaixaMouseClicked
-
     private void menuItemReserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemReserActionPerformed
         frmreservation form = new frmreservation(in, out);
         desktop.add(form);
@@ -331,19 +296,21 @@ public class frmInici extends javax.swing.JFrame {
 
     private void menuToolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuToolsActionPerformed
         // TODO add your handling code here:
-        
+
 
     }//GEN-LAST:event_menuToolsActionPerformed
+
+    private void menuItemRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRoomActionPerformed
+        frmrooms form = new frmrooms(in, out);
+        desktop.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_menuItemRoomActionPerformed
 
     void logOut(DataInputStream in, DataOutputStream out) {
 
         try {
 
-            // Llegir la resposta del servidor al establir la connexió
-            //String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            //out.writeUTF("LOGIN," + getUsuari() + "," + getPass() + "," + getId());
-            //Executo la consulta de la crida per sortir
             out.writeInt(0);
             System.out.println("Valor getId: " + getId());
 
@@ -356,7 +323,6 @@ public class frmInici extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JMenuItem jMenuItemUsers;
-    private javax.swing.JMenu menuBaixa;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuItemAbout;
