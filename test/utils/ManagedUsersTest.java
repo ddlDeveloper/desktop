@@ -46,7 +46,7 @@ public class ManagedUsersTest {
         System.out.println("getId_con");
         ManagedUsers instance = new ManagedUsers();
         int expResult = 0;
-        int result = instance.getId_con();
+        String result = instance.getId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -58,9 +58,9 @@ public class ManagedUsersTest {
     @Test
     public void testSetId_con() {
         System.out.println("setId_con");
-        int id_con = 0;
+        String id = "";
         ManagedUsers instance = new ManagedUsers();
-        instance.setId_con(id_con);
+        instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -392,7 +392,7 @@ public class ManagedUsersTest {
     /**
      * Test of addUser method, of class ManagedUsers.
      */
-    @Test
+  /*  @Test
     public void testAddUser() {
         System.out.println("addUser");
         ManagedUsers instance = new ManagedUsers();
@@ -401,6 +401,6 @@ public class ManagedUsersTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }**/
     
 }

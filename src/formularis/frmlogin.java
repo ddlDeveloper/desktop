@@ -32,11 +32,10 @@ public class frmlogin extends javax.swing.JFrame {
             /**
              * Creates new form LoginForm
              */
-
-    /**
-     * Creates new form frmlogin
-     */
-    yMouse;
+            /**
+             * Creates new form frmlogin
+             */
+            yMouse;
 
     public frmlogin() {
         initComponents();
@@ -341,7 +340,7 @@ public class frmlogin extends javax.swing.JFrame {
     private void entrarLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarLabelMouseExited
         entrarPanel.setBackground(new Color(0, 134, 190));
     }//GEN-LAST:event_entrarLabelMouseExited
-        
+
     private void passwordFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMousePressed
         if (String.valueOf(passwordField.getPassword()).equals("********")) {
             passwordField.setText("");
@@ -372,37 +371,72 @@ public class frmlogin extends javax.swing.JFrame {
             // send response to server with user and password
             out.writeUTF(usuariTextField.getText());
             out.writeUTF(passwordField.getText());
-            out.writeBoolean(true);
-            System.out.println("LOGIN, " + usuariTextField.getText().toString() + ", " + passwordField.getText().toString() + ", 0");
-
+            out.writeInt(1);
             int resposta_server_id = in.readInt();
             System.out.println("Resposta servidor:  " + resposta_server);
+            int rol = in.readInt(); //Recollim el valor numeric del rol, per enviar al formulari frmInici i fer un switch
 
-            if (resposta_server_id != 0) {
-                JOptionPane.showMessageDialog(this, "Benvigut/da " + usuariTextField.getText().toString());
-                frmInici formInici = new frmInici(in, out);
+            if (resposta_server_id > 0) {
+                JOptionPane.showMessageDialog(this, "Welcome user " + usuariTextField.getText().toString());
+                                
+                frmInici formInici = new frmInici(in, out, rol);
 
                 formInici.setId(resposta_server_id);
                 formInici.setUsuari(usuariTextField.getText().toString());
                 formInici.setPass(passwordField.getText().toString());
+                formInici.setRol(rol);
                 formInici.setVisible(true);
                 this.dispose();
 
             } else {
-                JOptionPane.showMessageDialog(this, "Usuari o contrasenya incorrecta");
-                
+                JOptionPane.showMessageDialog(this, "Incorrect username or password");
+
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "No es pot establir connexió amb el servidor");
+            JOptionPane.showMessageDialog(this, "Unable to connect to server");
             Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_entrarLabelMouseClicked
 
     private void registrarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarLabelMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
-        RegistreForm r1 = new RegistreForm();
-        r1.setVisible(true);
+
+        Socket cli;
+
+        try {
+            cli = new Socket("127.0.0.1", 8000);
+            DataInputStream in = new DataInputStream(cli.getInputStream());
+            DataOutputStream out = new DataOutputStream(cli.getOutputStream());
+
+            String resposta_server = in.readUTF();
+
+            // send response to server with user and password
+            //out.writeUTF("0, " + usuariTextField.getText() + ", " + passwordField.getText() + ", " + 1);
+            out.writeUTF(usuariTextField.getText());
+            out.writeUTF(passwordField.getText());
+            out.writeInt(0);
+            //System.out.println("LOGIN, " + usuariTextField.getText().toString() + ", " + passwordField.getText().toString() + ", 1");
+
+            int resposta_server_id = in.readInt();
+            //System.out.println("Resposta servidor:  " + resposta_server);
+
+            if (resposta_server_id == 0) {
+                //JOptionPane.showMessageDialog(this, "Benvigut/da " + usuariTextField.getText().toString());
+
+                this.setVisible(false);
+                RegistreForm r1 = new RegistreForm(cli, in, out);
+                r1.setVisible(true);
+
+            } else {
+                //JOptionPane.showMessageDialog(this, "Usuari o contrasenya incorrecta");
+
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "No es pot establir connexió amb el servidor");
+            Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_registrarLabelMouseClicked
 
     private void registrarLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarLabelMouseEntered

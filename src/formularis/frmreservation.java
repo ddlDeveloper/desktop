@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -6,11 +6,18 @@
 
 package formularis;
 
+//import Datos.vcliente;
+//import Datos.vtrabajador;
+//import Logica.fcliente;
+//import Logica.fproducto;
+//import Logica.ftrabajador;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+//import java.lang.System.Logger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import java.net.Socket;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -21,7 +28,7 @@ import utils.ManagedUsers;
  *
  * @author Lluís Barbó
  */
-public class frmuser extends javax.swing.JInternalFrame {
+public class frmreservation extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmcliente
@@ -29,17 +36,8 @@ public class frmuser extends javax.swing.JInternalFrame {
     DataInputStream in;
     DataOutputStream out;
     Socket cli;
-    int access = 0;
-
-    public int getAccess() {
-        return access;
-    }
-
-    public void setAccess(int access) {
-        this.access = access;
-    }
     
-    public frmuser(DataInputStream in, DataOutputStream out) {
+    public frmreservation(DataInputStream in, DataOutputStream out) {
         initComponents();
         this.in = in;
         this.out = out;
@@ -169,7 +167,7 @@ public class frmuser extends javax.swing.JInternalFrame {
         setResizable(true);
 
         jPanel1.setBackground(new java.awt.Color(144, 164, 174));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("User registration"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Reservation registration"));
 
         txtiduser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,7 +265,6 @@ public class frmuser extends javax.swing.JInternalFrame {
         jLabelEmail.setText("EMAIL:");
 
         cboaccess.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrator", "Reception" }));
-        cboaccess.setToolTipText("");
 
         jLabelAccess.setText("Access:");
 
@@ -408,10 +405,10 @@ public class frmuser extends javax.swing.JInternalFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("User");
+        jLabel1.setText("Reservations");
 
         jPanel2.setBackground(new java.awt.Color(144, 164, 174));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("User list"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Reservation list"));
 
         tablelist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -528,6 +525,9 @@ public class frmuser extends javax.swing.JInternalFrame {
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("Reservation");
+        jPanel2.getAccessibleContext().setAccessibleName("Reservation list");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -554,129 +554,7 @@ public class frmuser extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        if (txtname.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a Name for the User");
-            txtname.requestFocus();
-            return;
-        }
-        if (txtlastname.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a last name for the User");
-            txtlastname.requestFocus();
-            return;
-        }
-        
-        if (txtnum_document.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a Doc Number for the User");
-            txtnum_document.requestFocus();
-            return;
-        }
-        
-        
-        if (txtlogin.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a login for the User");
-            txtlogin.requestFocus();
-            return;
-        }
-        if (txtpassword.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a password for the User");
-            txtpassword.requestFocus();
-            return;
-        }
-        
-        // Creem les variables on desem les dades de l'usuari
-        String name = txtname.getText().toString();
-        String lastName = txtlastname.getText().toString();
-        String docType = cbotipo_document.getSelectedItem().toString();
-        String numDoc = txtnum_document.getText().toString();
-        String address = txtaddress.getText().toString();
-        String phone = txtphone.getText().toString();
-        String email = txtemail.getText().toString();
-        String acces = cboaccess.getSelectedItem().toString();
-        String user = txtlogin.getText().toString();
-        String password = txtpassword.getText().toString();
-        String sex = cbosex.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(this, acces);
-        
-        if (cboaccess.equals("Administration")) {
-            acces = "1";
-        } else {
-            acces = "2";
-        }
-        /*
-        // Instanciem la classe ManagedUsers
-        ManagedUsers mUser = new ManagedUsers();
-        
-        mUser.setName(name);
-        mUser.setLastName(lastName);
-        mUser.setDocType(docType);
-        mUser.setNumDoc(numDoc);
-        mUser.setAddress(address);
-        mUser.setPhone(phone);
-        mUser.setEmail(email);
-        mUser.setAccess(access);
-        mUser.setUser(user);
-        mUser.setPassword(password);
-        mUser.setSex(sex);
-
-        if (mUser.addUser()) {
-            
-            JOptionPane.showMessageDialog(this, "L'usuari " + name + " " + lastName + " ha sigut donat d'alta amb el nom d'usuari " + user);
-            
-        }
-        */
-        try {
-            //out.writeInt(2);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
-            if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
-                if (senyal == true) {
-                    out.writeUTF(user);
-                    out.writeUTF(password);
-                    out.writeUTF(name);
-                    out.writeUTF(lastName);
-                    out.writeUTF(email);
-                    out.writeUTF(numDoc);
-                    out.writeUTF(address);
-                    out.writeUTF(phone);
-                    out.writeUTF(acces);
-                    //out.writeInt(access);
-                    //out.writeUTF(docType);
-                    
-                    
-                    
-                    //out.writeUTF(sex);
-                    String correcte = in.readUTF();
-                    System.out.println(correcte);
-                    /*
-                    int rol = in.readInt();  
-                    String rol_ = "";
-                    if (rol == 0) {
-                        System.out.println("L'usuari " + user + " no te rol correcte.");
-                     
-                    } else {
-                        switch(rol){
-                            case 1:
-                                break;
-                            case 2:
-                                break;
-                            default:
-                                break;
-                        }
-                    }*/
-                }
-            }
-            /*
-            frmInici inici = new frmInici(in, out);
-            inici.logOut(in, out);*/
-            this.dispose();
-            
-        } catch (IOException ex) {
-            //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
+        // TODO add your handling code here:
         
                
 
@@ -812,7 +690,103 @@ public class frmuser extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtiduserActionPerformed
 
     private void btnguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnguardarMouseClicked
+        if (txtname.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a Name for the User");
+            txtname.requestFocus();
+            return;
+        }
+        if (txtlastname.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a last name for the User");
+            txtlastname.requestFocus();
+            return;
+        }
         
+        if (txtnum_document.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a Doc Number for the User");
+            txtnum_document.requestFocus();
+            return;
+        }
+        
+        
+        if (txtlogin.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a login for the User");
+            txtlogin.requestFocus();
+            return;
+        }
+        if (txtpassword.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a password for the User");
+            txtpassword.requestFocus();
+            return;
+        }
+        
+        // Creem les variables on desem les dades de l'usuari
+        String id = txtiduser.getText().toString();
+        String name = txtname.getText().toString();
+        String lastName = txtlastname.getText().toString();
+        String docType = cbotipo_document.getSelectedItem().toString();
+        String numDoc = txtnum_document.getText().toString();
+        String address = txtaddress.getText().toString();
+        String phone = txtphone.getText().toString();
+        String email = txtemail.getText().toString();
+        String acces = cboaccess.getSelectedItem().toString();
+        //String user = txtlogin.getText().toString();
+        //String password = txtpassword.getText().toString();
+        String user = txtlogin.getText();
+        String password = txtpassword.getText();
+        String sex = cbosex.getSelectedItem().toString();
+        
+        try {
+            out.writeInt(2);
+            int comprovacio = in.readInt();
+            if (comprovacio == 1) {
+                out.writeBoolean(true);
+                boolean senyal = in.readBoolean();
+                if (senyal == true) {
+                    out.writeUTF(txtlogin.getText());
+                    out.writeUTF(txtpassword.getText());
+                    String correcte = in.readUTF();
+                    System.out.println(correcte);
+                    int rol = in.readInt();
+                    if ( rol != 0) {
+                        System.out.println("Ha accedit l'usuari " + txtlogin.getText());
+                    } else {
+                        System.out.println("L'usuari " + txtlogin.getText() + " no té el rol correcte");
+                    }
+                }
+            }
+            /*
+            frmInici inici = new frmInici(in, out);
+            inici.logOut(in, out);
+            this.dispose();*/
+            
+        } catch (IOException ex) {
+            //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        /*
+        // Instanciem la classe ManagedUsers
+        ManagedUsers mUser = new ManagedUsers();
+        
+        mUser.addUser(user, password);
+        mUser.setId(id);
+        mUser.setName(name);
+        mUser.setLastName(lastName);
+        mUser.setDocType(docType);
+        mUser.setNumDoc(numDoc);
+        mUser.setAddress(address);
+        mUser.setPhone(phone);
+        mUser.setEmail(email);
+        mUser.setAcces(acces);
+        mUser.setUser(user);
+        mUser.setPassword(password);
+        mUser.setSex(sex);
+        
+        /*
+        if (mUser.addUser()) {
+            
+            JOptionPane.showMessageDialog(this, "L'usuari " + name + " " + lastName + " ha sigut donat d'alta amb el nom d'usuari " + user);
+            
         /*
         // Instanciem la classe ManagedUsers
         ManagedUsers mUser = new ManagedUsers();

@@ -11,19 +11,45 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Dapau69
  */
 public class frmInici extends javax.swing.JFrame {
-    
+
     static int id;
     static String usuari;
     static String pass;
     static DataInputStream in;
     static DataOutputStream out;
-    
+    static int rol;
+
+    public static int getRol() {
+        return rol;
+    }
+
+    public static void setRol(int rol) {
+        frmInici.rol = rol;
+    }
+
+    public static DataInputStream getIn() {
+        return in;
+    }
+
+    public static void setIn(DataInputStream in) {
+        frmInici.in = in;
+    }
+
+    public static DataOutputStream getOut() {
+        return out;
+    }
+
+    public static void setOut(DataOutputStream out) {
+        frmInici.out = out;
+    }
+
     public static int getId() {
         return id;
     }
@@ -51,17 +77,43 @@ public class frmInici extends javax.swing.JFrame {
     /**
      * Creates new form frmInici
      */
-    public frmInici(DataInputStream in, DataOutputStream out) {
+    public frmInici(DataInputStream in, DataOutputStream out, int rol) {
         this.in = in;
         this.out = out;
+        this.rol = rol;
         initComponents();
         this.setExtendedState(frmInici.MAXIMIZED_BOTH);
         this.setTitle("Room Reservation System and Sales Management");
         setIconImage(new ImageIcon(getClass().getResource("../images/logoDDL.jpeg")).getImage());
         setLocationRelativeTo(this);
-    }
+        switch (rol) {
+            case 1:
+                //Administrator
+                JOptionPane.showMessageDialog(this, "You are logged in with the Administrator role");
+                menuBaixa.setVisible(true);
+                menuLogout.setVisible(true);
+                menuHelp.setVisible(true);
+                menuTools.setVisible(true);
+                menuQueries.setVisible(true);
+                menuReserves.setVisible(true);
+                menuManagement.setVisible(true);
+                break;
+            case 2:
+                //Reception
+                JOptionPane.showMessageDialog(this, "You are logged in with the Reception role");
+                menuBaixa.setVisible(false);
+                menuLogout.setVisible(true);
+                menuHelp.setVisible(true);
+                menuTools.setVisible(false);
+                menuQueries.setVisible(false);
+                menuReserves.setVisible(true);
+                menuManagement.setVisible(true);
+                break;
+            default:
+                break;
 
-   
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,6 +140,7 @@ public class frmInici extends javax.swing.JFrame {
         menuItemAbout = new javax.swing.JMenuItem();
         menuItemHelp = new javax.swing.JMenuItem();
         menuLogout = new javax.swing.JMenu();
+        menuBaixa = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +169,11 @@ public class frmInici extends javax.swing.JFrame {
         menuItemReser.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuItemReser.setMnemonic('t');
         menuItemReser.setText("Reservations and services");
+        menuItemReser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemReserActionPerformed(evt);
+            }
+        });
         menuReserves.add(menuItemReser);
 
         menuItemClients.setMnemonic('y');
@@ -140,6 +198,11 @@ public class frmInici extends javax.swing.JFrame {
 
         menuTools.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/tools-48.png"))); // NOI18N
         menuTools.setText("Tools");
+        menuTools.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuToolsActionPerformed(evt);
+            }
+        });
 
         jMenuItemUsers.setText("Users and access");
         jMenuItemUsers.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -176,6 +239,21 @@ public class frmInici extends javax.swing.JFrame {
         });
         menuBar.add(menuLogout);
 
+        menuBaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/password-key-24.png"))); // NOI18N
+        menuBaixa.setText("Baixa");
+        menuBaixa.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/images_1_.png"))); // NOI18N
+        menuBaixa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuBaixaMouseClicked(evt);
+            }
+        });
+        menuBaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBaixaActionPerformed(evt);
+            }
+        });
+        menuBar.add(menuBaixa);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,7 +279,7 @@ public class frmInici extends javax.swing.JFrame {
         form.setVisible(true);
         logOut(in, out);
         this.dispose();
-        
+
     }//GEN-LAST:event_menuLogoutMouseClicked
 
     private void menuItemClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemClientsActionPerformed
@@ -212,61 +290,60 @@ public class frmInici extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemClientsActionPerformed
 
     private void jMenuItemUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemUsersMouseClicked
-        
+
     }//GEN-LAST:event_jMenuItemUsersMouseClicked
 
     private void jMenuItemUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsersActionPerformed
-        frmuser form = new frmuser();
+        frmuser form = new frmuser(in, out);
         desktop.add(form);
         form.toFront();
         form.setVisible(true);
     }//GEN-LAST:event_jMenuItemUsersActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmInici.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmInici.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmInici.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmInici.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void menuBaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBaixaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmInici(in, out).setVisible(true);
-            }
-        });
-    }
-    
-    private void logOut(DataInputStream in, DataOutputStream out) {
-        
+        BaixaForm form = new BaixaForm(in, out);
+        desktop.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_menuBaixaActionPerformed
+
+    private void menuBaixaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBaixaMouseClicked
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            out.writeInt(1);
+        } catch (IOException ex) {
+            Logger.getLogger(frmInici.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        BaixaForm form = new BaixaForm(in, out);
+        form.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_menuBaixaMouseClicked
+
+    private void menuItemReserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemReserActionPerformed
+        frmreservation form = new frmreservation(in, out);
+        desktop.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_menuItemReserActionPerformed
+
+    private void menuToolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuToolsActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_menuToolsActionPerformed
+
+    void logOut(DataInputStream in, DataOutputStream out) {
+
         try {
 
             // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
+            //String resposta_svr = in.readUTF();
             //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + getUsuari() + "," + getPass() + "," + getId());
+            //out.writeUTF("LOGIN," + getUsuari() + "," + getPass() + "," + getId());
             //Executo la consulta de la crida per sortir
-            out.writeUTF("USER_EXIT");
+            out.writeInt(0);
             System.out.println("Valor getId: " + getId());
 
         } catch (IOException ex) {
@@ -278,6 +355,7 @@ public class frmInici extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JMenuItem jMenuItemUsers;
+    private javax.swing.JMenu menuBaixa;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuItemAbout;

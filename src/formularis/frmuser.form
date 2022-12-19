@@ -225,6 +225,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtiduser">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtiduserActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelName">
           <Properties>
@@ -291,6 +294,7 @@
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnguardarMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguardarActionPerformed"/>
           </Events>
         </Component>
@@ -356,6 +360,7 @@
                 <StringItem index="1" value="Reception"/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelAccess">

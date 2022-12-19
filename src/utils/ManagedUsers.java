@@ -20,8 +20,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Lluís Barbó
  */
 public class ManagedUsers {
+    
+    Socket sc;
+    DataInputStream in;
+    DataOutputStream out;
 
-    private int id_con;
+    private String id;
     private String name;
     private String lastName;
     private String docType;
@@ -33,15 +37,24 @@ public class ManagedUsers {
     private String user;
     private String password;
     private String sex;
+    private int access;
+
+    public int getAccess() {
+        return access;
+    }
+
+    public void setAccess(int access) {
+        this.access = access;
+    }
 
     ArrayList<String> usersArray = new ArrayList<>();
 
-    public int getId_con() {
-        return id_con;
+    public String getId() {
+        return id;
     }
 
-    public void setId_con(int id_con) {
-        this.id_con = id_con;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -142,10 +155,9 @@ public class ManagedUsers {
 
     // Mètode afegir usuaris
     public boolean addUser() {
-        //frmuser fuser = new frmuser();
-        boolean result = false;
-
-        Socket sc;
+          boolean result = false;
+          Socket sc;
+          
 
         try {
 
@@ -156,7 +168,7 @@ public class ManagedUsers {
             out.writeBoolean(true);
 
             // Realitzem la crida per afegir l'usuari
-            out.writeUTF(id_con + ",USER_ADD," + name + "," + lastName + "," + docType + "," + numDoc + "," + address + "," + phone + "," + email + "," + acces + "," + user + "," + password + "," + sex);
+            out.writeUTF(id + ",USER_ADD," + name + "," + lastName + "," + docType + "," + numDoc + "," + address + "," + phone + "," + email + "," + access + "," + user + "," + password + "," + sex);
 
             int response_add = in.readInt();
 
@@ -171,5 +183,9 @@ public class ManagedUsers {
         return result;
 
     }
+/*
+    public void setAcces(int access) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
 
 }
