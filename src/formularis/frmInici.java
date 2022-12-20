@@ -228,6 +228,11 @@ public class frmInici extends javax.swing.JFrame {
         menuHelp.add(menuItemAbout);
 
         menuItemHelp.setText("Help");
+        menuItemHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemHelpActionPerformed(evt);
+            }
+        });
         menuHelp.add(menuItemHelp);
 
         menuBar.add(menuHelp);
@@ -306,6 +311,14 @@ public class frmInici extends javax.swing.JFrame {
         form.toFront();
         form.setVisible(true);
     }//GEN-LAST:event_menuItemRoomActionPerformed
+
+    private void menuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemHelpActionPerformed
+        frmhelp form = new frmhelp(in, out);
+        desktop.add(form);
+        form.toFront();
+        form.setVisible(true);
+        
+    }//GEN-LAST:event_menuItemHelpActionPerformed
 
     void logOut(DataInputStream in, DataOutputStream out) {
 
