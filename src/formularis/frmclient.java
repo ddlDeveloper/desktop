@@ -610,7 +610,7 @@ public class frmclient extends javax.swing.JInternalFrame {
         
         try {
 
-            out.writeInt(2);
+            out.writeInt(3);
             out.writeInt(1);
             out.writeInt(1);
             int comprovacio = in.readInt();
