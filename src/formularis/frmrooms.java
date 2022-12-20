@@ -600,6 +600,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
         
         try {
             out.writeInt(2);
+            out.writeInt(1);
             int comprovacio = in.readInt();
             if (comprovacio == 1) {
                 out.writeBoolean(true);

@@ -720,16 +720,29 @@ public class frmreservation extends javax.swing.JInternalFrame {
         String sex = cbosex.getSelectedItem().toString();
 
         try {
-            out.writeInt(2);
+            out.writeInt(3);
+            out.writeInt(1);
+            out.writeInt(1);
             int comprovacio = in.readInt();
             if (comprovacio == 1) {
                 out.writeBoolean(true);
                 boolean senyal = in.readBoolean();
                 if (senyal == true) {
-                    out.writeUTF(txtlogin.getText());
-                    out.writeUTF(txtpassword.getText());
+                    out.writeUTF(name);
+                    out.writeUTF(lastName);
+                    out.writeUTF(docType);
+                    out.writeUTF(numDoc);
+                    out.writeUTF(address);
+                    out.writeUTF(phone);
+                    out.writeUTF(email);
+                    out.writeUTF(acces);
+                    out.writeUTF(user);
+                    out.writeUTF(password);
+                    out.writeUTF(sex);
                     String correcte = in.readUTF();
                     System.out.println(correcte);
+                    JOptionPane.showMessageDialog(this, "The Reservation has been entered");
+                    inhabilitar();
                     int rol = in.readInt();
                     if (rol != 0) {
                         System.out.println("Ha accedit l'usuari " + txtlogin.getText());
