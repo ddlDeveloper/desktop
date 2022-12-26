@@ -639,7 +639,7 @@ public class frmclient extends javax.swing.JInternalFrame {
             }
 
             
-            //this.dispose();
+            //this.dispose(); 
 
         } catch (IOException ex) {
             Logger.getLogger(RegistreForm.class.getName()).log(Level.SEVERE, null, ex);

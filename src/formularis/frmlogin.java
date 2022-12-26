@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.net.Socket;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -367,10 +369,27 @@ public class frmlogin extends javax.swing.JFrame {
             DataOutputStream out = new DataOutputStream(cli.getOutputStream());
 
             String resposta_server = in.readUTF();
+            String pass = passwordField.getText();
+            String encryptedPass;
+            
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(pass.getBytes());
+            byte[] bytes = m.digest();
+            
+            StringBuilder stringBuilder = new StringBuilder();
+            
+            for (int i = 0; i < bytes.length; i++) {
+                
+                    stringBuilder.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                    
+                }
+
+            encryptedPass = stringBuilder.toString();
 
             // send response to server with user and password
             out.writeUTF(usuariTextField.getText());
-            out.writeUTF(passwordField.getText());
+            out.writeUTF(encryptedPass);
+            //out.writeUTF(passwordField.getText());
             out.writeInt(1);
             int resposta_server_id = in.readInt();
             System.out.println("Resposta servidor:  " + resposta_server);
@@ -394,6 +413,8 @@ public class frmlogin extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Unable to connect to server");
+            Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_entrarLabelMouseClicked
