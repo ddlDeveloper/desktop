@@ -9,14 +9,19 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64;
 
 /**
  *
@@ -24,7 +29,11 @@ import static org.junit.Assert.*;
  */
 public class frmloginTest {
     
+    final String KEY = "abecedari69@";
+    
     public frmloginTest() {
+        
+               
     }
 
     /**
@@ -40,7 +49,7 @@ public class frmloginTest {
 
         Socket cli;
         String user = "lluis";
-        String password = "password";
+        String password = Encriptar("password");
 
         try {
 
@@ -92,7 +101,7 @@ public class frmloginTest {
 
         Socket cli;
         String user = "david";
-        String password = "password";
+        String password = Encriptar("1234qwer");
 
         try {
 
@@ -148,7 +157,7 @@ public class frmloginTest {
 
         Socket cli;
         String user = "userErroni";
-        String password = "passErroni";
+        String password = Encriptar("passErroni");
 
         try {
 
@@ -184,6 +193,50 @@ public class frmloginTest {
 
             System.out.println("No és pot establir connexió amb el servidor");
 
+        }
+    }
+    
+    // Clau d'encriptació / desencriptació
+    public SecretKeySpec CrearClave(String llave) {
+        
+        try {
+            
+            byte[] cadena = llave.getBytes("UTF-8");
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            cadena = md.digest(cadena);
+            cadena = Arrays.copyOf(cadena, 16);
+            SecretKeySpec secretKeySpec = new SecretKeySpec(cadena, "AES");
+            
+            return secretKeySpec;
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }
+
+    }
+
+    // Encriptar
+    public String Encriptar(String encriptar) {
+
+        try {
+            
+            SecretKeySpec secretKeySpec = CrearClave(KEY);
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+
+            byte[] cadena = encriptar.getBytes("UTF-8");
+            byte[] encriptada = cipher.doFinal(cadena);
+            byte[] cadena_encriptar = Base64.encode(encriptada);
+            String cadena_encriptada = new String(cadena_encriptar);
+            
+            return cadena_encriptada;
+
+        } catch (Exception e) {
+            
+            return "";
+            
         }
     }
 

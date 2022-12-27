@@ -15,11 +15,15 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.net.Socket;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+//import java.util.Base64;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64;
 
 /**
  *
@@ -38,6 +42,8 @@ public class frmlogin extends javax.swing.JFrame {
              * Creates new form frmlogin
              */
             yMouse;
+    
+    final String KEY = "abecedari69@";
 
     public frmlogin() {
         initComponents();
@@ -355,6 +361,50 @@ public class frmlogin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_passwordFieldMousePressed
 
+    // Clau d'encriptació / desencriptació
+    public SecretKeySpec CrearClave(String llave) {
+        
+        try {
+            
+            byte[] cadena = llave.getBytes("UTF-8");
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            cadena = md.digest(cadena);
+            cadena = Arrays.copyOf(cadena, 16);
+            SecretKeySpec secretKeySpec = new SecretKeySpec(cadena, "AES");
+            
+            return secretKeySpec;
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }
+
+    }
+
+    // Encriptar
+    public String Encriptar(String encriptar) {
+
+        try {
+            
+            SecretKeySpec secretKeySpec = CrearClave(KEY);
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+
+            byte[] cadena = encriptar.getBytes("UTF-8");
+            byte[] encriptada = cipher.doFinal(cadena);
+            byte[] cadena_encriptar = Base64.encode(encriptada);
+            String cadena_encriptada = new String(cadena_encriptar);
+            
+            return cadena_encriptada;
+
+        } catch (Exception e) {
+            
+            return "";
+            
+        }
+    }
+
     private void entrarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarLabelMouseClicked
         // Ho deixem comentat per comprovacions
         /*javax.swing.JOptionPane.showMessageDialog(this, "Intent d'accés amb les dades:\nUsuari: " 
@@ -369,27 +419,11 @@ public class frmlogin extends javax.swing.JFrame {
             DataOutputStream out = new DataOutputStream(cli.getOutputStream());
 
             String resposta_server = in.readUTF();
-            String pass = passwordField.getText();
-            String encryptedPass;
-            
-            MessageDigest m = MessageDigest.getInstance("MD5");
-            m.update(pass.getBytes());
-            byte[] bytes = m.digest();
-            
-            StringBuilder stringBuilder = new StringBuilder();
-            
-            for (int i = 0; i < bytes.length; i++) {
-                
-                    stringBuilder.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-                    
-                }
-
-            encryptedPass = stringBuilder.toString();
 
             // send response to server with user and password
             out.writeUTF(usuariTextField.getText());
-            out.writeUTF(encryptedPass);
-            //out.writeUTF(passwordField.getText());
+            String passEncrypt = Encriptar(passwordField.getText());
+            out.writeUTF(passEncrypt);
             out.writeInt(1);
             int resposta_server_id = in.readInt();
             System.out.println("Resposta servidor:  " + resposta_server);
@@ -397,7 +431,7 @@ public class frmlogin extends javax.swing.JFrame {
 
             if (resposta_server_id > 0) {
                 JOptionPane.showMessageDialog(this, "Welcome user " + usuariTextField.getText().toString());
-                                
+
                 frmInici formInici = new frmInici(in, out, rol);
 
                 formInici.setId(resposta_server_id);
@@ -413,8 +447,6 @@ public class frmlogin extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Unable to connect to server");
-            Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_entrarLabelMouseClicked
@@ -435,17 +467,17 @@ public class frmlogin extends javax.swing.JFrame {
             out.writeUTF(usuariTextField.getText());
             out.writeUTF(passwordField.getText());
             out.writeInt(0);
-            
+
             int resposta_server_id = in.readInt();
-            
+
             if (resposta_server_id == 0) {
-                
+
                 this.setVisible(false);
                 RegistreForm r1 = new RegistreForm(cli, in, out);
                 r1.setVisible(true);
 
-            } 
-            
+            }
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "No es pot establir connexió amb el servidor");
             Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
