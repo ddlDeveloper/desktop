@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.util.Arrays;
-//import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.Icon;
