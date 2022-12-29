@@ -58,7 +58,7 @@ public class RegistreForm extends javax.swing.JFrame {
         passLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         usuariLabel8 = new javax.swing.JLabel();
-        rolTextField = new javax.swing.JTextField();
+        jComboBoxRol = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -163,7 +163,7 @@ public class RegistreForm extends javax.swing.JFrame {
 
         passwordField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passwordField.setForeground(new java.awt.Color(204, 204, 204));
-        passwordField.setText("Enter ");
+        passwordField.setText("********");
         passwordField.setBorder(null);
         passwordField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -174,17 +174,10 @@ public class RegistreForm extends javax.swing.JFrame {
         usuariLabel8.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
         usuariLabel8.setText("ROL");
 
-        rolTextField.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        rolTextField.setForeground(new java.awt.Color(204, 204, 204));
-        rolTextField.setBorder(null);
-        rolTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                rolTextFieldMousePressed(evt);
-            }
-        });
-        rolTextField.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administration", "Reception" }));
+        jComboBoxRol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rolTextFieldActionPerformed(evt);
+                jComboBoxRolActionPerformed(evt);
             }
         });
 
@@ -211,9 +204,9 @@ public class RegistreForm extends javax.swing.JFrame {
                             .addComponent(usuariLabel))
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(usuariTextField)
+                            .addComponent(usuariTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                             .addComponent(passwordField)
-                            .addComponent(rolTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))))
+                            .addComponent(jComboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -229,11 +222,11 @@ public class RegistreForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passLabel))
-                .addGap(48, 48, 48)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rolTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(usuariLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                    .addComponent(usuariLabel8)
+                    .addComponent(jComboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tornarPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(desarPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -292,12 +285,18 @@ public class RegistreForm extends javax.swing.JFrame {
                     //out.writeUTF(idTextField.getText());
                     out.writeUTF(usuariTextField.getText());
                     out.writeUTF(passwordField.getText());
-                    out.writeUTF(rolTextField.getText());
+                    String comboRol = "";
+                    if (jComboBoxRol.getSelectedItem().toString().equals("Administration")) {
+                        comboRol = "1";
+                    } else {
+                        comboRol = "2";
+                    }
+                    out.writeUTF(comboRol);
                     String correcte = in.readUTF();
                     System.out.println(correcte);
                     int rol = in.readInt();
                     if (rol != 0) {
-                        System.out.println("Ha accedit l'usuari " + usuariTextField.getText() + " amb el rol de " + rolTextField.getText() + " numero " + rol + ".");
+                        System.out.println("Ha accedit l'usuari " + usuariTextField.getText() + " amb el rol de " + jComboBoxRol.getSelectedItem().toString() + " numero " + rol + ".");
                     } else {
                         System.out.println("L'usuari " + usuariTextField.getText() + " no te rol correcte.");
                     }
@@ -352,13 +351,9 @@ public class RegistreForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usuariTextFieldActionPerformed
 
-    private void rolTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolTextFieldActionPerformed
+    private void jComboBoxRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRolActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rolTextFieldActionPerformed
-
-    private void rolTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rolTextFieldMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rolTextFieldMousePressed
+    }//GEN-LAST:event_jComboBoxRolActionPerformed
 
     void logOut(DataInputStream in, DataOutputStream out) {
 
@@ -375,11 +370,11 @@ public class RegistreForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel desarLabel;
     private javax.swing.JPanel desarPanel;
+    private javax.swing.JComboBox<String> jComboBoxRol;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel passLabel;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel registreForm;
-    private javax.swing.JTextField rolTextField;
     private javax.swing.JLabel tornarLabel;
     private javax.swing.JPanel tornarPanel;
     private javax.swing.JLabel usuariLabel;

@@ -200,18 +200,8 @@ public class frmInici extends javax.swing.JFrame {
 
         menuTools.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/tools-48.png"))); // NOI18N
         menuTools.setText("Tools");
-        menuTools.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuToolsActionPerformed(evt);
-            }
-        });
 
         jMenuItemUsers.setText("Users and access");
-        jMenuItemUsers.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItemUsersMouseClicked(evt);
-            }
-        });
         jMenuItemUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemUsersActionPerformed(evt);
@@ -281,10 +271,6 @@ public class frmInici extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_menuItemClientsActionPerformed
 
-    private void jMenuItemUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemUsersMouseClicked
-
-    }//GEN-LAST:event_jMenuItemUsersMouseClicked
-
     private void jMenuItemUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUsersActionPerformed
         frmuser form = new frmuser(in, out);
         desktop.add(form);
@@ -298,12 +284,6 @@ public class frmInici extends javax.swing.JFrame {
         form.toFront();
         form.setVisible(true);
     }//GEN-LAST:event_menuItemReserActionPerformed
-
-    private void menuToolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuToolsActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_menuToolsActionPerformed
 
     private void menuItemRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRoomActionPerformed
         frmrooms form = new frmrooms(in, out);
