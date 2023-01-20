@@ -10,10 +10,12 @@ import java.awt.Color;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import utils.SystemUtils;
 
 /**
  *
@@ -275,6 +277,14 @@ public class RegistreForm extends javax.swing.JFrame {
     private void desarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_desarLabelMouseClicked
 
         try {
+            /*
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            // send response to server with user and password */
 
             out.writeInt(1);
             int comprovacio = in.readInt();
@@ -284,7 +294,7 @@ public class RegistreForm extends javax.swing.JFrame {
                 if (senyal == true) {
                     //out.writeUTF(idTextField.getText());
                     out.writeUTF(usuariTextField.getText());
-                    out.writeUTF(passwordField.getText());
+                    out.writeUTF(SystemUtils.convertirSHA256(passwordField.getText()));
                     String comboRol = "";
                     if (jComboBoxRol.getSelectedItem().toString().equals("Administration")) {
                         comboRol = "1";
@@ -306,7 +316,7 @@ public class RegistreForm extends javax.swing.JFrame {
             frmlogin form = new frmlogin();
             frmInici inici = new frmInici(in, out, rol);
             form.setVisible(true);
-            inici.logOut(in, out);
+            logOut(in, out);
             this.dispose();
 
         } catch (IOException ex) {

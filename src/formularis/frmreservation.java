@@ -5,6 +5,8 @@
  */
 package formularis;
 
+import static formularis.frmuser.in;
+import static formularis.frmuser.out;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -25,9 +27,10 @@ public class frmreservation extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmcliente
      */
-    DataInputStream in;
-    DataOutputStream out;
-    Socket cli;
+    static DataInputStream in;
+    static DataOutputStream out;
+    int rol;
+    DefaultTableModel model = new DefaultTableModel();
 
     public frmreservation(DataInputStream in, DataOutputStream out) {
         initComponents();
@@ -35,6 +38,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
         this.out = out;
         //mostrar("");
         inhabilitar();
+        //llistar();
     }
     private String accio = "save";
 
@@ -543,51 +547,116 @@ public class frmreservation extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        // TODO add your handling code here:
+        if (txtname.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a Name for the User");
+            txtname.requestFocus();
+            return;
+        }
+        if (txtlastname.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a last name for the User");
+            txtlastname.requestFocus();
+            return;
+        }
+
+        if (txtnum_document.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a Doc Number for the User");
+            txtnum_document.requestFocus();
+            return;
+        }
+
+        if (txtlogin.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a login for the User");
+            txtlogin.requestFocus();
+            return;
+        }
+        if (txtpassword.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a password for the User");
+            txtpassword.requestFocus();
+            return;
+        }
+
+        try {
+            out.writeInt(3);
+            out.writeInt(1);
+            out.writeInt(1);
+            int comprovacio = in.readInt();
+            if (comprovacio == 1) {
+                out.writeBoolean(true);
+                boolean senyal = in.readBoolean();
+                String comboRol = "";
+                if (senyal == true) {
+                    out.writeUTF(txtname.getText());
+                    out.writeUTF(txtlastname.getText());
+                    out.writeUTF(cbotipo_document.getSelectedItem().toString());
+                    out.writeUTF(txtnum_document.getText());
+                    out.writeUTF(txtaddress.getText());
+                    out.writeUTF(txtphone.getText());
+                    out.writeUTF(txtemail.getText());
+                    if (cboaccess.getSelectedItem().toString().equals("Administration")) {
+                        comboRol = "1";
+                    } else {
+                        comboRol = "2";
+                    }
+                    out.writeUTF(comboRol);
+                    out.writeUTF(txtlogin.getText());
+                    out.writeUTF(txtpassword.getText());
+                    out.writeUTF(cbosex.getSelectedItem().toString());
+                    String correcte = in.readUTF();
+                    System.out.println(correcte);
+                    JOptionPane.showMessageDialog(this, "The Reservation has been entered");
+                    inhabilitar();
+                    //llistar();
+                }
+            }
+
+        } catch (IOException ex) {
+            //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
 
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
-    public void llistar(String buscar) {
-
-        Socket sc;
+    public void llistar() {
 
         try {
+            out.writeInt(3);
+            out.writeInt(4);
+            out.writeInt(1);
+            int comprovacio = in.readInt();
+            if (comprovacio == 1) {
+                out.writeBoolean(true);
+                boolean senyal = in.readBoolean();
+                if (senyal == true) {
+                    int registres_trobats = Integer.parseInt(in.readUTF());
 
-            sc = new Socket("127.0.0.1", 8000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+                    String[] nameColumns = {"ID", "Name", "LastName", "docType", "NumDoc", "Address", "Phone", "Email", "Acces", "User", "Password", "Sex"};
+                    String[] fields;
+                    Object[][] recordGrid = new Object[registres_trobats][12];
 
-            out.writeBoolean(true);
+                    //DefaultTableModel model = new DefaultTableModel();
+                    model.setColumnIdentifiers(nameColumns);
 
-            // Realitzem la crida per llegir l'usuari
-            out.writeUTF(",USER_QUERY,");
+                    for (int i = 0; i < registres_trobats; i++) {
+                        String record = in.readUTF();
+                        fields = record.split(",");
 
-            int response_query = in.readInt();
+                        for (int j = 0; j < 0; j++) {
+                            recordGrid[i][j] = fields[j];
+                        }
 
-            String[] nameColumns = {"ID", "Name", "LastName", "TypeDoc", "NumDoc", "Address", "Phone", "Email", "Acces", "User", "Password", "Sex"};
-            String[] fields;
-            Object[][] recordGrid = new Object[response_query][12];
+                        model.addRow(fields);
 
-            DefaultTableModel model = new DefaultTableModel();
-            model.setColumnIdentifiers(nameColumns);
+                    }
 
-            for (int i = 0; i < response_query; i++) {
-                String record = in.readUTF();
-                fields = record.split(",");
-
-                for (int j = 0; j < 0; j++) {
-                    recordGrid[i][j] = fields[j];
+                    tablelist.setModel(model);
                 }
-
-                model.addRow(fields);
 
             }
 
-            tablelist.setModel(model);
-
         } catch (Exception e) {
-
+            System.out.println("Error en rebre dades " + e);
         }
     }
 
@@ -621,7 +690,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
-        llistar(txtbuscar.getText());
+        llistar();
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
@@ -637,10 +706,37 @@ public class frmreservation extends javax.swing.JInternalFrame {
                 func.eliminar(dts);
                 mostrar("");
                 inhabilitar();*/
+                try {
+                    out.writeInt(3);
+                    out.writeInt(2);
+                    out.writeInt(1);
+                    int comprovacio = in.readInt();
+                    if (comprovacio == 1) {
+                        out.writeBoolean(true);
+                        boolean senyal = in.readBoolean();
+
+                        if (senyal == true) {
+                            out.writeUTF(txtnum_document.getText());
+
+                            String correcte = in.readUTF();
+                            System.out.println(correcte);
+                            JOptionPane.showMessageDialog(this, "The Reservation has been deleted");
+                            inhabilitar();
+                            //llistar();
+                        }
+                    }
+
+                } catch (IOException ex) {
+                    //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
+
+                }
 
             }
 
         }
+
+
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
@@ -677,87 +773,6 @@ public class frmreservation extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtiduserActionPerformed
 
     private void btnguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnguardarMouseClicked
-        if (txtname.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a Name for the User");
-            txtname.requestFocus();
-            return;
-        }
-        if (txtlastname.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a last name for the User");
-            txtlastname.requestFocus();
-            return;
-        }
-
-        if (txtnum_document.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a Doc Number for the User");
-            txtnum_document.requestFocus();
-            return;
-        }
-
-        if (txtlogin.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a login for the User");
-            txtlogin.requestFocus();
-            return;
-        }
-        if (txtpassword.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a password for the User");
-            txtpassword.requestFocus();
-            return;
-        }
-
-        // Creem les variables on desem les dades de l'usuari
-        String id = txtiduser.getText().toString();
-        String name = txtname.getText().toString();
-        String lastName = txtlastname.getText().toString();
-        String docType = cbotipo_document.getSelectedItem().toString();
-        String numDoc = txtnum_document.getText().toString();
-        String address = txtaddress.getText().toString();
-        String phone = txtphone.getText().toString();
-        String email = txtemail.getText().toString();
-        String acces = cboaccess.getSelectedItem().toString();
-        String user = txtlogin.getText();
-        String password = txtpassword.getText();
-        String sex = cbosex.getSelectedItem().toString();
-
-        try {
-            out.writeInt(3);
-            out.writeInt(1);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
-            if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
-                if (senyal == true) {
-                    out.writeUTF(name);
-                    out.writeUTF(lastName);
-                    out.writeUTF(docType);
-                    out.writeUTF(numDoc);
-                    out.writeUTF(address);
-                    out.writeUTF(phone);
-                    out.writeUTF(email);
-                    out.writeUTF(acces);
-                    out.writeUTF(user);
-                    out.writeUTF(password);
-                    out.writeUTF(sex);
-                    String correcte = in.readUTF();
-                    System.out.println(correcte);
-                    JOptionPane.showMessageDialog(this, "The Reservation has been entered");
-                    inhabilitar();
-                    int rol = in.readInt();
-                    if (rol != 0) {
-                        System.out.println("Ha accedit l'usuari " + txtlogin.getText());
-                    } else {
-                        System.out.println("L'usuari " + txtlogin.getText() + " no té el rol correcte");
-                    }
-                }
-            }
-
-        } catch (IOException ex) {
-            //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-
 
     }//GEN-LAST:event_btnguardarMouseClicked
 

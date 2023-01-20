@@ -11,6 +11,7 @@ import java.io.DataInputStream;
 import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.net.Socket;
@@ -18,11 +19,13 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.SSLSocketFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64;
+import utils.SystemUtils;
 
 /**
  *
@@ -43,6 +46,7 @@ public class frmlogin extends javax.swing.JFrame {
             yMouse;
     
     final String KEY = "abecedari69@";
+    SSLSocketFactory sslSocketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
 
     public frmlogin() {
         initComponents();
@@ -360,50 +364,7 @@ public class frmlogin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_passwordFieldMousePressed
 
-    // Clau d'encriptació / desencriptació
-    public SecretKeySpec CrearClave(String llave) {
-        
-        try {
-            
-            byte[] cadena = llave.getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            cadena = md.digest(cadena);
-            cadena = Arrays.copyOf(cadena, 16);
-            SecretKeySpec secretKeySpec = new SecretKeySpec(cadena, "AES");
-            
-            return secretKeySpec;
-            
-        } catch (Exception e) {
-            
-            return null;
-            
-        }
-
-    }
-
-    // Encriptar
-    public String Encriptar(String encriptar) {
-
-        try {
-            
-            SecretKeySpec secretKeySpec = CrearClave(KEY);
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-
-            byte[] cadena = encriptar.getBytes("UTF-8");
-            byte[] encriptada = cipher.doFinal(cadena);
-            byte[] cadena_encriptar = Base64.encode(encriptada);
-            String cadena_encriptada = new String(cadena_encriptar);
-            
-            return cadena_encriptada;
-
-        } catch (Exception e) {
-            
-            return "";
-            
-        }
-    }
-
+    
     private void entrarLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarLabelMouseClicked
         // Ho deixem comentat per comprovacions
         /*javax.swing.JOptionPane.showMessageDialog(this, "Intent d'accés amb les dades:\nUsuari: " 
@@ -416,16 +377,18 @@ public class frmlogin extends javax.swing.JFrame {
             cli = new Socket("127.0.0.1", 8000);
             DataInputStream in = new DataInputStream(cli.getInputStream());
             DataOutputStream out = new DataOutputStream(cli.getOutputStream());
-
-            String resposta_server = in.readUTF();
-
+            
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
             // send response to server with user and password
-            out.writeUTF(usuariTextField.getText());
-            String passEncrypt = Encriptar(passwordField.getText());
-            out.writeUTF(passEncrypt);
+            out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + SystemUtils.convertirSHA256(passwordField.getText()), shared_secret.toByteArray()));
             out.writeInt(1);
             int resposta_server_id = in.readInt();
-            System.out.println("Resposta servidor:  " + resposta_server);
+            System.out.println("Resposta servidor:  " + resposta_server_id);
             int rol = in.readInt(); //Recollim el valor numeric del rol, per enviar al formulari frmInici i fer un switch
 
             if (resposta_server_id > 0) {
@@ -460,11 +423,15 @@ public class frmlogin extends javax.swing.JFrame {
             DataInputStream in = new DataInputStream(cli.getInputStream());
             DataOutputStream out = new DataOutputStream(cli.getOutputStream());
 
-            String resposta_server = in.readUTF();
-
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
             // send response to server with user and password
-            out.writeUTF(usuariTextField.getText());
-            out.writeUTF(passwordField.getText());
+            out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + passwordField.getText(), shared_secret.toByteArray()));
+
             out.writeInt(0);
 
             int resposta_server_id = in.readInt();
@@ -478,7 +445,7 @@ public class frmlogin extends javax.swing.JFrame {
             }
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "No es pot establir connexió amb el servidor");
+            JOptionPane.showMessageDialog(this, "Unable to connect to server");
             Logger.getLogger(frmlogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 

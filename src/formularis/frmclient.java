@@ -6,9 +6,7 @@
 
 package formularis;
 
-//import Datos.vcliente;
-//import Logica.fcliente;
-//import Logica.fproducto;
+import dades.client;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -16,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logica.logClient;
 
 /**
  *
@@ -30,23 +29,25 @@ public class frmclient extends javax.swing.JInternalFrame {
     static DataInputStream in;
     static DataOutputStream out;
     
+    DefaultTableModel model = new DefaultTableModel();
+    
     public frmclient(DataInputStream in, DataOutputStream out) {
         initComponents();
         this.in = in;
         this.out = out;
-        mostrar("");
+        mostrar();
         inhabilitar();
     }
        private String accio = "save";
 
     void ocultar_columnas() {
-        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
-        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
-        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tablelist.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablelist.getColumnModel().getColumn(0).setMinWidth(0);
+        tablelist.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
 
     void inhabilitar() {
-        txtidpersona.setVisible(false);
+        txtidclient.setVisible(false);
         
         txtname.setEnabled(false);
         txtmunicipality.setEnabled(false);
@@ -64,7 +65,7 @@ public class frmclient extends javax.swing.JInternalFrame {
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
         btneliminar.setEnabled(false);
-        txtidpersona.setText("");
+        txtidclient.setText("");
         txtname.setText("");
         txtmunicipality.setText("");
         txtlastname.setText("");
@@ -79,7 +80,7 @@ public class frmclient extends javax.swing.JInternalFrame {
     }
 
     void habilitar() {
-        txtidpersona.setVisible(false);
+        txtidclient.setVisible(false);
         
         txtname.setEnabled(true);
         txtmunicipality.setEnabled(true);
@@ -97,7 +98,7 @@ public class frmclient extends javax.swing.JInternalFrame {
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
         btneliminar.setEnabled(true);
-        txtidpersona.setText("");
+        txtidclient.setText("");
         txtname.setText("");
         txtmunicipality.setText("");
         txtlastname.setText("");
@@ -110,17 +111,15 @@ public class frmclient extends javax.swing.JInternalFrame {
 
     }
 
-    void mostrar(String buscar) {
+     void mostrar() {
         try {
-            DefaultTableModel modelo;
-            /*
-            fcliente func = new fcliente();
-            modelo = func.mostrar(buscar);
+            
+            logClient func = new logClient(in, out);
+            model = func.mostrar();
 
-            tablalistado.setModel(modelo);
+            tablelist.setModel(model);
             ocultar_columnas();
-            lbltotalregistros.setText("Total Registros " + Integer.toString(func.totalregistros));
-            */
+            lbltotalregistros.setText("Total Registres " + Integer.toString(func.totalregistres));
 
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -138,7 +137,7 @@ public class frmclient extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtidpersona = new javax.swing.JTextField();
+        txtidclient = new javax.swing.JTextField();
         jLabelName = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         jLabelDocument = new javax.swing.JLabel();
@@ -169,7 +168,7 @@ public class frmclient extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tablalistado = new javax.swing.JTable();
+        tablelist = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         txtbuscar = new javax.swing.JTextField();
         btnbuscar = new javax.swing.JButton();
@@ -179,6 +178,7 @@ public class frmclient extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setResizable(true);
 
         jPanel1.setBackground(new java.awt.Color(144, 164, 174));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Client registration"));
@@ -313,7 +313,7 @@ public class frmclient extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtidpersona, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtidclient, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(139, 139, 139))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -370,7 +370,7 @@ public class frmclient extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(txtidpersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtidclient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -436,7 +436,7 @@ public class frmclient extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(144, 164, 174));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Client list"));
 
-        tablalistado.setModel(new javax.swing.table.DefaultTableModel(
+        tablelist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -447,12 +447,12 @@ public class frmclient extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tablalistado.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablelist.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablalistadoMouseClicked(evt);
+                tablelistMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tablalistado);
+        jScrollPane3.setViewportView(tablelist);
 
         jLabel9.setText("Search");
 
@@ -608,77 +608,43 @@ public class frmclient extends javax.swing.JInternalFrame {
             return;
         }
         
-        try {
+        client cli = new client();
+        logClient func = new logClient(in, out);
+        
+        cli.setName(txtname.getText());
+        cli.setLastname(txtlastname.getText());
+        cli.setEmail(txtemail.getText());
+        cli.setDoctype(cbotype_document.getSelectedItem().toString());
+        cli.setNumdoc(txtnum_document.getText());
+        cli.setAddress(txtaddress.getText());
+        cli.setMunicipality(txtmunicipality.getText());
+        cli.setProvince(txtprovince.getText());
+        cli.setNacionality(txtNacionality.getText());
+        cli.setPhone(txtphone.getText());
+        cli.setIban(txtiban.getText());
+        cli.setPostalcode(Integer.parseInt(txtpostalcode.getText()));
+        
+        
+        if (accio.equals("save")) {
+            if (func.insertar(cli)) {
+                JOptionPane.showMessageDialog(rootPane, "The client was successfully registered");
+                mostrar();
+                inhabilitar();
 
-            out.writeInt(3);
-            out.writeInt(1);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
-            if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
-                if (senyal == true) {  
-                    out.writeUTF(txtNacionality.getText());
-                    out.writeUTF(txtaddress.getText());
-                    out.writeUTF(txtbuscar.getText());
-                    out.writeUTF(txtemail.getText());
-                    out.writeUTF(txtiban.getText());
-                    out.writeUTF(txtidpersona.getText());
-                    out.writeUTF(txtlastname.getText());
-                    out.writeUTF(txtmunicipality.getText());
-                    out.writeUTF(txtname.getText());
-                    out.writeUTF(txtnum_document.getText());
-                    out.writeUTF(txtphone.getText());
-                    out.writeUTF(txtpostalcode.getText());
-                    out.writeUTF(txtprovince.getText());
-                    String correcte = in.readUTF();
-                    System.out.println(correcte); 
-                    JOptionPane.showMessageDialog(this, "The Client has been entered");
-                    inhabilitar();
-                }
             }
 
+        }
+        else if (accio.equals("edit")){
+            cli.setIdclient(Integer.parseInt(txtidclient.getText()));
+
+            if (func.editar(cli)) {
+                JOptionPane.showMessageDialog(rootPane, "The client was Edited successfully");
+                mostrar();
+                inhabilitar();
+            }
+        }
             
-            //this.dispose(); 
-
-        } catch (IOException ex) {
-            Logger.getLogger(RegistreForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-/*
-        vcliente dts = new vcliente();
-        fcliente func = new fcliente();
-
-        dts.setNombre(txtnombre.getText());
-
-        dts.setApaterno(txtapaterno.getText());
-        dts.setAmaterno(txtamaterno.getText());
-        
-        int seleccionado = cbotipo_documento.getSelectedIndex();
-        dts.setTipo_documento((String) cbotipo_documento.getItemAt(seleccionado));
-        dts.setNum_documento(txtnum_documento.getText());
-        dts.setDireccion(txtdireccion.getText());
-        dts.setTelefono(txttelefono.getText());
-        dts.setEmail(txtemail.getText());
-        dts.setCodigo_cliente(txtcodigo_cliente.getText());
-        
-        if (accio.equals("guardar")) {
-            if (func.insertar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "el cliente fue registrado satisfactoriamente");
-                mostrar("");
-                inhabilitar();
-
-            }
-
-        }
-        else if (accio.equals("editar")){
-            dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
-
-            if (func.editar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "El Cliente fue Editado satisfactoriamente");
-                mostrar("");
-                inhabilitar();
-            }
-        } */
+            
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
@@ -686,48 +652,52 @@ public class frmclient extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btncancelarActionPerformed
 
-    private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
+    private void tablelistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistMouseClicked
         // TODO add your handling code here:
         btnguardar.setText("Edit");
         habilitar();
         btneliminar.setEnabled(true);
         accio="edit";
 
-        int fila = tablalistado.rowAtPoint(evt.getPoint());
+        int fila = tablelist.rowAtPoint(evt.getPoint());
 
-        txtidpersona.setText(tablalistado.getValueAt(fila, 0).toString());
-        txtname.setText(tablalistado.getValueAt(fila, 1).toString());
+        txtidclient.setText(tablelist.getValueAt(fila, 0).toString());
+        txtname.setText(tablelist.getValueAt(fila, 1).toString());
+        txtlastname.setText(tablelist.getValueAt(fila, 2).toString());
+        txtemail.setText(tablelist.getValueAt(fila, 3).toString());
+        cbotype_document.setSelectedItem(tablelist.getValueAt(fila, 4).toString());
+        txtnum_document.setText(tablelist.getValueAt(fila, 5).toString());
+        txtaddress.setText(tablelist.getValueAt(fila, 6).toString());
+        txtmunicipality.setText(tablelist.getValueAt(fila, 7).toString());
+        txtprovince.setText(tablelist.getValueAt(fila, 8).toString());
+        txtNacionality.setText(tablelist.getValueAt(fila, 9).toString()); 
+        txtphone.setText(tablelist.getValueAt(fila, 10).toString());
+        txtiban.setText(tablelist.getValueAt(fila, 11).toString());
+        txtpostalcode.setText(tablelist.getValueAt(fila, 12).toString());
+        
 
-        txtmunicipality.setText(tablalistado.getValueAt(fila, 2).toString());
-        txtlastname.setText(tablalistado.getValueAt(fila, 3).toString());
-        cbotype_document.setSelectedItem(tablalistado.getValueAt(fila, 4).toString());
-        txtnum_document.setText(tablalistado.getValueAt(fila, 5).toString());
-        txtaddress.setText(tablalistado.getValueAt(fila, 6).toString());
-        txtNacionality.setText(tablalistado.getValueAt(fila, 7).toString());
-        txtemail.setText(tablalistado.getValueAt(fila, 8).toString());
-        txtprovince.setText(tablalistado.getValueAt(fila, 9).toString());
-
-    }//GEN-LAST:event_tablalistadoMouseClicked
+    }//GEN-LAST:event_tablelistMouseClicked
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
-        mostrar(txtbuscar.getText());
+        mostrar();
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
-        if (!txtidpersona.getText().equals("")) {
+        if (!txtidclient.getText().equals("")) {
             int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to Delete the Client? ","Confirm",2);
 
-            if (confirmacion==0) { /*
-                fcliente func = new fcliente();
-                vcliente dts= new vcliente();
+            if (confirmacion == 0) { 
+                logClient func = new logClient(in, out);
+                client cli = new client();
 
-                dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
-                func.eliminar(dts);
-                mostrar("");
+                cli.setIdclient(Integer.parseInt(txtidclient.getText()));
+                func.eliminar(cli);
+                
+                mostrar();
                 inhabilitar();
-*/
+
             }
 
         }
@@ -810,13 +780,13 @@ public class frmclient extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbltotalregistros;
-    private javax.swing.JTable tablalistado;
+    private javax.swing.JTable tablelist;
     private javax.swing.JTextField txtNacionality;
     private javax.swing.JTextField txtaddress;
     private javax.swing.JTextField txtbuscar;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtiban;
-    private javax.swing.JTextField txtidpersona;
+    private javax.swing.JTextField txtidclient;
     private javax.swing.JTextField txtlastname;
     private javax.swing.JTextField txtmunicipality;
     private javax.swing.JTextField txtname;

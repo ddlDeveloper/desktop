@@ -8,10 +8,12 @@ package formularis;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import utils.SystemUtils;
 
 /**
  *
@@ -303,7 +305,16 @@ public class frmInici extends javax.swing.JFrame {
     void logOut(DataInputStream in, DataOutputStream out) {
 
         try {
-
+            /*
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            int exit = 0;
+            out.writeUTF(SystemUtils.encryptedText("0", shared_secret.toByteArray()));  */
             out.writeInt(0);
             System.out.println("Valor getId: " + getId());
 
