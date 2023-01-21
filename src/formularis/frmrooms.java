@@ -3,18 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package formularis;
 
+import dades.reserva;
+import dades.room;
+import dades.usuari;
+import static formularis.frmreservation.in;
+import static formularis.frmreservation.out;
+import static formularis.frmuser.in;
+import static formularis.frmuser.out;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.Socket;
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import logica.logReserve;
+import logica.logRooms;
+import logica.logUser;
 import utils.ManagedUsers;
 
 /**
@@ -26,18 +36,19 @@ public class frmrooms extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmcliente
      */
-    DataInputStream in;
-    DataOutputStream out;
-    Socket cli;
-    
+    static DataInputStream in;
+    static DataOutputStream out;
+
+    DefaultTableModel model = new DefaultTableModel();
+
     public frmrooms(DataInputStream in, DataOutputStream out) {
         initComponents();
         this.in = in;
         this.out = out;
-        //mostrar("");
+        mostrar();
         inhabilitar();
     }
-       private String accio = "save";
+    private String accio = "save";
 
     void ocultar_columnas() {
         tablelist.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -47,7 +58,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
 
     void inhabilitar() {
         txtidroom.setVisible(false);
-        
+
         txtname.setEnabled(false);
         jCheckBoxMarriedBed.setEnabled(false);
         jSpinnerMarriedBed.setEnabled(false);
@@ -57,18 +68,18 @@ public class frmrooms extends javax.swing.JInternalFrame {
         jCheckBoxWifi.setEnabled(false);
         jCheckBoxAir.setEnabled(false);
         jCheckBoxJacuzzi.setEnabled(false);
-        
+
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
         btneliminar.setEnabled(false);
         txtidroom.setText("");
         txtname.setText("");
-                
+
     }
 
     void habilitar() {
         txtidroom.setVisible(true);
-        
+
         txtname.setEnabled(true);
         jCheckBoxMarriedBed.setEnabled(true);
         jSpinnerMarriedBed.setEnabled(true);
@@ -78,18 +89,30 @@ public class frmrooms extends javax.swing.JInternalFrame {
         jCheckBoxWifi.setEnabled(true);
         jCheckBoxAir.setEnabled(true);
         jCheckBoxJacuzzi.setEnabled(true);
-        
+
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
         btneliminar.setEnabled(true);
         txtidroom.setText("");
         txtname.setText("");
-        
 
     }
 
-    
-    
+    void mostrar() {
+        try {
+
+            logRooms func = new logRooms(in, out);
+            model = func.mostrar();
+
+            tablelist.setModel(model);
+            ocultar_columnas();
+            lbltotalregistros.setText("Total Registres " + Integer.toString(func.totalregistres));
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -171,11 +194,6 @@ public class frmrooms extends javax.swing.JInternalFrame {
         btnguardar.setBackground(new java.awt.Color(51, 51, 51));
         btnguardar.setForeground(new java.awt.Color(255, 255, 255));
         btnguardar.setText("Save");
-        btnguardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnguardarMouseClicked(evt);
-            }
-        });
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
@@ -472,56 +490,54 @@ public class frmrooms extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        // TODO add your handling code here:
-        
-               
+        if (txtname.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "You must enter a Name for the User");
+            txtname.requestFocus();
+            return;
+        }
+
+        room room = new room();
+        logRooms func = new logRooms(in, out);
+
+        room.setName(txtname.getText());
+        if (jCheckBoxMarriedBed.isSelected() == true) {
+            room.setMarriedbed(Integer.parseInt(jSpinnerMarriedBed.getValue().toString()));
+        } else {
+            room.setMarriedbed(0);
+        }
+        if (jCheckBoxBed.isSelected() == true) {
+            room.setBed(Integer.parseInt(jSpinnerBed.getValue().toString()));
+        } else {
+            room.setBed(0);
+
+        }
+        room.setRatecode(jComboBoxRateCode.getSelectedItem().toString());
+        room.setWifi(jCheckBoxWifi.isSelected());
+        room.setAir(jCheckBoxAir.isSelected());
+        room.setJacuzzi(jCheckBoxJacuzzi.isSelected());
+
+        if (accio.equals("save")) {
+            if (func.insertar(room)) {
+                JOptionPane.showMessageDialog(rootPane, "The room was successfully registered");
+                mostrar();
+                inhabilitar();
+
+            }
+
+        } else if (accio.equals("edit")) {
+            room.setIdroom(Integer.parseInt(txtidroom.getText()));
+
+            if (func.editar(room)) {
+                JOptionPane.showMessageDialog(rootPane, "The room was Edited successfully");
+                mostrar();
+                inhabilitar();
+            }
+        }
+
 
     }//GEN-LAST:event_btnguardarActionPerformed
- 
-    public void llistar(String buscar) {
-        
-        Socket sc;
-        
-        try {
-            
-            sc = new Socket("127.0.0.1", 8000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
-            out.writeBoolean(true);
-            
-            // Realitzem la crida per llegir l'usuari
-            out.writeUTF(",USER_QUERY,");
-            
-            int response_query = in.readInt();
-            
-            String[] nameColumns = {"ID", "Name", "LastName", "TypeDoc", "NumDoc", "Address", "Phone", "Email", "Acces", "User", "Password", "Sex"};
-            String[] fields;
-            Object[][] recordGrid = new Object[response_query][12];
-            
-            DefaultTableModel model = new DefaultTableModel();
-            model.setColumnIdentifiers(nameColumns);
-            
-            for (int i = 0; i < response_query; i++) {
-                String record = in.readUTF();
-                fields = record.split(",");
-                
-                for (int j = 0; j < 0; j++) {
-                    recordGrid[i][j] = fields[j];
-                }
-                                
-            model.addRow(fields);
-            
-        }
-        
-        tablelist.setModel(model);
-        
 
-        } catch (Exception e) {
-            
-        }
-    }
-    
+
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -532,42 +548,39 @@ public class frmrooms extends javax.swing.JInternalFrame {
         btnguardar.setText("Edit");
         habilitar();
         btneliminar.setEnabled(true);
-        accio="edit";
-        
+        accio = "edit";
+
         int fila = tablelist.rowAtPoint(evt.getPoint());
 
         txtidroom.setText(tablelist.getValueAt(fila, 0).toString());
         txtname.setText(tablelist.getValueAt(fila, 1).toString());
-        jCheckBoxMarriedBed.setText(tablelist.getValueAt(fila, 2).toString());
-        jSpinnerMarriedBed.setValue(tablelist.getValueAt(fila, 3));
-        jCheckBoxBed.setText(tablelist.getValueAt(fila, 4).toString());
-        jSpinnerBed.setValue(tablelist.getValueAt(fila, 5).toString());
-        jComboBoxRateCode.setSelectedItem(tablelist.getValueAt(fila, 6).toString());
-        jCheckBoxWifi.setText(tablelist.getValueAt(fila, 7).toString());
-        jCheckBoxAir.setText(tablelist.getValueAt(fila, 8).toString());
-        jCheckBoxJacuzzi.setText(tablelist.getValueAt(fila, 9).toString());
-                
-        
+        jComboBoxRateCode.setSelectedItem(tablelist.getValueAt(fila, 2).toString());
+        jCheckBoxWifi.setText(tablelist.getValueAt(fila, 3).toString());
+        jCheckBoxAir.setText(tablelist.getValueAt(fila, 4).toString());
+        jCheckBoxJacuzzi.setText(tablelist.getValueAt(fila, 5).toString());
+
+
     }//GEN-LAST:event_tablelistMouseClicked
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
-        llistar(txtbuscar.getText());
+        mostrar();
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
         if (!txtidroom.getText().equals("")) {
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the user?","Confirm",2);
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the user?", "Confirm", 2);
 
-            if (confirmacion==0) {/*
-                ftrabajador func = new ftrabajador();
-                vtrabajador dts= new vtrabajador();
+            if (confirmacion == 0) {
+                logRooms func = new logRooms(in, out);
+                room res = new room();
 
-                dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
-                func.eliminar(dts);
-                mostrar("");
-                inhabilitar();*/
+                res.setIdroom(Integer.parseInt(txtidroom.getText()));
+                func.eliminar(res);
+
+                mostrar();
+                inhabilitar();
 
             }
 
@@ -583,71 +596,6 @@ public class frmrooms extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtidroomActionPerformed
 
-    private void btnguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnguardarMouseClicked
-        if (txtname.getText().length() == 0) {
-            JOptionPane.showConfirmDialog(rootPane, "You must enter a Name for the User");
-            txtname.requestFocus();
-            return;
-        }
-        
-        
-        // Creem les variables on desem les dades de l'usuari
-        String id = txtidroom.getText().toString();
-        String name = txtname.getText().toString();
-        String rateCode = jComboBoxRateCode.getSelectedItem().toString();
-        
-        
-        
-        try {
-            out.writeInt(2);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
-            if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
-                if (senyal == true) {
-                    out.writeUTF(name);
-                    if (jCheckBoxMarriedBed.isSelected()){
-                        int marriedBed = (int)jSpinnerMarriedBed.getValue();
-                        out.writeInt(marriedBed);
-                    }
-                    if (jCheckBoxBed.isSelected()) {
-                        int bed = (int)jSpinnerBed.getValue();
-                        out.writeInt(bed);
-                    }
-                    out.writeUTF(rateCode);
-                    if (jCheckBoxWifi.isSelected()){
-                        boolean wifi = true;
-                        out.writeBoolean(wifi);
-                    }
-                    if (jCheckBoxAir.isSelected()){
-                        boolean air = true;
-                        out.writeBoolean(air);
-                    }
-                    if (jCheckBoxJacuzzi.isSelected()){
-                        boolean jacuzzi = true;
-                        out.writeBoolean(jacuzzi);
-                    }
-                    String correcte = in.readUTF();
-                    System.out.println(correcte);
-                    
-                    JOptionPane.showConfirmDialog(this, "The room has been saved");
-                    inhabilitar();
-                    
-                }
-            }
-            
-            
-        } catch (IOException ex) {
-            
-            Logger.getLogger(frmrooms.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
-        
-        
-        
-    }//GEN-LAST:event_btnguardarMouseClicked
-
     private void jCheckBoxBedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxBedActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxBedActionPerformed
@@ -655,7 +603,6 @@ public class frmrooms extends javax.swing.JInternalFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;
