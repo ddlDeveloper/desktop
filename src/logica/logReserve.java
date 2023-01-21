@@ -5,8 +5,8 @@
  */
 package logica;
 
-import dades.usuari;
-import formularis.frmuser;
+import dades.reserva;
+import formularis.frmreservation;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class logReserve {
                 boolean senyal = in.readBoolean();
                 if (senyal == true) {
                     int registres_trobats = Integer.parseInt(in.readUTF());
-                    String[] nameColumns = {"ID", "User", "Password", "Name", "LastName", "Email", "TypeDoc", "NumDoc", "Address", "Phone", "Sex", "Rol"};
+                    String[] nameColumns = {"ID", "Name", "LastName", "DocType", "NumDoc", "Address", "Phone", "Email", "Rol", "User", "Password", "Sex"};
                     String[] fields;
 
                     Object[][] registre = new Object[registres_trobats][12];
@@ -81,7 +81,7 @@ public class logReserve {
 
     }
 
-    public boolean insertar(usuari user) {
+    public boolean insertar(reserva res) {
         boolean verificar = false;
 
         try {
@@ -95,18 +95,18 @@ public class logReserve {
                 boolean senyal = in.readBoolean();
 
                 if (senyal == true) {
-                    out.writeUTF(user.getUser());
-                    out.writeUTF(user.getPassword());
-                    out.writeUTF(user.getName());
-                    out.writeUTF(user.getLastname());
-                    out.writeUTF(user.getEmail());
+                    out.writeUTF(res.getName());
+                    out.writeUTF(res.getLastname());
+                    out.writeUTF(res.getDoctype());
+                    out.writeUTF(res.getNumdoc());
+                    out.writeUTF(res.getAddress());
 
-                    out.writeUTF(user.getDoctype());
-                    out.writeUTF(user.getNumdoc());
-                    out.writeUTF(user.getAddress());
-                    out.writeUTF(user.getPhone());
-                    out.writeUTF(user.getSex());
-                    out.writeUTF(String.valueOf(user.getRol()));
+                    out.writeUTF(res.getPhone());
+                    out.writeUTF(res.getEmail());
+                    out.writeInt(res.getRol());
+                    out.writeUTF(res.getUser());
+                    out.writeUTF(SystemUtils.convertirSHA256(res.getPassword()));    
+                    out.writeUTF(String.valueOf(res.getSex()));
 
                     String correcte = in.readUTF();
                     System.out.println(correcte);
@@ -117,14 +117,14 @@ public class logReserve {
 
         } catch (IOException ex) {
 
-            Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
         return verificar;
     }
 
-    public boolean editar(usuari user) {
+    public boolean editar(reserva res) {
         boolean verificar = false;
 
         try {
@@ -139,19 +139,19 @@ public class logReserve {
 
                 if (senyal == true) {
 
-                    out.writeUTF(user.getUser());
-                    out.writeUTF(user.getPassword());
-                    out.writeUTF(user.getName());
-                    out.writeUTF(user.getLastname());
-                    out.writeUTF(user.getEmail());
+                    out.writeUTF(res.getName());
+                    out.writeUTF(res.getLastname());
+                    out.writeUTF(res.getDoctype());
+                    out.writeUTF(res.getNumdoc());
+                    out.writeUTF(res.getAddress());
 
-                    out.writeUTF(user.getDoctype());
-                    out.writeUTF(user.getNumdoc());
-                    out.writeUTF(user.getAddress());
-                    out.writeUTF(user.getPhone());
-                    out.writeUTF(user.getSex());
-                    out.writeInt(user.getRol());
-                    out.writeInt(user.getIduser());
+                    out.writeUTF(res.getPhone());
+                    out.writeUTF(res.getEmail());
+                    out.writeInt(res.getRol());
+                    out.writeUTF(res.getUser());
+                    out.writeUTF(SystemUtils.convertirSHA256(res.getPassword()));
+                    out.writeUTF(res.getSex());
+                    out.writeInt(res.getIdreserva());
 
                     String correcte = in.readUTF();
                     System.out.println(correcte);
@@ -162,14 +162,14 @@ public class logReserve {
 
         } catch (IOException ex) {
 
-            Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
         return verificar;
     }
 
-    public boolean eliminar(usuari user) {
+    public boolean eliminar(reserva res) {
         boolean verificar = false;
 
         try {
@@ -184,8 +184,8 @@ public class logReserve {
                 boolean senyal = in.readBoolean();
                 if (senyal == true) {
 
-                    out.writeInt(user.getIduser());
-                    System.out.println("Enviem al servidor id user: " + user.getIduser());
+                    out.writeInt(res.getIdreserva());
+                    System.out.println("Enviem al servidor id reserve: " + res.getIdreserva());
 
                     String correcte = in.readUTF();
                     System.out.println(correcte);

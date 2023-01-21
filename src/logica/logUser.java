@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import utils.SystemUtils;
 
 /**
  *
@@ -95,7 +96,7 @@ public class logUser {
 
                 if (senyal == true) {
                     out.writeUTF(user.getUser());
-                    out.writeUTF(user.getPassword());
+                    out.writeUTF(SystemUtils.convertirSHA256(user.getPassword()));
                     out.writeUTF(user.getName());
                     out.writeUTF(user.getLastname());
                     out.writeUTF(user.getEmail());
@@ -139,7 +140,7 @@ public class logUser {
                 if (senyal == true) {
 
                     out.writeUTF(user.getUser());
-                    out.writeUTF(user.getPassword());
+                    out.writeUTF(SystemUtils.convertirSHA256(user.getPassword()));
                     out.writeUTF(user.getName());
                     out.writeUTF(user.getLastname());
                     out.writeUTF(user.getEmail());

@@ -18,7 +18,7 @@ public class reserva {
     private String address;
     private String phone;
     private String email;
-    private String rol;
+    private int rol;
     private String user;
     private String password;
     private String sex;
@@ -27,7 +27,7 @@ public class reserva {
         
     }
     
-    public reserva (int idreserva, String name, String lastname, String doctype, String numdoc, String address, String phone, String email, String rol, String user, String password, String sex){
+    public reserva (int idreserva, String name, String lastname, String doctype, String numdoc, String address, String phone, String email, int rol, String user, String password, String sex){
         this.idreserva = idreserva;
         this.name = name;
         this.lastname = lastname;
@@ -107,11 +107,11 @@ public class reserva {
         this.email = email;
     }
 
-    public String getRol() {
+    public int getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(int rol) {
         this.rol = rol;
     }
 

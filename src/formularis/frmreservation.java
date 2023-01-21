@@ -5,6 +5,10 @@
  */
 package formularis;
 
+import dades.client;
+import dades.reserva;
+import static formularis.frmclient.in;
+import static formularis.frmclient.out;
 import static formularis.frmuser.in;
 import static formularis.frmuser.out;
 import java.io.DataInputStream;
@@ -16,7 +20,10 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import logica.logClient;
+import logica.logReserve;
 import utils.ManagedUsers;
+import utils.SystemUtils;
 
 /**
  *
@@ -36,7 +43,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
         initComponents();
         this.in = in;
         this.out = out;
-        //mostrar("");
+        mostrar();
         inhabilitar();
         //llistar();
     }
@@ -49,7 +56,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
     }
 
     void inhabilitar() {
-        txtiduser.setVisible(false);
+        txtidreserve.setVisible(false);
 
         txtname.setEnabled(false);
         txtlastname.setEnabled(false);
@@ -66,7 +73,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
         btneliminar.setEnabled(false);
-        txtiduser.setText("");
+        txtidreserve.setText("");
         txtname.setText("");
         txtlastname.setText("");
         txtnum_document.setText("");
@@ -78,7 +85,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
     }
 
     void habilitar() {
-        txtiduser.setVisible(true);
+        txtidreserve.setVisible(true);
 
         txtname.setEnabled(true);
         txtlastname.setEnabled(true);
@@ -95,7 +102,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
         btneliminar.setEnabled(true);
-        txtiduser.setText("");
+        txtidreserve.setText("");
         txtname.setText("");
         txtlastname.setText("");
         txtnum_document.setText("");
@@ -105,6 +112,21 @@ public class frmreservation extends javax.swing.JInternalFrame {
         txtlogin.setText("");
         txtpassword.setText("");
 
+    }
+
+    void mostrar() {
+        try {
+
+            logReserve func = new logReserve(in, out);
+            model = func.mostrar();
+
+            tablelist.setModel(model);
+            ocultar_columnas();
+            lbltotalregistros.setText("Total Registres " + Integer.toString(func.totalregistres));
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
     }
 
     /**
@@ -117,7 +139,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtiduser = new javax.swing.JTextField();
+        txtidreserve = new javax.swing.JTextField();
         jLabelName = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         jLabelNumDoc = new javax.swing.JLabel();
@@ -162,9 +184,9 @@ public class frmreservation extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(144, 164, 174));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Reservation registration"));
 
-        txtiduser.addActionListener(new java.awt.event.ActionListener() {
+        txtidreserve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtiduserActionPerformed(evt);
+                txtidreserveActionPerformed(evt);
             }
         });
 
@@ -284,7 +306,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtiduser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtidreserve, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(94, 94, 94))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -344,7 +366,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(txtiduser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtidreserve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelName)
@@ -519,7 +541,6 @@ public class frmreservation extends javax.swing.JInternalFrame {
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("Reservation");
-        jPanel2.getAccessibleContext().setAccessibleName("Reservation list");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -575,90 +596,50 @@ public class frmreservation extends javax.swing.JInternalFrame {
             return;
         }
 
-        try {
-            out.writeInt(3);
-            out.writeInt(1);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
-            if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
-                String comboRol = "";
-                if (senyal == true) {
-                    out.writeUTF(txtname.getText());
-                    out.writeUTF(txtlastname.getText());
-                    out.writeUTF(cbotipo_document.getSelectedItem().toString());
-                    out.writeUTF(txtnum_document.getText());
-                    out.writeUTF(txtaddress.getText());
-                    out.writeUTF(txtphone.getText());
-                    out.writeUTF(txtemail.getText());
-                    if (cboaccess.getSelectedItem().toString().equals("Administration")) {
-                        comboRol = "1";
-                    } else {
-                        comboRol = "2";
-                    }
-                    out.writeUTF(comboRol);
-                    out.writeUTF(txtlogin.getText());
-                    out.writeUTF(txtpassword.getText());
-                    out.writeUTF(cbosex.getSelectedItem().toString());
-                    String correcte = in.readUTF();
-                    System.out.println(correcte);
-                    JOptionPane.showMessageDialog(this, "The Reservation has been entered");
-                    inhabilitar();
-                    //llistar();
-                }
+        reserva res = new reserva();
+        logReserve func = new logReserve(in, out);
+
+        res.setName(txtname.getText());
+        res.setLastname(txtlastname.getText());
+        res.setDoctype(cbotipo_document.getSelectedItem().toString());
+        res.setNumdoc(txtnum_document.getText());
+        res.setAddress(txtaddress.getText());
+        res.setPhone(txtphone.getText());
+        res.setEmail(txtemail.getText());
+        if (cboaccess.getSelectedItem().toString().equals("Administrator")) {
+            rol = 1;
+        } else if (cboaccess.getSelectedItem().toString().equals("Reception")) {
+            rol = 2;
+        } else {
+            rol = 0;
+        }
+        res.setRol(rol);
+        res.setUser(txtlogin.getText());
+        res.setPassword(txtpassword.getText());
+        res.setSex(cbosex.getSelectedItem().toString());
+
+        if (accio.equals("save")) {
+            if (func.insertar(res)) {
+                JOptionPane.showMessageDialog(rootPane, "The reserve was successfully registered");
+                mostrar();
+                inhabilitar();
+
             }
 
-        } catch (IOException ex) {
-            //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
-            Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
+        } else if (accio.equals("edit")) {
+            res.setIdreserva(Integer.parseInt(txtidreserve.getText()));
+
+            if (func.editar(res)) {
+                JOptionPane.showMessageDialog(rootPane, "The reserve was Edited successfully");
+                mostrar();
+                inhabilitar();
+            }
 
         }
 
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
-    public void llistar() {
-
-        try {
-            out.writeInt(3);
-            out.writeInt(4);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
-            if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
-                if (senyal == true) {
-                    int registres_trobats = Integer.parseInt(in.readUTF());
-
-                    String[] nameColumns = {"ID", "Name", "LastName", "docType", "NumDoc", "Address", "Phone", "Email", "Acces", "User", "Password", "Sex"};
-                    String[] fields;
-                    Object[][] recordGrid = new Object[registres_trobats][12];
-
-                    //DefaultTableModel model = new DefaultTableModel();
-                    model.setColumnIdentifiers(nameColumns);
-
-                    for (int i = 0; i < registres_trobats; i++) {
-                        String record = in.readUTF();
-                        fields = record.split(",");
-
-                        for (int j = 0; j < 0; j++) {
-                            recordGrid[i][j] = fields[j];
-                        }
-
-                        model.addRow(fields);
-
-                    }
-
-                    tablelist.setModel(model);
-                }
-
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error en rebre dades " + e);
-        }
-    }
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         // TODO add your handling code here:
@@ -674,7 +655,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
 
         int fila = tablelist.rowAtPoint(evt.getPoint());
 
-        txtiduser.setText(tablelist.getValueAt(fila, 0).toString());
+        txtidreserve.setText(tablelist.getValueAt(fila, 0).toString());
         txtname.setText(tablelist.getValueAt(fila, 1).toString());
         txtlastname.setText(tablelist.getValueAt(fila, 2).toString());
         cbotipo_document.setSelectedItem(tablelist.getValueAt(fila, 3).toString());
@@ -690,47 +671,23 @@ public class frmreservation extends javax.swing.JInternalFrame {
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // TODO add your handling code here:
-        llistar();
+        mostrar();
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
-        if (!txtiduser.getText().equals("")) {
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the user?", "Confirm", 2);
+        if (!txtidreserve.getText().equals("")) {
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "Are you sure to delete the Reserve?", "Confirm", 2);
 
-            if (confirmacion == 0) {/*
-                ftrabajador func = new ftrabajador();
-                vtrabajador dts= new vtrabajador();
+            if (confirmacion == 0) {
+                logReserve func = new logReserve(in, out);
+                reserva res = new reserva();
 
-                dts.setIdpersona(Integer.parseInt(txtidpersona.getText()));
-                func.eliminar(dts);
-                mostrar("");
-                inhabilitar();*/
-                try {
-                    out.writeInt(3);
-                    out.writeInt(2);
-                    out.writeInt(1);
-                    int comprovacio = in.readInt();
-                    if (comprovacio == 1) {
-                        out.writeBoolean(true);
-                        boolean senyal = in.readBoolean();
+                res.setIdreserva(Integer.parseInt(txtidreserve.getText()));
+                func.eliminar(res);
 
-                        if (senyal == true) {
-                            out.writeUTF(txtnum_document.getText());
-
-                            String correcte = in.readUTF();
-                            System.out.println(correcte);
-                            JOptionPane.showMessageDialog(this, "The Reservation has been deleted");
-                            inhabilitar();
-                            //llistar();
-                        }
-                    }
-
-                } catch (IOException ex) {
-                    //Logger.getLogger(frmuser.class.getName()).log(Level.SEVERE, null, ex);
-                    Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
-
-                }
+                mostrar();
+                inhabilitar();
 
             }
 
@@ -768,9 +725,9 @@ public class frmreservation extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtloginActionPerformed
 
-    private void txtiduserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtiduserActionPerformed
+    private void txtidreserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidreserveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtiduserActionPerformed
+    }//GEN-LAST:event_txtidreserveActionPerformed
 
     private void btnguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnguardarMouseClicked
 
@@ -811,7 +768,7 @@ public class frmreservation extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtaddress;
     private javax.swing.JTextField txtbuscar;
     private javax.swing.JTextField txtemail;
-    private javax.swing.JTextField txtiduser;
+    private javax.swing.JTextField txtidreserve;
     private javax.swing.JTextField txtlastname;
     private javax.swing.JTextField txtlogin;
     private javax.swing.JTextField txtname;
