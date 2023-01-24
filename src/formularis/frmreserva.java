@@ -11,9 +11,13 @@ import dades.room;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.logReservation;
@@ -106,8 +110,8 @@ public class frmreserva extends javax.swing.JInternalFrame {
         txtidclient.setVisible(false);
         txtidemployed.setVisible(false);
         
-        txtnumber.setEnabled(true);
-        txtclient.setEnabled(true);
+        txtnumber.setEnabled(false);
+        txtclient.setEnabled(false);
         txtemployed.setEnabled(false);
         
         txtnumber.setEnabled(true);
@@ -636,6 +640,7 @@ public class frmreserva extends javax.swing.JInternalFrame {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         // TODO add your handling code here:
+        inhabilitar();
         habilitar();
         btnguardar.setText("Guardar");
         accion = "save";
@@ -745,17 +750,16 @@ public class frmreserva extends javax.swing.JInternalFrame {
         txtemployed.setText(tablelist.getValueAt(fila, 6).toString());
         
         cbotipo_reserve.setSelectedItem(tablelist.getValueAt(fila, 7).toString());
-        /*
         try {
-            jDateReservation.setDate(df.parse(tablelist.getValueAt(fila, 8).toString()));
-            jDateAdmission.setDate(df.parse(tablelist.getValueAt(fila, 9).toString()));
-            jDateDeparture.setDate(df.parse(tablelist.getValueAt(fila, 10).toString()));
+            jDateReservation.setDate((Date) new SimpleDateFormat("yyyy-MM-dd").parse((String)tablelist.getValueAt(fila, 8)));
+            jDateAdmission.setDate((Date) new SimpleDateFormat("yyyy-MM-dd").parse((String)tablelist.getValueAt(fila, 9)));
+            jDateDeparture.setDate((Date) new SimpleDateFormat("yyyy-MM-dd").parse((String)tablelist.getValueAt(fila, 10)));
         } catch (ParseException ex) {
             Logger.getLogger(frmreserva.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        
-        txtprice.setText(tablelist.getValueAt(fila, 8).toString());
-        cboestate.setSelectedItem(tablelist.getValueAt(fila,9).toString());
+        }
+               
+        txtprice.setText(tablelist.getValueAt(fila, 11).toString());
+        cboestate.setSelectedItem(tablelist.getValueAt(fila,12).toString());
 
     }//GEN-LAST:event_tablelistMouseClicked
 

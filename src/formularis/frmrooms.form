@@ -31,11 +31,11 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="jPanel2" max="32767" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,24 +85,24 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="56" max="32767" attributes="0"/>
-                                  <Component id="btnnuevo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnnew" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="btnguardar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnsave" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="btncancelar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btncancel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelEmail" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelState" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAir" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelAccess" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelLastName" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelNumDoc" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelPhone" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelAccess1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelName1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelJacuzzi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelMarriedBed" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelBed" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelWifi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelPrice" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelNumber" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -115,8 +115,8 @@
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelDocType1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabelDocType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabelQuantBed" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabelQuantMarriedBed" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -156,7 +156,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelName1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtnumber" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
@@ -165,14 +165,14 @@
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jCheckBoxMarriedBed" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelDocType" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelQuantMarriedBed" min="-2" max="-2" attributes="0"/>
                               <Component id="jSpinnerMarriedBed" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jCheckBoxBed" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabelDocType1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelQuantBed" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jSpinnerBed" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -183,35 +183,35 @@
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabelLastName" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelMarriedBed" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jLabelNumDoc" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelBed" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabelAddress" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelState" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabelPhone" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelWifi" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jCheckBoxAir" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelEmail" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelAir" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jLabelAccess" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelJacuzzi" min="-2" max="-2" attributes="0"/>
                       <Component id="jCheckBoxJacuzzi" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jLabelAccess1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelPrice" min="-2" max="-2" attributes="0"/>
                       <Component id="txtdayprice" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="88" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnnuevo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnguardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btncancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnnew" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnsave" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btncancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -237,17 +237,17 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtnameActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelNumDoc">
+        <Component class="javax.swing.JLabel" name="jLabelBed">
           <Properties>
             <Property name="text" type="java.lang.String" value="Bed:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelDocType">
+        <Component class="javax.swing.JLabel" name="jLabelQuantMarriedBed">
           <Properties>
             <Property name="text" type="java.lang.String" value="Quantity:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnnuevo">
+        <Component class="javax.swing.JButton" name="btnnew">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
@@ -258,10 +258,10 @@
             <Property name="text" type="java.lang.String" value="New"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnnuevoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnnewActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnguardar">
+        <Component class="javax.swing.JButton" name="btnsave">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
@@ -272,10 +272,10 @@
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguardarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnsaveActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btncancelar">
+        <Component class="javax.swing.JButton" name="btncancel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
@@ -286,30 +286,30 @@
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncancelarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncancelActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelLastName">
+        <Component class="javax.swing.JLabel" name="jLabelMarriedBed">
           <Properties>
             <Property name="text" type="java.lang.String" value="Married bed:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelAddress">
+        <Component class="javax.swing.JLabel" name="jLabelState">
           <Properties>
             <Property name="text" type="java.lang.String" value="State:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelPhone">
+        <Component class="javax.swing.JLabel" name="jLabelWifi">
           <Properties>
             <Property name="text" type="java.lang.String" value="Wi-Fi:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelEmail">
+        <Component class="javax.swing.JLabel" name="jLabelAir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Air conditioning:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelAccess">
+        <Component class="javax.swing.JLabel" name="jLabelJacuzzi">
           <Properties>
             <Property name="text" type="java.lang.String" value="Jacuzzi:"/>
           </Properties>
@@ -328,7 +328,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxBedActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelDocType1">
+        <Component class="javax.swing.JLabel" name="jLabelQuantBed">
           <Properties>
             <Property name="text" type="java.lang.String" value="Quantity:"/>
           </Properties>
@@ -359,7 +359,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBoxJacuzzi">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelAccess1">
+        <Component class="javax.swing.JLabel" name="jLabelPrice">
           <Properties>
             <Property name="text" type="java.lang.String" value="Day price:"/>
           </Properties>
@@ -369,7 +369,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtdaypriceActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelName1">
+        <Component class="javax.swing.JLabel" name="jLabelNumber">
           <Properties>
             <Property name="text" type="java.lang.String" value="Number:"/>
           </Properties>
@@ -423,7 +423,7 @@
                                   <Component id="btnsalir" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="132" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>

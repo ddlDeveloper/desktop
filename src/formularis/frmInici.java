@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package formularis;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import utils.SystemUtils;
 
 /**
  *
@@ -105,7 +98,7 @@ public class frmInici extends javax.swing.JFrame {
                 menuLogout.setVisible(true);
                 menuHelp.setVisible(true);
                 menuTools.setVisible(false);
-                menuQueries.setVisible(false);
+                menuQueries.setVisible(true);
                 menuReserves.setVisible(true);
                 menuManagement.setVisible(true);
                 break;
@@ -128,12 +121,12 @@ public class frmInici extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         menuManagement = new javax.swing.JMenu();
         menuItemRoom = new javax.swing.JMenuItem();
-        menuItemServices = new javax.swing.JMenuItem();
         menuReserves = new javax.swing.JMenu();
         menuItemReser = new javax.swing.JMenuItem();
         menuItemClients = new javax.swing.JMenuItem();
         menuItemPayments = new javax.swing.JMenuItem();
         menuQueries = new javax.swing.JMenu();
+        jMenuInquiries = new javax.swing.JMenuItem();
         menuTools = new javax.swing.JMenu();
         jMenuItemUsers = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
@@ -159,10 +152,6 @@ public class frmInici extends javax.swing.JFrame {
             }
         });
         menuManagement.add(menuItemRoom);
-
-        menuItemServices.setMnemonic('s');
-        menuItemServices.setText("Services");
-        menuManagement.add(menuItemServices);
 
         menuBar.add(menuManagement);
 
@@ -198,6 +187,15 @@ public class frmInici extends javax.swing.JFrame {
         menuQueries.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/resume-48.png"))); // NOI18N
         menuQueries.setMnemonic('h');
         menuQueries.setText("Queries");
+
+        jMenuInquiries.setText("Inquiries");
+        jMenuInquiries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuInquiriesActionPerformed(evt);
+            }
+        });
+        menuQueries.add(jMenuInquiries);
+
         menuBar.add(menuQueries);
 
         menuTools.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/formularis/tools-48.png"))); // NOI18N
@@ -299,8 +297,16 @@ public class frmInici extends javax.swing.JFrame {
         desktop.add(form);
         form.toFront();
         form.setVisible(true);
-        
+
     }//GEN-LAST:event_menuItemHelpActionPerformed
+
+    private void jMenuInquiriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuInquiriesActionPerformed
+        frmquery form = new frmquery(in, out, rol);
+        desktop.add(form);
+        form.toFront();
+        form.setVisible(true);
+
+    }//GEN-LAST:event_jMenuInquiriesActionPerformed
 
     void logOut(DataInputStream in, DataOutputStream out) {
 
@@ -326,6 +332,7 @@ public class frmInici extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
+    private javax.swing.JMenuItem jMenuInquiries;
     private javax.swing.JMenuItem jMenuItemUsers;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuHelp;
@@ -335,7 +342,6 @@ public class frmInici extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemPayments;
     private javax.swing.JMenuItem menuItemReser;
     private javax.swing.JMenuItem menuItemRoom;
-    private javax.swing.JMenuItem menuItemServices;
     private javax.swing.JMenu menuLogout;
     private javax.swing.JMenu menuManagement;
     private javax.swing.JMenu menuQueries;

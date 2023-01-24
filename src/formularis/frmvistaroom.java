@@ -2,6 +2,7 @@ package formularis;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import logica.logRooms;
 
@@ -22,6 +23,7 @@ public class frmvistaroom extends javax.swing.JFrame {
         this.in = in;
         this.out = out;
         mostrar();
+        setIconImage(new ImageIcon(getClass().getResource("../images/logoDDL.jpeg")).getImage());
         this.setLocationRelativeTo(null);
 
     }
@@ -39,7 +41,7 @@ public class frmvistaroom extends javax.swing.JFrame {
             modelo = func.mostrar();
 
             tablalistado.setModel(modelo);
-            ocultar_columnas();
+            //ocultar_columnas();
             lbltotalregistros.setText("Total Registres " + Integer.toString(func.totalregistres));
 
         } catch (Exception e) {

@@ -9,6 +9,7 @@ import dades.room;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
 import logica.logRooms;
 import utils.SystemUtils;
@@ -57,8 +58,8 @@ public class frmrooms extends javax.swing.JInternalFrame {
         jCheckBoxJacuzzi.setEnabled(false);
         txtdayprice.setEnabled(false);
 
-        btnguardar.setEnabled(false);
-        btncancelar.setEnabled(false);
+        btnsave.setEnabled(false);
+        btncancel.setEnabled(false);
         btneliminar.setEnabled(false);
         txtidroom.setText("");
         txtname.setText("");
@@ -66,7 +67,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
     }
 
     void habilitar() {
-        txtidroom.setVisible(true);
+        txtidroom.setVisible(false);
 
         txtname.setEnabled(true);
         txtnumber.setEnabled(true);
@@ -80,8 +81,8 @@ public class frmrooms extends javax.swing.JInternalFrame {
         jCheckBoxJacuzzi.setEnabled(true);
         txtdayprice.setEnabled(true);
 
-        btnguardar.setEnabled(true);
-        btncancelar.setEnabled(true);
+        btnsave.setEnabled(true);
+        btncancel.setEnabled(true);
         btneliminar.setEnabled(true);
         txtidroom.setText("");
         txtname.setText("");
@@ -116,28 +117,28 @@ public class frmrooms extends javax.swing.JInternalFrame {
         txtidroom = new javax.swing.JTextField();
         jLabelName = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
-        jLabelNumDoc = new javax.swing.JLabel();
-        jLabelDocType = new javax.swing.JLabel();
-        btnnuevo = new javax.swing.JButton();
-        btnguardar = new javax.swing.JButton();
-        btncancelar = new javax.swing.JButton();
-        jLabelLastName = new javax.swing.JLabel();
-        jLabelAddress = new javax.swing.JLabel();
-        jLabelPhone = new javax.swing.JLabel();
-        jLabelEmail = new javax.swing.JLabel();
-        jLabelAccess = new javax.swing.JLabel();
+        jLabelBed = new javax.swing.JLabel();
+        jLabelQuantMarriedBed = new javax.swing.JLabel();
+        btnnew = new javax.swing.JButton();
+        btnsave = new javax.swing.JButton();
+        btncancel = new javax.swing.JButton();
+        jLabelMarriedBed = new javax.swing.JLabel();
+        jLabelState = new javax.swing.JLabel();
+        jLabelWifi = new javax.swing.JLabel();
+        jLabelAir = new javax.swing.JLabel();
+        jLabelJacuzzi = new javax.swing.JLabel();
         jCheckBoxMarriedBed = new javax.swing.JCheckBox();
         jSpinnerBed = new javax.swing.JSpinner();
         jCheckBoxBed = new javax.swing.JCheckBox();
-        jLabelDocType1 = new javax.swing.JLabel();
+        jLabelQuantBed = new javax.swing.JLabel();
         jSpinnerMarriedBed = new javax.swing.JSpinner();
         jComboBoxState = new javax.swing.JComboBox<>();
         jCheckBoxAir = new javax.swing.JCheckBox();
         jCheckBoxWifi = new javax.swing.JCheckBox();
         jCheckBoxJacuzzi = new javax.swing.JCheckBox();
-        jLabelAccess1 = new javax.swing.JLabel();
+        jLabelPrice = new javax.swing.JLabel();
         txtdayprice = new javax.swing.JTextField();
-        jLabelName1 = new javax.swing.JLabel();
+        jLabelNumber = new javax.swing.JLabel();
         txtnumber = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -172,46 +173,46 @@ public class frmrooms extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabelNumDoc.setText("Bed:");
+        jLabelBed.setText("Bed:");
 
-        jLabelDocType.setText("Quantity:");
+        jLabelQuantMarriedBed.setText("Quantity:");
 
-        btnnuevo.setBackground(new java.awt.Color(51, 51, 51));
-        btnnuevo.setForeground(new java.awt.Color(255, 255, 255));
-        btnnuevo.setText("New");
-        btnnuevo.addActionListener(new java.awt.event.ActionListener() {
+        btnnew.setBackground(new java.awt.Color(51, 51, 51));
+        btnnew.setForeground(new java.awt.Color(255, 255, 255));
+        btnnew.setText("New");
+        btnnew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnuevoActionPerformed(evt);
+                btnnewActionPerformed(evt);
             }
         });
 
-        btnguardar.setBackground(new java.awt.Color(51, 51, 51));
-        btnguardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnguardar.setText("Save");
-        btnguardar.addActionListener(new java.awt.event.ActionListener() {
+        btnsave.setBackground(new java.awt.Color(51, 51, 51));
+        btnsave.setForeground(new java.awt.Color(255, 255, 255));
+        btnsave.setText("Save");
+        btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnguardarActionPerformed(evt);
+                btnsaveActionPerformed(evt);
             }
         });
 
-        btncancelar.setBackground(new java.awt.Color(51, 51, 51));
-        btncancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btncancelar.setText("Cancel");
-        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+        btncancel.setBackground(new java.awt.Color(51, 51, 51));
+        btncancel.setForeground(new java.awt.Color(255, 255, 255));
+        btncancel.setText("Cancel");
+        btncancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncancelarActionPerformed(evt);
+                btncancelActionPerformed(evt);
             }
         });
 
-        jLabelLastName.setText("Married bed:");
+        jLabelMarriedBed.setText("Married bed:");
 
-        jLabelAddress.setText("State:");
+        jLabelState.setText("State:");
 
-        jLabelPhone.setText("Wi-Fi:");
+        jLabelWifi.setText("Wi-Fi:");
 
-        jLabelEmail.setText("Air conditioning:");
+        jLabelAir.setText("Air conditioning:");
 
-        jLabelAccess.setText("Jacuzzi:");
+        jLabelJacuzzi.setText("Jacuzzi:");
 
         jSpinnerBed.setModel(new javax.swing.SpinnerNumberModel(0, 0, 4, 1));
 
@@ -221,13 +222,13 @@ public class frmrooms extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabelDocType1.setText("Quantity:");
+        jLabelQuantBed.setText("Quantity:");
 
         jSpinnerMarriedBed.setModel(new javax.swing.SpinnerNumberModel(0, 0, 4, 1));
 
         jComboBoxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Occupied", "Not busy" }));
 
-        jLabelAccess1.setText("Day price:");
+        jLabelPrice.setText("Day price:");
 
         txtdayprice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +236,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabelName1.setText("Number:");
+        jLabelNumber.setText("Number:");
 
         txtnumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,23 +259,23 @@ public class frmrooms extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 56, Short.MAX_VALUE)
-                                .addComponent(btnnuevo)
+                                .addComponent(btnnew)
                                 .addGap(42, 42, 42)
-                                .addComponent(btnguardar)
+                                .addComponent(btnsave)
                                 .addGap(38, 38, 38)
-                                .addComponent(btncancelar)
+                                .addComponent(btncancel)
                                 .addGap(9, 9, 9))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelAddress)
-                                    .addComponent(jLabelEmail)
+                                    .addComponent(jLabelState)
+                                    .addComponent(jLabelAir)
                                     .addComponent(jLabelName)
-                                    .addComponent(jLabelAccess)
-                                    .addComponent(jLabelLastName)
-                                    .addComponent(jLabelNumDoc)
-                                    .addComponent(jLabelPhone)
-                                    .addComponent(jLabelAccess1)
-                                    .addComponent(jLabelName1))
+                                    .addComponent(jLabelJacuzzi)
+                                    .addComponent(jLabelMarriedBed)
+                                    .addComponent(jLabelBed)
+                                    .addComponent(jLabelWifi)
+                                    .addComponent(jLabelPrice)
+                                    .addComponent(jLabelNumber))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtname)
@@ -285,8 +286,8 @@ public class frmrooms extends javax.swing.JInternalFrame {
                                             .addComponent(jCheckBoxBed))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelDocType1)
-                                            .addComponent(jLabelDocType))
+                                            .addComponent(jLabelQuantBed)
+                                            .addComponent(jLabelQuantMarriedBed))
                                         .addGap(31, 31, 31)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jSpinnerMarriedBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,7 +314,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
                     .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelName1)
+                    .addComponent(jLabelNumber)
                     .addComponent(txtnumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,13 +322,13 @@ public class frmrooms extends javax.swing.JInternalFrame {
                         .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jCheckBoxMarriedBed)
-                            .addComponent(jLabelDocType)
+                            .addComponent(jLabelQuantMarriedBed)
                             .addComponent(jSpinnerMarriedBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jCheckBoxBed)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelDocType1)
+                                .addComponent(jLabelQuantBed)
                                 .addComponent(jSpinnerBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBoxState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,30 +336,30 @@ public class frmrooms extends javax.swing.JInternalFrame {
                         .addComponent(jCheckBoxWifi)
                         .addGap(5, 5, 5))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelLastName)
+                        .addComponent(jLabelMarriedBed)
                         .addGap(28, 28, 28)
-                        .addComponent(jLabelNumDoc)
+                        .addComponent(jLabelBed)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelAddress)
+                        .addComponent(jLabelState)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelPhone)
+                        .addComponent(jLabelWifi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jCheckBoxAir)
-                    .addComponent(jLabelEmail))
+                    .addComponent(jLabelAir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelAccess)
+                    .addComponent(jLabelJacuzzi)
                     .addComponent(jCheckBoxJacuzzi))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelAccess1)
+                    .addComponent(jLabelPrice)
                     .addComponent(txtdayprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnnuevo)
-                    .addComponent(btnguardar)
-                    .addComponent(btncancelar))
+                    .addComponent(btnnew)
+                    .addComponent(btnsave)
+                    .addComponent(btncancel))
                 .addContainerGap())
         );
 
@@ -440,7 +441,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
                                 .addComponent(btneliminar)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnsalir)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 132, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -469,9 +470,9 @@ public class frmrooms extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(150, 150, 150))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -495,14 +496,15 @@ public class frmrooms extends javax.swing.JInternalFrame {
         txtname.transferFocus();
     }//GEN-LAST:event_txtnameActionPerformed
 
-    private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
+    private void btnnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnewActionPerformed
         // TODO add your handling code here:
+        inhabilitar();
         habilitar();
-        btnguardar.setText("Save");
+        btnsave.setText("Save");
         accio = "save";
-    }//GEN-LAST:event_btnnuevoActionPerformed
+    }//GEN-LAST:event_btnnewActionPerformed
 
-    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
         if (txtname.getText().length() == 0) {
             JOptionPane.showConfirmDialog(rootPane, "You must enter a Name for the User");
             txtname.requestFocus();
@@ -553,17 +555,17 @@ public class frmrooms extends javax.swing.JInternalFrame {
 
         
 
-    }//GEN-LAST:event_btnguardarActionPerformed
+    }//GEN-LAST:event_btnsaveActionPerformed
 
 
-    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+    private void btncancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_btncancelarActionPerformed
+    }//GEN-LAST:event_btncancelActionPerformed
 
     private void tablelistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablelistMouseClicked
         // TODO add your handling code here:
-        btnguardar.setText("Edit");
+        btnsave.setText("Edit");
         habilitar();
         btneliminar.setEnabled(true);
         accio = "edit";
@@ -573,11 +575,14 @@ public class frmrooms extends javax.swing.JInternalFrame {
         txtidroom.setText(tablelist.getValueAt(fila, 0).toString());
         txtname.setText(tablelist.getValueAt(fila, 1).toString());
         txtnumber.setText(tablelist.getValueAt(fila, 2).toString());
-        jComboBoxState.setSelectedItem(tablelist.getValueAt(fila, 3).toString());
-        jCheckBoxWifi.setText(tablelist.getValueAt(fila, 4).toString());
-        jCheckBoxAir.setText(tablelist.getValueAt(fila, 5).toString());
-        jCheckBoxJacuzzi.setText(tablelist.getValueAt(fila, 6).toString());
-        txtdayprice.setText(tablelist.getValueAt(fila, 7).toString());
+        jCheckBoxMarriedBed.setText(tablelist.getValueAt(fila, 3).toString());
+        jSpinnerMarriedBed.setModel((SpinnerDateModel)tablelist.getValueAt(fila, 4));
+        jComboBoxState.setSelectedItem(tablelist.getValueAt(fila, 5).toString());
+        jSpinnerBed.setModel((SpinnerDateModel)tablelist.getValueAt(fila, 6));
+        jCheckBoxWifi.setText(tablelist.getValueAt(fila, 7).toString());
+        jCheckBoxAir.setText(tablelist.getValueAt(fila, 8).toString());
+        jCheckBoxJacuzzi.setText(tablelist.getValueAt(fila, 9).toString());
+        txtdayprice.setText(tablelist.getValueAt(fila, 10).toString());
 
 
     }//GEN-LAST:event_tablelistMouseClicked
@@ -634,11 +639,11 @@ public class frmrooms extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;
-    private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btncancel;
     private javax.swing.JButton btneliminar;
-    private javax.swing.JButton btnguardar;
-    private javax.swing.JButton btnnuevo;
+    private javax.swing.JButton btnnew;
     private javax.swing.JButton btnsalir;
+    private javax.swing.JButton btnsave;
     private javax.swing.JCheckBox jCheckBoxAir;
     private javax.swing.JCheckBox jCheckBoxBed;
     private javax.swing.JCheckBox jCheckBoxJacuzzi;
@@ -647,17 +652,17 @@ public class frmrooms extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBoxState;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelAccess;
-    private javax.swing.JLabel jLabelAccess1;
-    private javax.swing.JLabel jLabelAddress;
-    private javax.swing.JLabel jLabelDocType;
-    private javax.swing.JLabel jLabelDocType1;
-    private javax.swing.JLabel jLabelEmail;
-    private javax.swing.JLabel jLabelLastName;
+    private javax.swing.JLabel jLabelAir;
+    private javax.swing.JLabel jLabelBed;
+    private javax.swing.JLabel jLabelJacuzzi;
+    private javax.swing.JLabel jLabelMarriedBed;
     private javax.swing.JLabel jLabelName;
-    private javax.swing.JLabel jLabelName1;
-    private javax.swing.JLabel jLabelNumDoc;
-    private javax.swing.JLabel jLabelPhone;
+    private javax.swing.JLabel jLabelNumber;
+    private javax.swing.JLabel jLabelPrice;
+    private javax.swing.JLabel jLabelQuantBed;
+    private javax.swing.JLabel jLabelQuantMarriedBed;
+    private javax.swing.JLabel jLabelState;
+    private javax.swing.JLabel jLabelWifi;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -30,7 +30,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel1" min="-2" pref="434" max="-2" attributes="0"/>
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
@@ -71,87 +71,78 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="txtiduser" min="-2" pref="124" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="txtiduser" min="-2" pref="124" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="btnnuevo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="btnguardar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="btncancelar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="btnnuevo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="btnguardar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="btncancelar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabelLastName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabelAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabelPhone" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabelEmail" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jLabelNumDoc" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="jLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabelLogin" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabelAccess" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jLabelLastName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jLabelAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jLabelPhone" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="jLabelEmail" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <Component id="jLabelNumDoc" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <Component id="jLabelName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabelLogin" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabelAccess" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelSex" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabelDocType" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabelPassword" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jLabelSex" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelDocType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelPassword" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtname" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="cboaccess" min="-2" pref="110" max="-2" attributes="0"/>
-                                              <Component id="txtphone" min="-2" pref="184" max="-2" attributes="0"/>
-                                              <Component id="txtemail" min="-2" pref="184" max="-2" attributes="0"/>
-                                              <Component id="txtaddress" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                                              <Component id="txtnum_document" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                                              <Component id="cbotipo_document" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
-                                              <Component id="txtlastname" min="-2" pref="242" max="-2" attributes="0"/>
-                                              <Component id="txtlogin" min="-2" pref="110" max="-2" attributes="0"/>
-                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="txtpassword" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="cbosex" alignment="0" pref="110" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="cboaccess" min="-2" pref="110" max="-2" attributes="0"/>
+                              <Component id="txtphone" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="txtemail" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="txtaddress" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="txtnum_document" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="cbotipo_document" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                              <Component id="txtlastname" pref="242" max="32767" attributes="0"/>
+                              <Component id="txtlogin" min="-2" pref="110" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtpassword" alignment="0" pref="110" max="32767" attributes="0"/>
+                                  <Component id="cbosex" alignment="0" pref="110" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="txtname" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="41" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -401,9 +392,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtpassword">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

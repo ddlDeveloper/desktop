@@ -118,7 +118,7 @@ public class frmclient extends javax.swing.JInternalFrame {
             model = func.mostrar();
 
             tablelist.setModel(model);
-            ocultar_columnas();
+            //ocultar_columnas();
             lbltotalregistros.setText("Total Registres " + Integer.toString(func.totalregistres));
 
         } catch (Exception e) {
@@ -571,6 +571,7 @@ public class frmclient extends javax.swing.JInternalFrame {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         // TODO add your handling code here:
+        inhabilitar();
         habilitar();
         btnguardar.setText("Save");
         accio = "save";

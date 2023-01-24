@@ -284,11 +284,12 @@ public class RegistreForm extends javax.swing.JFrame {
             out.writeInt(1);
             //out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
             int comprovacio = in.readInt();
+            System.out.println("resposta servidor:" + comprovacio);
             if (comprovacio == 1) {
                 out.writeBoolean(true);
                 boolean senyal = in.readBoolean();
                 if (senyal == true) {
-                    //out.writeUTF(idTextField.getText());
+                    System.out.println(senyal);
                     out.writeUTF(usuariTextField.getText());
                     out.writeUTF(SystemUtils.convertirSHA256(passwordField.getText()));
                     String comboRol = "";
