@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package formularis;
 
 import formularis.frmInici;
@@ -284,9 +279,10 @@ public class RegistreForm extends javax.swing.JFrame {
             out.writeUTF(String.valueOf(claus_ps[0]));
             //llegim la clau pública del servidor
             BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
-            // send response to server with user and password */
+            // send response to server with user and password  */
 
             out.writeInt(1);
+            //out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
             int comprovacio = in.readInt();
             if (comprovacio == 1) {
                 out.writeBoolean(true);

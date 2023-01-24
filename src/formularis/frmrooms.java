@@ -5,27 +5,13 @@
  */
 package formularis;
 
-import dades.reserva;
 import dades.room;
-import dades.usuari;
-import static formularis.frmreservation.in;
-import static formularis.frmreservation.out;
-import static formularis.frmuser.in;
-import static formularis.frmuser.out;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.net.Socket;
-import java.util.HashSet;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import logica.logReserve;
 import logica.logRooms;
-import logica.logUser;
-import utils.ManagedUsers;
+import utils.SystemUtils;
 
 /**
  *
@@ -34,7 +20,7 @@ import utils.ManagedUsers;
 public class frmrooms extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmcliente
+     * Creates new form frmrooms
      */
     static DataInputStream in;
     static DataOutputStream out;
@@ -60,14 +46,16 @@ public class frmrooms extends javax.swing.JInternalFrame {
         txtidroom.setVisible(false);
 
         txtname.setEnabled(false);
+        txtnumber.setEnabled(false);
         jCheckBoxMarriedBed.setEnabled(false);
         jSpinnerMarriedBed.setEnabled(false);
         jCheckBoxBed.setEnabled(false);
         jSpinnerBed.setEnabled(false);
-        jComboBoxRateCode.setEnabled(false);
+        jComboBoxState.setEnabled(false);
         jCheckBoxWifi.setEnabled(false);
         jCheckBoxAir.setEnabled(false);
         jCheckBoxJacuzzi.setEnabled(false);
+        txtdayprice.setEnabled(false);
 
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
@@ -81,14 +69,16 @@ public class frmrooms extends javax.swing.JInternalFrame {
         txtidroom.setVisible(true);
 
         txtname.setEnabled(true);
+        txtnumber.setEnabled(true);
         jCheckBoxMarriedBed.setEnabled(true);
         jSpinnerMarriedBed.setEnabled(true);
         jCheckBoxBed.setEnabled(true);
         jSpinnerBed.setEnabled(true);
-        jComboBoxRateCode.setEnabled(true);
+        jComboBoxState.setEnabled(true);
         jCheckBoxWifi.setEnabled(true);
         jCheckBoxAir.setEnabled(true);
         jCheckBoxJacuzzi.setEnabled(true);
+        txtdayprice.setEnabled(true);
 
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
@@ -141,10 +131,14 @@ public class frmrooms extends javax.swing.JInternalFrame {
         jCheckBoxBed = new javax.swing.JCheckBox();
         jLabelDocType1 = new javax.swing.JLabel();
         jSpinnerMarriedBed = new javax.swing.JSpinner();
-        jComboBoxRateCode = new javax.swing.JComboBox<>();
+        jComboBoxState = new javax.swing.JComboBox<>();
         jCheckBoxAir = new javax.swing.JCheckBox();
         jCheckBoxWifi = new javax.swing.JCheckBox();
         jCheckBoxJacuzzi = new javax.swing.JCheckBox();
+        jLabelAccess1 = new javax.swing.JLabel();
+        txtdayprice = new javax.swing.JTextField();
+        jLabelName1 = new javax.swing.JLabel();
+        txtnumber = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -211,7 +205,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
 
         jLabelLastName.setText("Married bed:");
 
-        jLabelAddress.setText("Rate code:");
+        jLabelAddress.setText("State:");
 
         jLabelPhone.setText("Wi-Fi:");
 
@@ -231,7 +225,23 @@ public class frmrooms extends javax.swing.JInternalFrame {
 
         jSpinnerMarriedBed.setModel(new javax.swing.SpinnerNumberModel(0, 0, 4, 1));
 
-        jComboBoxRateCode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rate 1", "Rate 2", "Rate 3", "Rate 4" }));
+        jComboBoxState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Occupied", "Not busy" }));
+
+        jLabelAccess1.setText("Day price:");
+
+        txtdayprice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtdaypriceActionPerformed(evt);
+            }
+        });
+
+        jLabelName1.setText("Number:");
+
+        txtnumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnumberActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -262,91 +272,94 @@ public class frmrooms extends javax.swing.JInternalFrame {
                                     .addComponent(jLabelAccess)
                                     .addComponent(jLabelLastName)
                                     .addComponent(jLabelNumDoc)
-                                    .addComponent(jLabelPhone))
+                                    .addComponent(jLabelPhone)
+                                    .addComponent(jLabelAccess1)
+                                    .addComponent(jLabelName1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtname)
+                                    .addComponent(txtdayprice)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jCheckBoxBed)
-                                            .addComponent(jCheckBoxMarriedBed))
+                                            .addComponent(jCheckBoxMarriedBed)
+                                            .addComponent(jCheckBoxBed))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelDocType)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabelDocType1)
-                                                .addGap(40, 40, 40)
-                                                .addComponent(jSpinnerBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jLabelDocType1)
+                                            .addComponent(jLabelDocType))
+                                        .addGap(31, 31, 31)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jSpinnerMarriedBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSpinnerBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(9, 9, 9))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBoxRateCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jComboBoxState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jCheckBoxWifi)
                                             .addComponent(jCheckBoxAir)
-                                            .addComponent(jCheckBoxJacuzzi))
+                                            .addComponent(jCheckBoxJacuzzi)
+                                            .addComponent(txtnumber, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE)))))
                         .addGap(28, 28, 28)))
                 .addGap(45, 45, 45))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(307, Short.MAX_VALUE)
-                    .addComponent(jSpinnerMarriedBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(72, 72, 72)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(txtidroom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelName)
+                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelName1)
+                    .addComponent(txtnumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabelLastName)
-                                .addGap(23, 23, 23))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtidroom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabelName)
-                                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelDocType)
-                                    .addComponent(jCheckBoxMarriedBed))
-                                .addGap(18, 18, Short.MAX_VALUE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelNumDoc, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabelDocType1)
-                                    .addComponent(jSpinnerBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jCheckBoxBed))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelAddress)
-                            .addComponent(jComboBoxRateCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelPhone)
-                            .addComponent(jCheckBoxWifi))
+                            .addComponent(jCheckBoxMarriedBed)
+                            .addComponent(jLabelDocType)
+                            .addComponent(jSpinnerMarriedBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBoxAir))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabelEmail)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCheckBoxBed)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabelDocType1)
+                                .addComponent(jSpinnerBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxWifi)
+                        .addGap(5, 5, 5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelLastName)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabelNumDoc)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelAddress)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelPhone)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCheckBoxAir)
+                    .addComponent(jLabelEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelAccess)
+                    .addComponent(jCheckBoxJacuzzi))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBoxJacuzzi, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelAccess, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelAccess1)
+                    .addComponent(txtdayprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnnuevo)
                     .addComponent(btnguardar)
                     .addComponent(btncancelar))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(102, 102, 102)
-                    .addComponent(jSpinnerMarriedBed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(415, Short.MAX_VALUE)))
         );
 
         jLabelName.getAccessibleContext().setAccessibleName("Description:");
@@ -469,7 +482,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("Reservation");
@@ -500,6 +513,8 @@ public class frmrooms extends javax.swing.JInternalFrame {
         logRooms func = new logRooms(in, out);
 
         room.setName(txtname.getText());
+        room.setNumber(Integer.parseInt(txtnumber.getText()));
+        
         if (jCheckBoxMarriedBed.isSelected() == true) {
             room.setMarriedbed(Integer.parseInt(jSpinnerMarriedBed.getValue().toString()));
         } else {
@@ -511,10 +526,12 @@ public class frmrooms extends javax.swing.JInternalFrame {
             room.setBed(0);
 
         }
-        room.setRatecode(jComboBoxRateCode.getSelectedItem().toString());
+        room.setState(jComboBoxState.getSelectedItem().toString());
         room.setWifi(jCheckBoxWifi.isSelected());
         room.setAir(jCheckBoxAir.isSelected());
         room.setJacuzzi(jCheckBoxJacuzzi.isSelected());
+        double dayprice = SystemUtils.validaDouble(txtdayprice.getText());
+        room.setDayprice(dayprice);
 
         if (accio.equals("save")) {
             if (func.insertar(room)) {
@@ -534,6 +551,7 @@ public class frmrooms extends javax.swing.JInternalFrame {
             }
         }
 
+        
 
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -554,10 +572,12 @@ public class frmrooms extends javax.swing.JInternalFrame {
 
         txtidroom.setText(tablelist.getValueAt(fila, 0).toString());
         txtname.setText(tablelist.getValueAt(fila, 1).toString());
-        jComboBoxRateCode.setSelectedItem(tablelist.getValueAt(fila, 2).toString());
-        jCheckBoxWifi.setText(tablelist.getValueAt(fila, 3).toString());
-        jCheckBoxAir.setText(tablelist.getValueAt(fila, 4).toString());
-        jCheckBoxJacuzzi.setText(tablelist.getValueAt(fila, 5).toString());
+        txtnumber.setText(tablelist.getValueAt(fila, 2).toString());
+        jComboBoxState.setSelectedItem(tablelist.getValueAt(fila, 3).toString());
+        jCheckBoxWifi.setText(tablelist.getValueAt(fila, 4).toString());
+        jCheckBoxAir.setText(tablelist.getValueAt(fila, 5).toString());
+        jCheckBoxJacuzzi.setText(tablelist.getValueAt(fila, 6).toString());
+        txtdayprice.setText(tablelist.getValueAt(fila, 7).toString());
 
 
     }//GEN-LAST:event_tablelistMouseClicked
@@ -600,6 +620,14 @@ public class frmrooms extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxBedActionPerformed
 
+    private void txtdaypriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdaypriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtdaypriceActionPerformed
+
+    private void txtnumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnumberActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -616,16 +644,18 @@ public class frmrooms extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBoxJacuzzi;
     private javax.swing.JCheckBox jCheckBoxMarriedBed;
     private javax.swing.JCheckBox jCheckBoxWifi;
-    private javax.swing.JComboBox<String> jComboBoxRateCode;
+    private javax.swing.JComboBox<String> jComboBoxState;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelAccess;
+    private javax.swing.JLabel jLabelAccess1;
     private javax.swing.JLabel jLabelAddress;
     private javax.swing.JLabel jLabelDocType;
     private javax.swing.JLabel jLabelDocType1;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelLastName;
     private javax.swing.JLabel jLabelName;
+    private javax.swing.JLabel jLabelName1;
     private javax.swing.JLabel jLabelNumDoc;
     private javax.swing.JLabel jLabelPhone;
     private javax.swing.JPanel jPanel1;
@@ -636,7 +666,9 @@ public class frmrooms extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbltotalregistros;
     private javax.swing.JTable tablelist;
     private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTextField txtdayprice;
     private javax.swing.JTextField txtidroom;
     private javax.swing.JTextField txtname;
+    private javax.swing.JTextField txtnumber;
     // End of variables declaration//GEN-END:variables
 }

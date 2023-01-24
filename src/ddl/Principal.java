@@ -6,7 +6,6 @@
 package ddl;
 
 import formularis.frmlogin;
-import javax.swing.ImageIcon;
 
 /**
  *

@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logica;
 
-import dades.reserva;
-import formularis.frmreservation;
+import dades.reservation;
+import formularis.frmreserva;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -20,13 +15,13 @@ import utils.SystemUtils;
  *
  * @author Lluís Barbó
  */
-public class logReserve {
+public class logReservation {
 
     public Integer totalregistres;
     DataOutputStream out;
     DataInputStream in;
 
-    public logReserve(DataInputStream in, DataOutputStream out) {
+    public logReservation(DataInputStream in, DataOutputStream out) {
         this.in = in;
         this.out = out;
     }
@@ -37,7 +32,7 @@ public class logReserve {
         totalregistres = 0;
 
         try {
-            out.writeInt(3);
+            out.writeInt(7);
             out.writeInt(4);
             out.writeInt(1);
             int comprovacio = in.readInt();
@@ -47,10 +42,10 @@ public class logReserve {
                 boolean senyal = in.readBoolean();
                 if (senyal == true) {
                     int registres_trobats = Integer.parseInt(in.readUTF());
-                    String[] nameColumns = {"ID", "Name", "LastName", "DocType", "NumDoc", "Address", "Phone", "Email", "Rol", "User", "Password", "Sex"};
+                    String[] nameColumns = {"ID", "IDRoom", "NumberRoom", "IDClient", "Client", "IDEmployed", "Employed", "TypeReserve", "DateReservation", "DateAdmission", "DateDeparture", "Pryce", "Estate"};
                     String[] fields;
 
-                    Object[][] registre = new Object[registres_trobats][12];
+                    Object[][] registre = new Object[registres_trobats][13];
 
                     model.setColumnIdentifiers(nameColumns);
 
@@ -81,12 +76,12 @@ public class logReserve {
 
     }
 
-    public boolean insertar(reserva res) {
+    public boolean insertar(reservation res) {
         boolean verificar = false;
 
         try {
 
-            out.writeInt(3);
+            out.writeInt(7);
             out.writeInt(1);
             out.writeInt(1);
             int comprovacio = in.readInt();
@@ -95,18 +90,15 @@ public class logReserve {
                 boolean senyal = in.readBoolean();
 
                 if (senyal == true) {
-                    out.writeUTF(res.getName());
-                    out.writeUTF(res.getLastname());
-                    out.writeUTF(res.getDoctype());
-                    out.writeUTF(res.getNumdoc());
-                    out.writeUTF(res.getAddress());
-
-                    out.writeUTF(res.getPhone());
-                    out.writeUTF(res.getEmail());
-                    out.writeInt(res.getRol());
-                    out.writeUTF(res.getUser());
-                    out.writeUTF(SystemUtils.convertirSHA256(res.getPassword()));    
-                    out.writeUTF(String.valueOf(res.getSex()));
+                    out.writeInt(res.getIdRoom());
+                    out.writeInt(res.getIdClient());
+                    out.writeInt(res.getIdEmployed());
+                    out.writeUTF(res.getTypeReserve());
+                    out.writeUTF(String.valueOf(res.getDateReservation()));
+                    out.writeUTF(String.valueOf(res.getDateAdmission()));
+                    out.writeUTF(String.valueOf(res.getDateDeparture()));
+                    out.writeDouble(res.getPryce());
+                    out.writeUTF(res.getState());
 
                     String correcte = in.readUTF();
                     System.out.println(correcte);
@@ -117,19 +109,19 @@ public class logReserve {
 
         } catch (IOException ex) {
 
-            Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmreserva.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
         return verificar;
     }
 
-    public boolean editar(reserva res) {
+    public boolean editar(reservation res) {
         boolean verificar = false;
 
         try {
 
-            out.writeInt(3);
+            out.writeInt(7);
             out.writeInt(3);
             out.writeInt(1);
             int comprovacio = in.readInt();
@@ -139,19 +131,16 @@ public class logReserve {
 
                 if (senyal == true) {
 
-                    out.writeUTF(res.getName());
-                    out.writeUTF(res.getLastname());
-                    out.writeUTF(res.getDoctype());
-                    out.writeUTF(res.getNumdoc());
-                    out.writeUTF(res.getAddress());
-
-                    out.writeUTF(res.getPhone());
-                    out.writeUTF(res.getEmail());
-                    out.writeInt(res.getRol());
-                    out.writeUTF(res.getUser());
-                    out.writeUTF(SystemUtils.convertirSHA256(res.getPassword()));
-                    out.writeUTF(res.getSex());
-                    out.writeInt(res.getIdreserva());
+                    out.writeInt(res.getIdRoom());
+                    out.writeInt(res.getIdClient());
+                    out.writeInt(res.getIdEmployed());
+                    out.writeUTF(res.getTypeReserve());
+                    out.writeUTF(String.valueOf(res.getDateReservation()));
+                    out.writeUTF(String.valueOf(res.getDateAdmission()));
+                    out.writeUTF(String.valueOf(res.getDateDeparture()));
+                    out.writeDouble(res.getPryce());
+                    out.writeUTF(res.getState());
+                    out.writeInt(res.getIdReserve());
 
                     String correcte = in.readUTF();
                     System.out.println(correcte);
@@ -162,18 +151,18 @@ public class logReserve {
 
         } catch (IOException ex) {
 
-            Logger.getLogger(frmreservation.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmreserva.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
         return verificar;
     }
 
-    public boolean eliminar(reserva res) {
+    public boolean eliminar(reservation res) {
         boolean verificar = false;
 
         try {
-            out.writeInt(3);
+            out.writeInt(7);
             out.writeInt(2);
             out.writeInt(1);
 
@@ -184,8 +173,41 @@ public class logReserve {
                 boolean senyal = in.readBoolean();
                 if (senyal == true) {
 
-                    out.writeInt(res.getIdreserva());
-                    System.out.println("Enviem al servidor id reserve: " + res.getIdreserva());
+                    out.writeInt(res.getIdReserve());
+                    System.out.println("Enviem al servidor id reserve: " + res.getIdReserve());
+
+                    String correcte = in.readUTF();
+                    System.out.println(correcte);
+
+                    verificar = true;
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+
+        return verificar;
+    }
+
+    public boolean pagar(reservation res) {
+        boolean verificar = false;
+
+        try {
+            out.writeInt(7);
+            out.writeInt(2);
+            out.writeInt(1);
+
+            int comprovacio = in.readInt();
+
+            if (comprovacio == 1) {
+                out.writeBoolean(true);
+                boolean senyal = in.readBoolean();
+                if (senyal == true) {
+
+                    out.writeInt(res.getIdReserve());
+                    System.out.println("Enviem al servidor id reserve: " + res.getIdReserve());
 
                     String correcte = in.readUTF();
                     System.out.println(correcte);
@@ -202,4 +224,3 @@ public class logReserve {
         return verificar;
     }
 }
-

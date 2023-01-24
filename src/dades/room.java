@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dades;
 
 /**
@@ -12,27 +7,31 @@ package dades;
 public class room {
     private int idroom;
     private String name;
+    private int number;
     private int marriedbed;
     private int bed;
-    private String ratecode;
+    private String state;
     private boolean wifi;
     private boolean air;
     private boolean jacuzzi;
+    private double dayprice;
     
     
     public room() {
         
     }
     
-    public room(int idroom, String name, int marriedbed, int bed, String ratecode, boolean wifi, boolean air, boolean jacuzzi){
+    public room(int idroom, String name, int number, int marriedbed, int bed, String state, boolean wifi, boolean air, boolean jacuzzi, double dayprice){
         this.idroom = idroom;
         this.name = name;
+        this.number = number;
         this.marriedbed = marriedbed;
         this.bed = bed;
-        this.ratecode = ratecode;
+        this.state = state;
         this.wifi = wifi;
         this.air = air;
         this.jacuzzi = jacuzzi;
+        this.dayprice = dayprice;
         
     }
 
@@ -68,12 +67,12 @@ public class room {
         this.bed = bed;
     }
 
-    public String getRatecode() {
-        return ratecode;
+    public String getState() {
+        return state;
     }
 
-    public void setRatecode(String ratecode) {
-        this.ratecode = ratecode;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public boolean isWifi() {
@@ -98,6 +97,22 @@ public class room {
 
     public void setJacuzzi(boolean jacuzzi) {
         this.jacuzzi = jacuzzi;
+    }
+
+    public double getDayprice() {
+        return dayprice;
+    }
+
+    public void setDayprice(double dayprice) {
+        this.dayprice = dayprice;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     

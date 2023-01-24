@@ -1,20 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package formularis;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.net.Socket;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import utils.ManagedUsers;
 
 /**
  *
@@ -27,9 +15,6 @@ public class frmhelp extends javax.swing.JInternalFrame {
      */
     DataInputStream in;
     DataOutputStream out;
-//    Socket cli;
-//    int rol;
-//    int access = 0;
 
     frmhelp(DataInputStream in, DataOutputStream out, int rol) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -152,28 +137,28 @@ public class frmhelp extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDonloadAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonloadAdmActionPerformed
-        
+
         try {
-            
+
             Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "src\\documents\\Document_Administrator.pdf");
-            
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, "Check file details");
-            
+
         }
     }//GEN-LAST:event_btnDonloadAdmActionPerformed
 
     private void btnDownloadRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownloadRecActionPerformed
 
         try {
-            
+
             Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "src\\documents\\Document_Reception.pdf");
-            
+
         } catch (Exception e) {
-            
+
             JOptionPane.showMessageDialog(null, "Check file details");
-            
+
         }
     }//GEN-LAST:event_btnDownloadRecActionPerformed
 

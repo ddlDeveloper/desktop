@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import java.io.IOException;
@@ -28,11 +23,12 @@ import javax.crypto.spec.SecretKeySpec;
  * @author Lluís Barbó
  */
 public class SystemUtils {
+
     public static final String AES = "AES/GCM/NoPadding";
     private static final int GCM_IV_LENGTH = 12;
     private static final int GCM_TAG_LENGTH = 16;
     private static final boolean ACTIVAR_ENCRIPTACIO = true;
-    
+
     /**
      *
      * @param clientPublicKeyUTF
@@ -60,9 +56,9 @@ public class SystemUtils {
             System.out.println("Shared: " + shared_secret.toByteArray().length);
 
         }
-        
+
         String claus_publica_share_server = String.valueOf(public_key) + "," + String.valueOf(shared_secret);
-        
+
         return claus_publica_share_server;
 
     }
@@ -104,7 +100,7 @@ public class SystemUtils {
 
         return shared_secret;
     }
-    
+
     /**
      * Aquest mètode l static que genera un número aleatori entre un interval
      * definit en els paràmetres d'entrada s'utilitza per genera el id_sessio al
@@ -210,5 +206,20 @@ public class SystemUtils {
         }
     }
 
+    public static double validaDouble(String number) {
         
+        float result = 0; //Valor default.
+        
+        try {
+
+            if (number != null) {
+
+                result = Float.parseFloat(number);
+            }
+        } catch (NumberFormatException nfe) {
+
+            System.out.println("No es numeric!" + nfe);
+        }
+        return result;
+    }
 }

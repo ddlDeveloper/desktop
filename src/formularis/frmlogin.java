@@ -47,6 +47,7 @@ public class frmlogin extends javax.swing.JFrame {
     
     final String KEY = "abecedari69@";
     SSLSocketFactory sslSocketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
+    public static int valorIdUser;
 
     public frmlogin() {
         initComponents();
@@ -386,10 +387,12 @@ public class frmlogin extends javax.swing.JFrame {
             BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
             // send response to server with user and password
             out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + SystemUtils.convertirSHA256(passwordField.getText()), shared_secret.toByteArray()));
-            out.writeInt(1);
-            int resposta_server_id = in.readInt();
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            valorIdUser = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
+            System.out.println("Valor id user: " + valorIdUser);
+            int resposta_server_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
             System.out.println("Resposta servidor:  " + resposta_server_id);
-            int rol = in.readInt(); //Recollim el valor numeric del rol, per enviar al formulari frmInici i fer un switch
+            int rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray())); //Recollim el valor numeric del rol, per enviar al formulari frmInici i fer un switch
 
             if (resposta_server_id > 0) {
                 JOptionPane.showMessageDialog(this, "Welcome user " + usuariTextField.getText().toString());
@@ -430,11 +433,13 @@ public class frmlogin extends javax.swing.JFrame {
             //llegim la clau pública del servidor
             BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
             // send response to server with user and password
-            out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + passwordField.getText(), shared_secret.toByteArray()));
+            //out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + passwordField.getText(), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + SystemUtils.convertirSHA256(passwordField.getText()), shared_secret.toByteArray()));
 
-            out.writeInt(0);
+            //out.writeInt(0);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(0), shared_secret.toByteArray()));
 
-            int resposta_server_id = in.readInt();
+            int resposta_server_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));//in.readInt();
 
             if (resposta_server_id == 0) {
 

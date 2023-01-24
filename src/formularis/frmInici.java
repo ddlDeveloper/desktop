@@ -281,7 +281,7 @@ public class frmInici extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemUsersActionPerformed
 
     private void menuItemReserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemReserActionPerformed
-        frmreservation form = new frmreservation(in, out);
+        frmreserva form = new frmreserva(in, out);
         desktop.add(form);
         form.toFront();
         form.setVisible(true);

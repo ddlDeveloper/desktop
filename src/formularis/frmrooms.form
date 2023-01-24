@@ -49,7 +49,7 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,31 +101,37 @@
                                       <Component id="jLabelLastName" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelNumDoc" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelPhone" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAccess1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelName1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtname" max="32767" attributes="0"/>
+                                      <Component id="txtdayprice" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jCheckBoxBed" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jCheckBoxMarriedBed" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jCheckBoxBed" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabelDocType" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabelDocType1" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                                  <Component id="jSpinnerBed" min="-2" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="jLabelDocType1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabelDocType" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jSpinnerMarriedBed" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jSpinnerBed" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jComboBoxRateCode" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jComboBoxState" min="-2" max="-2" attributes="0"/>
                                               <Component id="jCheckBoxWifi" min="-2" max="-2" attributes="0"/>
                                               <Component id="jCheckBoxAir" min="-2" max="-2" attributes="0"/>
                                               <Component id="jCheckBoxJacuzzi" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtnumber" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
@@ -137,87 +143,77 @@
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="307" max="32767" attributes="0"/>
-                      <Component id="jSpinnerMarriedBed" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+                  <Component id="txtidroom" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtname" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelName1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtnumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabelLastName" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="txtidroom" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabelName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtname" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace pref="36" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelDocType" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBoxMarriedBed" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jCheckBoxMarriedBed" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelDocType" min="-2" max="-2" attributes="0"/>
+                              <Component id="jSpinnerMarriedBed" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelNumDoc" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabelDocType1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinnerBed" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Component id="jCheckBoxBed" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelDocType1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerBed" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxRateCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabelPhone" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCheckBoxWifi" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="jCheckBoxAir" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jComboBoxState" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxWifi" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jLabelEmail" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabelLastName" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="jLabelNumDoc" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabelAddress" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabelPhone" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jCheckBoxJacuzzi" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelAccess" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jCheckBoxAir" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelEmail" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="142" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabelAccess" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCheckBoxJacuzzi" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabelAccess1" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtdayprice" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="88" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnnuevo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnguardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btncancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                      <Component id="jSpinnerMarriedBed" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="415" max="32767" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -300,7 +296,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelAddress">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Rate code:"/>
+            <Property name="text" type="java.lang.String" value="State:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelPhone">
@@ -344,14 +340,12 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBoxRateCode">
+        <Component class="javax.swing.JComboBox" name="jComboBoxState">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Rate 1"/>
-                <StringItem index="1" value="Rate 2"/>
-                <StringItem index="2" value="Rate 3"/>
-                <StringItem index="3" value="Rate 4"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Occupied"/>
+                <StringItem index="1" value="Not busy"/>
               </StringArray>
             </Property>
           </Properties>
@@ -364,6 +358,26 @@
         <Component class="javax.swing.JCheckBox" name="jCheckBoxWifi">
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBoxJacuzzi">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelAccess1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Day price:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtdayprice">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtdaypriceActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelName1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Number:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtnumber">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtnumberActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
