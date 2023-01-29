@@ -10,10 +10,12 @@ import formularis.frmclient;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import utils.SystemUtils;
 
 /**
  *
@@ -36,16 +38,27 @@ public class logClient {
         totalregistres = 0;
 
         try {
-            out.writeInt(2);
-            out.writeInt(4);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(2), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(4), shared_secret.toByteArray()));
+            
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                 if (senyal == true) {
-                    int registres_trobats = Integer.parseInt(in.readUTF());
+                    int registres_trobats = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                     String[] nameColumns = {"ID", "Name", "LastName", "Email", "TypeDoc", "NumDoc", "Address", "Municipality", "Province", "Nacionality", "Phone", "Iban", "Postalcode"};
                     String[] fields;
 
@@ -55,7 +68,7 @@ public class logClient {
 
                     for (int i = 0; i < registres_trobats; i++) {
 
-                        String record = in.readUTF();
+                        String record = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                         fields = record.split(",");
 
                         for (int j = 0; j < 0; j++) {
@@ -84,31 +97,42 @@ public class logClient {
         boolean verificar = false;
 
         try {
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(2), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
-            out.writeInt(2);
-            out.writeInt(1);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
                 if (senyal == true) {
-                    out.writeUTF(cli.getName());
-                    out.writeUTF(cli.getLastname());
-                    out.writeUTF(cli.getEmail());
-
-                    out.writeUTF(cli.getDoctype());
-                    out.writeUTF(cli.getNumdoc());
-                    out.writeUTF(cli.getAddress());
-                    out.writeUTF(cli.getMunicipality());
-                    out.writeUTF(cli.getProvince());
-                    out.writeUTF(cli.getNacionality());
-                    out.writeUTF(cli.getPhone());
-                    out.writeUTF(cli.getIban());
-                    out.writeInt(cli.getPostalcode());
-
-                    String correcte = in.readUTF();
+                    out.writeUTF(SystemUtils.encryptedText(cli.getName(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getLastname(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getEmail(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getDoctype(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getNumdoc(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getAddress(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getMunicipality(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getProvince(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getNacionality(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getPhone(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getIban(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(cli.getPostalcode()), shared_secret.toByteArray()));
+                    
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
 
                     verificar = true;
@@ -128,33 +152,43 @@ public class logClient {
         boolean verificar = false;
 
         try {
-
-            out.writeInt(2);
-            out.writeInt(3);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(2), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(3), shared_secret.toByteArray()));
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
                 if (senyal == true) {
 
-                    out.writeUTF(cli.getName());
-                    out.writeUTF(cli.getLastname());
-                    out.writeUTF(cli.getEmail());
-                    out.writeUTF(cli.getDoctype());
-                    out.writeUTF(cli.getNumdoc());
-
-                    out.writeUTF(cli.getAddress());
-                    out.writeUTF(cli.getMunicipality());
-                    out.writeUTF(cli.getProvince());
-                    out.writeUTF(cli.getNacionality());
-                    out.writeUTF(cli.getPhone());
-                    out.writeUTF(cli.getIban());
-                    out.writeInt(cli.getPostalcode());
-                    out.writeInt(cli.getIdclient());
-
-                    String correcte = in.readUTF();
+                    out.writeUTF(SystemUtils.encryptedText(cli.getName(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getLastname(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getEmail(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getDoctype(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getNumdoc(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getAddress(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getMunicipality(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getProvince(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getNacionality(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getPhone(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(cli.getIban(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(cli.getPostalcode()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(cli.getIdclient()), shared_secret.toByteArray()));
+                    
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
 
                     verificar = true;
@@ -174,21 +208,32 @@ public class logClient {
         boolean verificar = false;
 
         try {
-            out.writeInt(2);
-            out.writeInt(2);
-            out.writeInt(1);
-
-            int comprovacio = in.readInt();
-
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(2), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(2), shared_secret.toByteArray()));
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
+            
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                 if (senyal == true) {
 
-                    out.writeInt(cli.getIdclient());
-                    System.out.println("Enviem al servidor id client: " + cli.getIdclient());
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(cli.getIdclient()), shared_secret.toByteArray()));
+                    System.out.println("Enviem al servidor id room: " + cli.getIdclient());
 
-                    String correcte = in.readUTF();
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
 
                     verificar = true;

@@ -12,6 +12,7 @@ import formularis.frmuser;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -39,16 +40,28 @@ public class logRooms {
         totalregistres = 0;
 
         try {
-            out.writeInt(6);
-            out.writeInt(4);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(6), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(4), shared_secret.toByteArray()));
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                 if (senyal == true) {
-                    int registres_trobats = Integer.parseInt(in.readUTF());
+                    int registres_trobats = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                     String[] nameColumns = {"ID", "Name", "Number", "MarriedBed", "Bed", "State", "Wifi", "Air", "Jacuzzi", "DayPrice"};
                     String[] fields;
 
@@ -58,7 +71,7 @@ public class logRooms {
 
                     for (int i = 0; i < registres_trobats; i++) {
 
-                        String record = in.readUTF();
+                        String record = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                         fields = record.split(",");
 
                         for (int j = 0; j < 0; j++) {
@@ -88,16 +101,28 @@ public class logRooms {
         totalregistres = 0;
 
         try {
-            out.writeInt(6);
-            out.writeInt(4);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(6), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(4), shared_secret.toByteArray()));
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                 if (senyal == true) {
-                    int registres_trobats = Integer.parseInt(in.readUTF());
+                    int registres_trobats = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                     String[] nameColumns = {"ID", "Name", "Number", "MarriedBed", "Bed", "State", "Wifi", "Air", "Jacuzzi", "DayPrice"};
                     String[] fields;
 
@@ -107,7 +132,7 @@ public class logRooms {
 
                     for (int i = 0; i < registres_trobats; i++) {
 
-                        String record = in.readUTF();
+                        String record = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                         fields = record.split(",");
 
                         for (int j = 0; j < 0; j++) {
@@ -136,27 +161,38 @@ public class logRooms {
         boolean verificar = false;
 
         try {
-
-            out.writeInt(6);
-            out.writeInt(1);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(6), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
                 if (senyal == true) {
-                    out.writeUTF(room.getName());
-                    out.writeInt(room.getNumber());
-                    out.writeInt(room.getMarriedbed());
-                    out.writeInt(room.getBed());
-                    out.writeUTF(room.getState());
-                    out.writeBoolean(room.isWifi());
-                    out.writeBoolean(room.isAir());
-                    out.writeBoolean(room.isJacuzzi());
-                    out.writeDouble(room.getDayprice());
-
-                    String correcte = in.readUTF();
+                    out.writeUTF(SystemUtils.encryptedText(room.getName(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getNumber()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getMarriedbed()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getBed()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(room.getState(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.isWifi()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.isAir()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.isJacuzzi()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getDayprice()), shared_secret.toByteArray()));
+                    
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
 
                     verificar = true;
@@ -176,30 +212,41 @@ public class logRooms {
         boolean verificar = false;
 
         try {
-
-            out.writeInt(6);
-            out.writeInt(3);
-            out.writeInt(1);
-            int comprovacio = in.readInt();
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(6), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(3), shared_secret.toByteArray()));
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
                 if (senyal == true) {
 
-                    out.writeUTF(room.getName());
-                    out.writeInt(room.getNumber());
-                    out.writeInt(room.getMarriedbed());
-                    out.writeInt(room.getBed());
-                    out.writeUTF(room.getState());
-                    out.writeBoolean(room.isWifi());
-                    out.writeBoolean(room.isAir());
-                    out.writeBoolean(room.isJacuzzi());
-                    out.writeDouble(room.getDayprice());
-                    out.writeInt(room.getIdroom());
-                    
+                    out.writeUTF(SystemUtils.encryptedText(room.getName(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getNumber()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getMarriedbed()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getBed()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(room.getState(), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.isWifi()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.isAir()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.isJacuzzi()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getDayprice()), shared_secret.toByteArray()));
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getIdroom()), shared_secret.toByteArray()));
+                                                          
 
-                    String correcte = in.readUTF();
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
 
                     verificar = true;
@@ -219,21 +266,32 @@ public class logRooms {
         boolean verificar = false;
 
         try {
-            out.writeInt(6);
-            out.writeInt(2);
-            out.writeInt(1);
-
-            int comprovacio = in.readInt();
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(6), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(2), shared_secret.toByteArray()));
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
 
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                 if (senyal == true) {
 
-                    out.writeInt(room.getIdroom());
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getIdroom()), shared_secret.toByteArray()));
                     System.out.println("Enviem al servidor id room: " + room.getIdroom());
 
-                    String correcte = in.readUTF();
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
 
                     verificar = true;
@@ -252,21 +310,32 @@ public class logRooms {
         boolean verificar =  false;
         
         try {
-            out.writeInt(6);
-            out.writeInt(5);
-            out.writeInt(1);
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(6), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(5), shared_secret.toByteArray()));
             
-            int comprovacio = in.readInt();
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
             
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                 if (senyal == true) {
 
-                    out.writeInt(room.getIdroom());
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getIdroom()), shared_secret.toByteArray()));
                     System.out.println("Enviem al servidor id room: " + room.getIdroom());
 
-                    String correcte = in.readUTF();
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
 
                     verificar = true;
@@ -286,21 +355,32 @@ public class logRooms {
         boolean verificar =  false;
         
         try {
-            out.writeInt(6);
-            out.writeInt(6);
-            out.writeInt(1);
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(6), shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(6), shared_secret.toByteArray()));
             
-            int comprovacio = in.readInt();
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
             
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                 if (senyal == true) {
 
-                    out.writeInt(room.getIdroom());
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(room.getIdroom()), shared_secret.toByteArray()));
                     System.out.println("Enviem al servidor id room: " + room.getIdroom());
 
-                    String correcte = in.readUTF();
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
 
                     verificar = true;

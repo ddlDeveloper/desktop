@@ -48,6 +48,7 @@ public class frmlogin extends javax.swing.JFrame {
     final String KEY = "abecedari69@";
     SSLSocketFactory sslSocketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
     public static int valorIdUser;
+    public static BigInteger shared_secret;
 
     public frmlogin() {
         initComponents();
@@ -384,7 +385,7 @@ public class frmlogin extends javax.swing.JFrame {
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
             //llegim la clau pública del servidor
-            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
             // send response to server with user and password
             out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + SystemUtils.convertirSHA256(passwordField.getText()), shared_secret.toByteArray()));
             out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
@@ -431,7 +432,7 @@ public class frmlogin extends javax.swing.JFrame {
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
             //llegim la clau pública del servidor
-            BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
             // send response to server with user and password
             //out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + passwordField.getText(), shared_secret.toByteArray()));
             out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText() + "," + SystemUtils.convertirSHA256(passwordField.getText()), shared_secret.toByteArray()));

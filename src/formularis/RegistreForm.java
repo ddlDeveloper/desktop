@@ -1,6 +1,7 @@
 package formularis;
 
 import formularis.frmInici;
+import static formularis.frmlogin.shared_secret;
 import java.awt.Color;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -280,28 +281,30 @@ public class RegistreForm extends javax.swing.JFrame {
             //llegim la clau pública del servidor
             BigInteger shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
             // send response to server with user and password  */
-
-            out.writeInt(1);
-            //out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
-            int comprovacio = in.readInt();
+            
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(1), shared_secret.toByteArray()));
+            int comprovacio = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
+            
             System.out.println("resposta servidor:" + comprovacio);
             if (comprovacio == 1) {
-                out.writeBoolean(true);
-                boolean senyal = in.readBoolean();
+                out.writeUTF(SystemUtils.encryptedText(String.valueOf("true"), shared_secret.toByteArray()));
+                boolean senyal = Boolean.parseBoolean(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
+                
                 if (senyal == true) {
                     System.out.println(senyal);
-                    out.writeUTF(usuariTextField.getText());
-                    out.writeUTF(SystemUtils.convertirSHA256(passwordField.getText()));
+                    out.writeUTF(SystemUtils.encryptedText(usuariTextField.getText(), shared_secret.toByteArray()));
+                    String pass = SystemUtils.convertirSHA256(passwordField.getText());
+                    out.writeUTF(SystemUtils.encryptedText(pass, shared_secret.toByteArray()));
                     String comboRol = "";
                     if (jComboBoxRol.getSelectedItem().toString().equals("Administration")) {
                         comboRol = "1";
                     } else {
                         comboRol = "2";
                     }
-                    out.writeUTF(comboRol);
-                    String correcte = in.readUTF();
+                    out.writeUTF(SystemUtils.encryptedText(String.valueOf(comboRol), shared_secret.toByteArray()));
+                    String correcte = SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray());
                     System.out.println(correcte);
-                    int rol = in.readInt();
+                    int rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(), shared_secret.toByteArray()));
                     if (rol != 0) {
                         System.out.println("Ha accedit l'usuari " + usuariTextField.getText() + " amb el rol de " + jComboBoxRol.getSelectedItem().toString() + " numero " + rol + ".");
                     } else {
@@ -365,8 +368,14 @@ public class RegistreForm extends javax.swing.JFrame {
     void logOut(DataInputStream in, DataOutputStream out) {
 
         try {
-
-            out.writeInt(0);
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            shared_secret = SystemUtils.calculClauCompartida(in.readUTF(), claus_ps[1]);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(SystemUtils.encryptedText(String.valueOf(0), shared_secret.toByteArray()));
 
         } catch (IOException ex) {
             Logger.getLogger(frmInici.class.getName()).log(Level.SEVERE, null, ex);
